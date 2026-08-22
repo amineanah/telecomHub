@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiber Optics Technology - TelecomHub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f6f8fb;
+            color: #333;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background: #0f1419;
+            color: #e0e0e0;
+        }
+
+        /* ================= HEADER ================= */
+        header {
+            background: linear-gradient(135deg, #06152d, #0c2b58);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1264e8;
+            text-decoration: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-buttons a, .nav-buttons button {
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-buttons a:hover, .nav-buttons button:hover {
+            box-shadow: 0 6px 16px rgba(18, 100, 232, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* ================= MAIN CONTAINER ================= */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .hero-section h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-section p {
+            font-size: 18px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        body.dark-mode .hero-section p {
+            color: #b0b0b0;
+        }
+
+        /* ================= CONTENT CARDS ================= */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        body.dark-mode .content-card {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            border-color: #183c6c;
+        }
+
+        .content-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(18, 100, 232, 0.2);
+            border-color: #1264e8;
+        }
+
+        .card-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #1264e8;
+        }
+
+        body.dark-mode .card-title {
+            color: #5b9eff;
+        }
+
+        .card-subtitle {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        body.dark-mode .card-description {
+            color: #c0c0c0;
+        }
+
+        .specs-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .specs-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        body.dark-mode .specs-list li {
+            border-bottom-color: #2a3d5a;
+            color: #b0b0b0;
+        }
+
+        .specs-list li:before {
+            content: "✓ ";
+            color: #1264e8;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* ================= INFO SECTION ================= */
+        .info-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .info-section {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-section h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #1264e8;
+        }
+
+        body.dark-mode .info-section h3 {
+            color: #5b9eff;
+        }
+
+        .info-section p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        body.dark-mode .info-section p {
+            color: #b0b0b0;
+        }
+
+        /* ================= TABLE ================= */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #06152d, #0c2b58);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #555;
+        }
+
+        body.dark-mode .comparison-table td {
+            border-bottom-color: #2a3d5a;
+            color: #b0b0b0;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(18, 100, 232, 0.05);
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            background: #0f1419;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: #1264e8;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 32px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-table {
+                font-size: 14px;
+            }
+
+            .comparison-table th, .comparison-table td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ================= HEADER ================= -->
+    <header>
+        <div class="header-container">
+            <a href="Html%20code.html" class="logo">TELECOMHUB</a>
+            <div class="nav-buttons">
+                <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button>
+                <a href="Html%20code.html">← Back to Home</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <div class="container">
+        <div class="hero-section">
+            <h1>🔌 Fiber Optics Technology</h1>
+            <p>Comprehensive guide to fiber optic cables, systems, and technologies that power modern telecommunications infrastructure and high-speed data transmission.</p>
+        </div>
+
+        <!-- ================= FIBER TYPES ================= -->
+        <div class="content-grid">
+            <!-- SINGLE MODE FIBER -->
+            <div class="content-card">
+                <h2 class="card-title">Single Mode Fiber (SMF)</h2>
+                <p class="card-subtitle">Long Distance, High Performance</p>
+                <p class="card-description">
+                    Single mode fiber allows only one mode of light to propagate. Ideal for long-distance, high-bandwidth telecommunications and data center applications.
+                </p>
+                <ul class="specs-list">
+                    <li><strong>Core Diameter:</strong> 8-10 μm</li>
+                    <li><strong>Cladding Diameter:</strong> 125 μm</li>
+                    <li><strong>Maximum Distance:</strong> 200+ km</li>
+                    <li><strong>Data Rate:</strong> Up to 100 Gbps</li>
+                    <li><strong>Attenuation:</strong> 0.2 dB/km @ 1550 nm</li>
+                    <li><strong>Cost:</strong> Higher (requires laser source)</li>
+                    <li><strong>Applications:</strong> Long-haul, submarine, backbone</li>
+                </ul>
+            </div>
+
+            <!-- MULTI MODE FIBER -->
+            <div class="content-card">
+                <h2 class="card-title">Multi Mode Fiber (MMF)</h2>
+                <p class="card-subtitle">Short Distance, Cost Effective</p>
+                <p class="card-description">
+                    Multi mode fiber allows multiple light modes. Best for shorter distances with lower cost, commonly used in LANs and intra-building networks.
+                </p>
+                <ul class="specs-list">
+                    <li><strong>Core Diameter:</strong> 50-62.5 μm</li>
+                    <li><strong>Cladding Diameter:</strong> 125 μm</li>
+                    <li><strong>Maximum Distance:</strong> 2-5 km</li>
+                    <li><strong>Data Rate:</strong> Up to 10 Gbps</li>
+                    <li><strong>Attenuation:</strong> 2-3 dB/km @ 850 nm</li>
+                    <li><strong>Cost:</strong> Lower (uses LED/VCSEL)</li>
+                    <li><strong>Applications:</strong> LANs, offices, data centers</li>
+                </ul>
+            </div>
+
+            <!-- POLARIZATION MAINTAINING -->
+            <div class="content-card">
+                <h2 class="card-title">Polarization Maintaining (PM)</h2>
+                <p class="card-subtitle">Specialized Applications</p>
+                <p class="card-description">
+                    PM fiber maintains the polarization state of light. Essential for coherent optical communications and high-precision measurements.
+                </p>
+                <ul class="specs-list">
+                    <li><strong>Core Diameter:</strong> 5-10 μm</li>
+                    <li><strong>Birefringence:</strong> High (>10⁻⁴)</li>
+                    <li><strong>PMD Compensation:</strong> Excellent</li>
+                    <li><strong>Data Rate:</strong> Up to 400 Gbps</li>
+                    <li><strong>Extinction Ratio:</strong> >22 dB</li>
+                    <li><strong>Cost:</strong> Premium</li>
+                    <li><strong>Applications:</strong> Coherent systems, sensing</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ================= FIBER TECHNOLOGIES ================= -->
+        <div class="info-section">
+            <h3>🚀 Advanced Fiber Technologies</h3>
+            
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Dense Wavelength Division Multiplexing (DWDM)</h4>
+            <p>
+                DWDM technology allows multiple data streams to be transmitted simultaneously on a single fiber using different wavelengths (colors) of light. This dramatically increases fiber capacity without laying new cables. Modern DWDM systems can transmit over 80+ channels, with each channel capable of carrying 100 Gbps or more, effectively enabling terabit-per-second transmission rates on single fibers.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Coherent Optical Technology</h4>
+            <p>
+                Coherent detection enables higher spectral efficiency and longer transmission distances. By using both amplitude and phase information of the light wave, coherent systems can achieve 400 Gbps and beyond on single channels, supporting modern 5G backhaul and data center interconnect requirements.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Optical Performance Monitoring (OPM)</h4>
+            <p>
+                Real-time monitoring of optical signal quality parameters like Optical Signal-to-Noise Ratio (OSNR), Polarization Mode Dispersion (PMD), and Chromatic Dispersion. Enables predictive maintenance and dynamic network optimization for reliable operations.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Submarine Fiber Cables</h4>
+            <p>
+                Specialized fiber cables for undersea deployment with protective armor, advanced amplification, and regeneration systems. These cables connect continents and support global data transmission with latencies of tens of milliseconds across thousands of kilometers.
+            </p>
+        </div>
+
+        <!-- ================= COMPARISON TABLE ================= -->
+        <div class="info-section">
+            <h3>📊 Fiber Type Comparison</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Single Mode (SMF)</th>
+                        <th>Multi Mode (MMF)</th>
+                        <th>Polarization Maintaining</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Core Diameter</strong></td>
+                        <td>8-10 μm</td>
+                        <td>50-62.5 μm</td>
+                        <td>5-10 μm</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Maximum Distance</strong></td>
+                        <td>200+ km</td>
+                        <td>2-5 km</td>
+                        <td>100+ km</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bandwidth</strong></td>
+                        <td>Unlimited</td>
+                        <td>Limited by dispersion</td>
+                        <td>Very high</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Attenuation @ 1550nm</strong></td>
+                        <td>0.2 dB/km</td>
+                        <td>3 dB/km</td>
+                        <td>0.25 dB/km</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Light Source</strong></td>
+                        <td>Laser (1310/1550 nm)</td>
+                        <td>LED/VCSEL (850 nm)</td>
+                        <td>Laser/polarized source</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Connector Cost</strong></td>
+                        <td>Higher</td>
+                        <td>Lower</td>
+                        <td>Premium</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Installation</strong></td>
+                        <td>More critical alignment</td>
+                        <td>Easier installation</td>
+                        <td>Precision required</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Best Used For</strong></td>
+                        <td>Long-haul, backbone</td>
+                        <td>LANs, short distances</td>
+                        <td>Coherent systems, sensing</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ================= KEY PARAMETERS ================= -->
+        <div class="info-section">
+            <h3>⚙️ Important Fiber Parameters</h3>
+            
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Attenuation (Signal Loss)</h4>
+            <p>
+                Loss of light signal power as it travels through fiber. Measured in dB/km. Lower attenuation allows longer transmission distances. Typically 0.2-0.3 dB/km for SMF at 1550nm and 2-3 dB/km for MMF at 850nm. Affects repeater spacing and amplifier placement.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Dispersion</h4>
+            <p>
+                <strong>Chromatic Dispersion (CD):</strong> Different wavelengths travel at different speeds, spreading pulses. Compensated by fiber amplifiers and DSP (Digital Signal Processing). Values typically -17 to +17 ps/(nm·km).<br><br>
+                <strong>Polarization Mode Dispersion (PMD):</strong> Two orthogonal polarization states travel at different velocities, limiting transmission distance. Critical for high-speed systems. Compensated by adaptive equalization.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Bandwidth-Distance Product</h4>
+            <p>
+                The product of bandwidth and maximum usable distance. Multi-mode fiber has typical values of 500-2000 MHz·km. Single-mode fiber has unlimited theoretical bandwidth-distance product, enabling long-distance, high-speed transmission.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Numerical Aperture (NA)</h4>
+            <p>
+                Determines the light-gathering ability of the fiber. Higher NA allows easier coupling but increases modal dispersion in MMF. Typical values: 0.14 for SMF, 0.2-0.29 for MMF.
+            </p>
+        </div>
+
+        <!-- ================= APPLICATIONS ================= -->
+        <div class="info-section">
+            <h3>📱 Real-World Applications</h3>
+            
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Telecommunications Networks</h4>
+            <p>
+                Long-haul and metro networks using single-mode fiber with DWDM technology. Global submarine cables connect continents. 5G backhaul increasingly relies on fiber's capacity and low latency.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Data Centers</h4>
+            <p>
+                Multi-mode fiber for intra-datacenter connections (short distances). Single-mode increasingly used for data center interconnects (DCI) and emerging 800G/1.6T interfaces requiring long-reach capabilities.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Enterprise Networks</h4>
+            <p>
+                Campus area networks (CANs) and metro area networks (MANs) using multi-mode fiber. Building backbones for large enterprises, hospitals, universities with high-bandwidth requirements.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Sensing & Monitoring</h4>
+            <p>
+                Fiber optic sensors for temperature, pressure, strain, and seismic monitoring. Intrinsic safety (no electrical sparks), EMI immunity, and ability to function in harsh environments.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <p>&copy; 2024 TelecomHub. A professional platform by <a href="Html%20code.html">Amine Janah</a></p>
+        <p>Dedicated to telecom engineering excellence and fiber optics expertise</p>
+    </footer>
+
+    <!-- ================= DARK MODE SCRIPT ================= -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Check saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️';
+        }
+
+        // Toggle dark mode
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            themeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+        });
+    </script>
+</body>
+</html>
+

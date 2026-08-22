@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positive Site Inspection Report - TelecomHub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f6f8fb;
+            color: #333;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background: #0f1419;
+            color: #e0e0e0;
+        }
+
+        header {
+            background: linear-gradient(135deg, #06152d, #0c2b58);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1264e8;
+            text-decoration: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-buttons a, .nav-buttons button {
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-buttons a:hover, .nav-buttons button:hover {
+            box-shadow: 0 6px 16px rgba(18, 100, 232, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .poster-banner {
+            background-image: linear-gradient(135deg, rgba(16, 185, 129, 0.75), rgba(5, 150, 105, 0.75)), url('images/Image 5.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            border-radius: 12px;
+            padding: 100px 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            animation: slideInUp 0.8s ease-out;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .poster-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.4));
+            z-index: 1;
+        }
+
+        .poster-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .poster-banner h2 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            animation: slideInUp 0.8s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+
+        .poster-banner .poster-tagline {
+            font-size: 24px;
+            font-weight: 600;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            animation: slideInUp 0.8s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+
+        .poster-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 20px;
+            animation: rotateIn 0.8s ease-out 0.6s forwards;
+            opacity: 0;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #ffffff, #f8fbff);
+            border-radius: 12px;
+            padding: 60px 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .hero-section {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-section h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        body.dark-mode .hero-subtitle {
+            color: #b0b0b0;
+        }
+
+        .hero-section p {
+            font-size: 17px;
+            color: #666;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        body.dark-mode .hero-section p {
+            color: #b0b0b0;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes rotateIn {
+            from {
+                opacity: 0;
+                transform: rotate(-5deg) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(0) scale(1);
+            }
+        }
+
+        .status-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .status-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #10b981;
+            transition: all 0.3s ease;
+            animation: slideInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .status-card:nth-child(1) { animation-delay: 0.1s; }
+        .status-card:nth-child(2) { animation-delay: 0.2s; }
+        .status-card:nth-child(3) { animation-delay: 0.3s; }
+        .status-card:nth-child(4) { animation-delay: 0.4s; }
+
+        body.dark-mode .status-card {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .status-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(16, 185, 129, 0.2);
+        }
+
+        .status-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .status-card h3 {
+            font-size: 22px;
+            color: #10b981;
+            margin-bottom: 10px;
+        }
+
+        body.dark-mode .status-card h3 {
+            color: #6ee7b7;
+        }
+
+        .status-card p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        body.dark-mode .status-card p {
+            color: #b0b0b0;
+        }
+
+        .image-carousel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .carousel-image {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            height: 300px;
+            animation: scaleIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .carousel-image:nth-child(1) { animation-delay: 0.2s; }
+        .carousel-image:nth-child(2) { animation-delay: 0.3s; }
+        .carousel-image:nth-child(3) { animation-delay: 0.4s; }
+        .carousel-image:nth-child(4) { animation-delay: 0.5s; }
+
+        .carousel-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .carousel-image:hover img {
+            transform: scale(1.1);
+        }
+
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 20px;
+            color: white;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .carousel-image:hover .image-overlay {
+            transform: translateY(0);
+        }
+
+        .image-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .info-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        body.dark-mode .info-section {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-section h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #10b981;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        body.dark-mode .info-section h3 {
+            color: #6ee7b7;
+        }
+
+        .info-section h4 {
+            font-size: 18px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            color: #10b981;
+        }
+
+        body.dark-mode .info-section h4 {
+            color: #6ee7b7;
+        }
+
+        .info-section p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        body.dark-mode .info-section p {
+            color: #b0b0b0;
+        }
+
+        .info-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        .info-section li {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        body.dark-mode .info-section li {
+            color: #b0b0b0;
+        }
+
+        .compliance-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin: 8px;
+            animation: rotateIn 0.6s ease-out;
+        }
+
+        .badges-container {
+            margin: 25px 0;
+        }
+
+        .checklist {
+            background: linear-gradient(135deg, #f0fdf4, #e8fce8);
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        body.dark-mode .checklist {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+            border-left-color: #6ee7b7;
+        }
+
+        .checklist strong {
+            color: #10b981;
+        }
+
+        body.dark-mode .checklist strong {
+            color: #6ee7b7;
+        }
+
+        footer {
+            background: #0f1419;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: #10b981;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 32px;
+            }
+
+            .poster-banner {
+                padding: 60px 20px;
+            }
+
+            .poster-banner h2 {
+                font-size: 36px;
+            }
+
+            .poster-banner .poster-tagline {
+                font-size: 18px;
+            }
+
+            .status-cards, .image-carousel {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="Html%20code.html" class="logo">TELECOMHUB</a>
+            <div class="nav-buttons">
+                <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">Ã°Å¸Å’â„¢</button>
+                <a href="Html%20code.html">Ã¢â€ Â Back to Home</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="poster-banner">
+            <div class="poster-content">
+                <h2>Ã¢Å“â€¦ SITE INSPECTION</h2>
+                <p class="poster-tagline">Full Compliance Achieved</p>
+                <div class="poster-badge">Ã°Å¸Ââ€  APPROVED FOR OPERATIONS</div>
+            </div>
+        </div>
+
+        <div class="hero-section">
+            <h1>Ã¢Å“â€¦ Positive Site Inspection Report</h1>
+            <p class="hero-subtitle">Comprehensive Field Compliance & Quality Assurance Audit</p>
+            <p>Comprehensive field inspection of a telecom installation site demonstrating full compliance with EHS (Environment, Health & Safety) standards and quality assurance protocols. Our professional inspection team verified all infrastructure, equipment, documentation, and operational procedures meet or exceed industry best practices.</p>
+        </div>
+
+        <div class="status-cards">
+            <div class="status-card">
+                <div class="status-icon">Ã°Å¸Â¦Âº</div>
+                <h3>EHS Compliance</h3>
+                <p>All health, safety, and environmental protocols fully implemented. PPE properly maintained, safety procedures documented.</p>
+            </div>
+            <div class="status-card">
+                <div class="status-icon">Ã¢Å“â€¦</div>
+                <h3>Quality Standards</h3>
+                <p>Infrastructure meets ISO 9001 and telecom industry standards. All installations properly tested and verified.</p>
+            </div>
+            <div class="status-card">
+                <div class="status-icon">Ã°Å¸â€œâ€¹</div>
+                <h3>Documentation</h3>
+                <p>Complete record-keeping with as-built drawings, maintenance logs, and compliance certificates properly archived.</p>
+            </div>
+            <div class="status-card">
+                <div class="status-icon">Ã°Å¸Å½Â¯</div>
+                <h3>Performance</h3>
+                <p>All performance metrics within specification. Signal quality, power delivery, and throughput verified.</p>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>Ã°Å¸â€œÂ¸ Site Inspection Photo Documentation</h3>
+            <p>Visual evidence from our comprehensive site inspection showing compliance and professional installation standards:</p>
+        </div>
+
+        <div class="image-carousel">
+            <div class="carousel-image">
+                <img src="images/Image 2.jpg" alt="Equipment Installation">
+                <div class="image-overlay">
+                    <div class="image-title">Ã°Å¸â€Å’ Professional Equipment Installation</div>
+                </div>
+            </div>
+            <div class="carousel-image">
+                <img src="images/Image 3.jpg" alt="Commissioning Verification">
+                <div class="image-overlay">
+                    <div class="image-title">Ã¢Å¡Â¡ Live Commissioning Verification</div>
+                </div>
+            </div>
+            <div class="carousel-image">
+                <img src="images/Image 4.jpg" alt="Cable Management">
+                <div class="image-overlay">
+                    <div class="image-title">Ã°Å¸Â§Âµ Organized Cable Routing</div>
+                </div>
+            </div>
+            <div class="carousel-image">
+                <img src="images/Image 5.jpg" alt="Final Quality Check">
+                <div class="image-overlay">
+                    <div class="image-title">Ã°Å¸â€Â Final Quality Inspection</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>Ã°Å¸Â¦Âº EHS Standards Verification</h3>
+            
+            <h4>Ã¢Å“â€œ Personal Protective Equipment (PPE)</h4>
+            <ul>
+                <li><strong>Helmets & Hard Hats:</strong> All personnel properly equipped with certified safety headgear</li>
+                <li><strong>High-Visibility Vests:</strong> 100% compliance with visibility requirements</li>
+                <li><strong>Safety Footwear:</strong> Appropriate industrial-grade safety shoes observed</li>
+                <li><strong>Hand Protection:</strong> Work gloves in use during equipment handling</li>
+                <li><strong>Eye Protection:</strong> Safety glasses available for optical fiber work</li>
+            </ul>
+
+            <h4>Ã¢Å“â€œ Site Safety Protocols</h4>
+            <ul>
+                <li><strong>Exclusion Zones:</strong> Properly marked RF hazard areas with warning signs</li>
+                <li><strong>Grounding & Bonding:</strong> Verified electrical safety with proper grounding connections</li>
+                <li><strong>Fall Prevention:</strong> Safety rails and proper height protection in place</li>
+                <li><strong>Emergency Procedures:</strong> First aid kits accessible and staff trained</li>
+                <li><strong>RF Safety Compliance:</strong> Exposure limits verified with test equipment</li>
+            </ul>
+
+            <h4>Ã¢Å“â€œ Environmental Compliance</h4>
+            <ul>
+                <li><strong>Waste Management:</strong> Proper disposal of cables, packaging, and hazardous materials</li>
+                <li><strong>Spill Prevention:</strong> Secondary containment for fuel and oil storage</li>
+                <li><strong>Noise Control:</strong> Generators and equipment operated within acceptable limits</li>
+                <li><strong>Water Protection:</strong> Stormwater management procedures observed</li>
+            </ul>
+
+            <div class="badges-container">
+                <span class="compliance-badge">Ã°Å¸Ââ€  EHS Certified</span>
+                <span class="compliance-badge">Ã¢Å“â€¦ ISO 14001</span>
+                <span class="compliance-badge">Ã°Å¸â€ºÂ¡Ã¯Â¸Â ISO 45001</span>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>Ã°Å¸Ââ€¦ Quality Assurance Standards</h3>
+
+            <h4>Infrastructure Quality Verification</h4>
+            <div class="checklist">
+                <strong>Ã¢Å“â€œ Equipment Installation:</strong><br>
+                All base station equipment properly mounted, secured, and aligned. Cable entries weatherproofed. Thermal management systems functional.
+            </div>
+
+            <div class="checklist">
+                <strong>Ã¢Å“â€œ RF System Performance:</strong><br>
+                Antenna patterns verified. VSWR measurements within specification. Signal coverage mapping confirms target zones. Interference analysis shows acceptable levels.
+            </div>
+
+            <div class="checklist">
+                <strong>Ã¢Å“â€œ Power Delivery System:</strong><br>
+                AC/DC conversion verified. UPS battery backup tested and operational. Power distribution fuses rated appropriately. Redundancy confirmed.
+            </div>
+
+            <div class="checklist">
+                <strong>Ã¢Å“â€œ Network Connectivity:</strong><br>
+                Fiber optic links tested for continuity and signal quality. Backhaul throughput meets design specifications. Latency within tolerance. Network redundancy operational.
+            </div>
+
+            <div class="checklist">
+                <strong>Ã¢Å“â€œ Documentation Standards:</strong><br>
+                As-built drawings match installed configuration. All serial numbers recorded. Warranty documentation complete. Maintenance records initiated with baseline data.
+            </div>
+
+            <h4 style="margin-top: 30px;">Performance Metrics Summary</h4>
+            <ul>
+                <li><strong>Signal Strength:</strong> Average RSRP -75 dBm (Target: -85 to -65 dBm) Ã¢Å“â€¦</li>
+                <li><strong>Signal Quality:</strong> Average SINR +12 dB (Target: >8 dB) Ã¢Å“â€¦</li>
+                <li><strong>Downlink Throughput:</strong> 450+ Mbps (Target: >400 Mbps) Ã¢Å“â€¦</li>
+                <li><strong>Uplink Throughput:</strong> 85+ Mbps (Target: >75 Mbps) Ã¢Å“â€¦</li>
+                <li><strong>Latency:</strong> 28 ms average (Target: <50 ms) Ã¢Å“â€¦</li>
+                <li><strong>Coverage Probability:</strong> 99.2% (Target: >95%) Ã¢Å“â€¦</li>
+            </ul>
+        </div>
+
+        <div class="info-section">
+            <h3>Ã°Å¸â€œâ€¹ Inspection Findings & Recommendations</h3>
+
+            <h4>Strengths Identified</h4>
+            <ul>
+                <li><strong>Professional Installation:</strong> Excellent cable management and labeling practices exceed minimum standards</li>
+                <li><strong>Safety Culture:</strong> Site personnel demonstrate strong commitment to EHS compliance and best practices</li>
+                <li><strong>Preventive Maintenance:</strong> Comprehensive maintenance schedule documented with baseline performance data</li>
+                <li><strong>Documentation Quality:</strong> Complete as-built documentation with photos and equipment specifications</li>
+                <li><strong>Performance:</strong> All performance metrics exceed design specifications with margin for growth</li>
+            </ul>
+
+            <h4 style="margin-top: 25px;">Recommendations for Continued Excellence</h4>
+            <ul>
+                <li><strong>Quarterly Safety Audits:</strong> Continue regular EHS compliance reviews to maintain standards</li>
+                <li><strong>Training Updates:</strong> Quarterly refresher training for site personnel on latest procedures</li>
+                <li><strong>Documentation Archival:</strong> Implement digital backup system for all compliance and performance records</li>
+                <li><strong>Predictive Analytics:</strong> Deploy monitoring systems for early detection of potential issues</li>
+                <li><strong>Stakeholder Communication:</strong> Regular reports to operations teams on performance and compliance metrics</li>
+            </ul>
+        </div>
+
+        <div class="info-section">
+            <h3>Ã°Å¸â€œÅ  Final Inspection Verdict</h3>
+            <p style="font-size: 18px; color: #10b981; font-weight: 600; margin: 20px 0;">
+                Ã¢Å“â€¦ SITE INSPECTION APPROVED - FULL COMPLIANCE ACHIEVED
+            </p>
+            <p>
+                This telecommunications site has successfully passed comprehensive inspection across all EHS and quality assurance dimensions. All safety protocols are properly implemented, environmental standards are met, and technical performance exceeds expectations. The site demonstrates professional installation practices and strong operational excellence. Recommended for immediate operational deployment with routine maintenance oversight.
+            </p>
+            <div class="badges-container">
+                <span class="compliance-badge">Ã°Å¸Å½Â¯ APPROVED FOR OPERATIONS</span>
+                <span class="compliance-badge">Ã°Å¸Å’Å¸ EXCELLENCE STANDARD</span>
+                <span class="compliance-badge">Ã¢Å“Â¨ ZERO DEFECTS</span>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TelecomHub. Professional telecom site inspection and compliance auditing.</p>
+        <p>By <a href="Html%20code.html">Amine Janah</a> Ã¢â‚¬â€ Quality Assurance & EHS Compliance Specialist</p>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = 'Ã¢Ëœâ‚¬Ã¯Â¸Â';
+        }
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            themeToggle.textContent = isDarkMode ? 'Ã¢Ëœâ‚¬Ã¯Â¸Â' : 'Ã°Å¸Å’â„¢';
+        });
+    </script>
+</body>
+</html>

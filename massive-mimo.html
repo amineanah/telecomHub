@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Massive MIMO Technology Guide - TelecomHub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f6f8fb;
+            color: #333;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background: #0f1419;
+            color: #e0e0e0;
+        }
+
+        header {
+            background: linear-gradient(135deg, #06152d, #0c2b58);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1264e8;
+            text-decoration: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-buttons a, .nav-buttons button {
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-buttons a:hover, .nav-buttons button:hover {
+            box-shadow: 0 6px 16px rgba(18, 100, 232, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero-section {
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #ffffff, #f8fbff);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .hero-section {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1.5fr 0.9fr;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .hero-copy {
+            text-align: left;
+        }
+
+        .poster-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .poster-image {
+            width: min(100%, 430px);
+            max-height: 420px;
+            object-fit: cover;
+            border-radius: 18px;
+            box-shadow: 0 16px 36px rgba(18, 100, 232, 0.25);
+            border: 2px solid rgba(18, 100, 232, 0.15);
+            background: #fff;
+        }
+
+        .hero-section h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            text-align: left;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 20px;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        body.dark-mode .hero-subtitle {
+            color: #b0b0b0;
+        }
+
+        .hero-section p {
+            font-size: 17px;
+            color: #666;
+            max-width: 800px;
+            margin: 0 0 0;
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        body.dark-mode .hero-section p {
+            color: #b0b0b0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        body.dark-mode .content-card {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            border-color: #183c6c;
+        }
+
+        .content-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(18, 100, 232, 0.2);
+            border-color: #1264e8;
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #1264e8;
+        }
+
+        body.dark-mode .card-title {
+            color: #5b9eff;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        body.dark-mode .card-description {
+            color: #c0c0c0;
+        }
+
+        .specs-list {
+            list-style: none;
+            margin-bottom: 0;
+        }
+
+        .specs-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        body.dark-mode .specs-list li {
+            border-bottom-color: #2a3d5a;
+            color: #b0b0b0;
+        }
+
+        .specs-list li:before {
+            content: "Ã¢Å“â€œ ";
+            color: #1264e8;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .info-section {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-section h3 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #1264e8;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        body.dark-mode .info-section h3 {
+            color: #5b9eff;
+        }
+
+        .info-section p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        body.dark-mode .info-section p {
+            color: #b0b0b0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #666;
+        }
+
+        body.dark-mode .comparison-table td {
+            border-bottom-color: #2a3d5a;
+            color: #b0b0b0;
+        }
+
+        .comparison-table tr:hover {
+            background: #f9f9f9;
+        }
+
+        body.dark-mode .comparison-table tr:hover {
+            background: rgba(18, 100, 232, 0.1);
+        }
+
+        .benefit-box {
+            background: linear-gradient(135deg, #f0f4ff, #e8f0ff);
+            border-left: 4px solid #1264e8;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        body.dark-mode .benefit-box {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            border-left-color: #5b9eff;
+        }
+
+        .benefit-box strong {
+            color: #1264e8;
+        }
+
+        body.dark-mode .benefit-box strong {
+            color: #5b9eff;
+        }
+
+        .antenna-diagram {
+            background: #f0f4ff;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin: 25px 0;
+            font-family: monospace;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #1264e8;
+            overflow-x: auto;
+        }
+
+        body.dark-mode .antenna-diagram {
+            background: rgba(18, 100, 232, 0.1);
+            color: #5b9eff;
+        }
+
+        footer {
+            background: #0f1419;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: #1264e8;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffd89b 0%, #19547b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .hero-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-copy {
+                text-align: center;
+            }
+
+            .hero-section h1,
+            .hero-subtitle,
+            .hero-section p {
+                text-align: center;
+            }
+
+            .hero-section h1 {
+                font-size: 32px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-table {
+                font-size: 12px;
+            }
+
+            .comparison-table th, .comparison-table td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="Html%20code.html" class="logo">TELECOMHUB</a>
+            <div class="nav-buttons">
+                <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">Ã°Å¸Å’â„¢</button>
+                <a href="Html%20code.html">Ã¢â€ Â Back to Home</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero-section">
+            <div class="hero-layout">
+                <div class="hero-copy">
+                    <h1>Ã°Å¸â€œÂ¡ Massive MIMO Technology</h1>
+                    <p class="hero-subtitle">A Complete Guide to Multi-Antenna Systems & Advanced Beamforming</p>
+                    <p>Massive Multiple-Input Multiple-Output (Massive MIMO) is a revolutionary wireless technology that uses hundreds of antennas to dramatically increase network capacity, spectral efficiency, and energy efficiency. Discover how 64Ãƒâ€”64 and 256Ãƒâ€”256 antenna arrays power next-generation 5G and 6G networks.</p>
+                </div>
+                <div class="poster-wrap">
+                    <img class="poster-image" src="images/Massive.png" alt="Massive MIMO poster" />
+                </div>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="content-card">
+                <div class="card-icon">Ã°Å¸â€œÂ¡</div>
+                <h2 class="card-title">What is Massive MIMO?</h2>
+                <p class="card-description">
+                    Massive MIMO technology enables base stations to communicate with many users simultaneously using large arrays of antennas. The key principle is exploiting spatial degrees of freedom to serve multiple terminals in the same frequency band.
+                </p>
+                <ul class="specs-list">
+                    <li>Hundreds of antennas at base station</li>
+                    <li>Simultaneous multi-user transmission</li>
+                    <li>Spatial multiplexing & beamforming</li>
+                    <li>Propagation channel orthogonality</li>
+                    <li>Interference suppression capabilities</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <div class="card-icon">Ã°Å¸â€œÅ </div>
+                <h2 class="card-title">Configuration Sizes</h2>
+                <p class="card-description">
+                    Massive MIMO deployments vary from moderate to ultra-large antenna arrays. Each configuration offers different trade-offs between performance, cost, power consumption, and physical size constraints.
+                </p>
+                <ul class="specs-list">
+                    <li><strong>32Ãƒâ€”32:</strong> 1,024 antenna elements</li>
+                    <li><strong>64Ãƒâ€”64:</strong> 4,096 antenna elements</li>
+                    <li><strong>128Ãƒâ€”128:</strong> 16,384 antenna elements</li>
+                    <li><strong>256Ãƒâ€”256:</strong> 65,536 antenna elements</li>
+                    <li><strong>Beyond 5G:</strong> 512Ãƒâ€”512+ configurations</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <div class="card-icon">Ã¢Å¡Â¡</div>
+                <h2 class="card-title">Key Performance Gains</h2>
+                <p class="card-description">
+                    Massive MIMO delivers substantial improvements across critical network metrics, enabling unprecedented spectral efficiency and user experience enhancements.
+                </p>
+                <ul class="specs-list">
+                    <li><strong>+400-500%</strong> spectral efficiency increase</li>
+                    <li><strong>10-50x</strong> energy efficiency improvement</li>
+                    <li><strong>Better coverage</strong> with lower transmission power</li>
+                    <li><strong>Reduced interference</strong> between users & cells</li>
+                    <li><strong>Superior channel accuracy</strong> with pilot signals</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>Ã°Å¸Å½Â¯ How Massive MIMO Works: The Core Principles</h3>
+            
+            <p>Massive MIMO operates on elegant mathematical principles that exploit the channel characteristics of wireless propagation:</p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px; font-size: 18px;">1Ã¯Â¸ÂÃ¢Æ’Â£ Channel Orthogonality</h4>
+            <p>
+                When a base station has many more antennas than users, the channels become nearly orthogonal. This means signals to different users experience different propagation patterns, allowing the BS to distinguish between users and separate their signalsÃ¢â‚¬â€a process called <span class="highlight">precoding</span>.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px; font-size: 18px;">2Ã¯Â¸ÂÃ¢Æ’Â£ Beamforming & Beam Management</h4>
+            <p>
+                <strong>Transmit Beamforming:</strong> The base station calculates optimal weights for each antenna to create a focused beam toward each user. This concentrates energy where it's needed and suppresses interference elsewhere. <br>
+                <strong>Receive Beamforming:</strong> Signals from many antennas are combined using optimal weighting to enhance desired user signals while rejecting interference.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px; font-size: 18px;">3Ã¯Â¸ÂÃ¢Æ’Â£ Pilot-Based Channel Estimation</h4>
+            <p>
+                Users send pilot signals (known training sequences) that the BS uses to estimate the uplink channel. In FDD systems, this requires feedback of downlink channel estimates. In TDD systems, channel reciprocity allows reusing uplink estimates for downlink precodingÃ¢â‚¬â€a major advantage.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px; font-size: 18px;">4Ã¯Â¸ÂÃ¢Æ’Â£ Multi-User Detection & Interference Suppression</h4>
+            <p>
+                With perfect channel knowledge, the base station can compute precoding vectors that send signals to target users while nulling interference to others. This enables simultaneous transmission to many users on identical frequenciesÃ¢â‚¬â€massive capacity gains.
+            </p>
+
+            <div class="antenna-diagram">
+Massive MIMO Antenna Array Concept<br>
+<br>
+Single Antenna System (4G):<br>
+    [BS] Ã¢â€ â€™ [User 1, User 2, User 3] (Interference & Crosstalk)<br>
+<br>
+Massive MIMO System (5G+):<br>
+    [=============================]<br>
+    [64 or 256 Antenna Array      ]<br>
+    [=============================]<br>
+         Ã¢â€ â€œ Directed Beams Ã¢â€ â€œ<br>
+    [User 1] [User 2] [User 3]  (Clean Separation)<br>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>Ã°Å¸Å¡â‚¬ Advanced Techniques in Massive MIMO</h3>
+
+            <h4 style="color: #1264e8; margin-top: 20px; margin-bottom: 15px; font-size: 18px;">Zero Forcing (ZF) & Regularized Zero Forcing (RZF)</h4>
+            <p>
+                The base station inverts the channel matrix to compute precoding weights that completely null interference to other users. Zero Forcing is optimal under high SNR; Regularized ZF adds noise robustness for practical systems.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 20px; margin-bottom: 15px; font-size: 18px;">Maximum Ratio Transmission (MRT)</h4>
+            <p>
+                Also called conjugate beamforming, MRT allocates antenna power proportionally to channel gain of each user. Simple and effective, especially when channel state information (CSI) quality is limited.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 20px; margin-bottom: 15px; font-size: 18px;">Antenna Array Geometries</h4>
+            <div class="benefit-box">
+                <strong>Ã°Å¸â€Â· Uniform Linear Array (ULA):</strong> Antennas arranged in a line. Simple hardware, directional beams, limited 2D coverage.
+            </div>
+            <div class="benefit-box">
+                <strong>Ã°Å¸â€Â¶ Uniform Planar Array (UPA):</strong> 2D grid of antennas. Full 3D beamforming, full azimuth/elevation coverage, higher complexity.
+            </div>
+            <div class="benefit-box">
+                <strong>Ã°Å¸Å¸Â¢ 3D Array Configurations:</strong> Cylindrical, spherical, or distributed arrays for omnidirectional coverage with enhanced spatial resolution.
+            </div>
+
+            <h4 style="color: #1264e8; margin-top: 20px; margin-bottom: 15px; font-size: 18px;">Hybrid Precoding (Analog + Digital)</h4>
+            <p>
+                Practical systems combine analog (hardware) precoding on antenna subarrays with digital (software) precoding. This reduces RF chain count and power consumption while maintaining most benefits of full digital Massive MIMO.
+            </p>
+        </div>
+
+        <div class="info-section">
+            <h3>Ã°Å¸â€œË† Performance Comparison: Massive MIMO vs Conventional Systems</h3>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>4G (Single/Dual Antenna)</th>
+                        <th>5G Massive MIMO (64T64R)</th>
+                        <th>Next-Gen (256T256R)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Antenna Count</strong></td>
+                        <td>2-8</td>
+                        <td>4,096</td>
+                        <td>65,536</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Spectral Efficiency</strong></td>
+                        <td>6-8 bps/Hz</td>
+                        <td>30-50 bps/Hz</td>
+                        <td>100+ bps/Hz</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Energy Efficiency</strong></td>
+                        <td>1-2 Mbps/W</td>
+                        <td>20-40 Mbps/W</td>
+                        <td>100-200 Mbps/W</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Coverage Probability</strong></td>
+                        <td>70-80%</td>
+                        <td>95-99%</td>
+                        <td>99%+</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inter-cell Interference</strong></td>
+                        <td>High (Ã¢Ë†â€™110 dBm)</td>
+                        <td>Very Low (Ã¢Ë†â€™130 dBm)</td>
+                        <td>Negligible (Ã¢Ë†â€™150 dBm)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pilot Overhead</strong></td>
+                        <td>1-2%</td>
+                        <td>2-5%</td>
+                        <td>3-8%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TX Power (per user)</strong></td>
+                        <td>20-23 dBm</td>
+                        <td>5-10 dBm</td>
+                        <td>0-5 dBm</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="info-section">
+            <h3>Ã°Å¸â€™Â¡ Real-World Applications & Deployment</h3>
+
+            <h4 style="color: #1264e8; margin-top: 20px; margin-bottom: 15px; font-size: 18px;">Urban Dense Deployments</h4>
+            <p>
+                High-rise buildings with many users demand massive capacity. Massive MIMO base stations can serve 100+ simultaneous users per cell with clean channel separationÃ¢â‚¬â€dramatically improving per-user throughput and reducing latency.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 20px; margin-bottom: 15px; font-size: 18px;">Indoor & Enterprise Networks</h4>
+            <p>
+                Corporate offices, shopping malls, and campuses with dense device traffic benefit from indoor Massive MIMO systems. Small form-factor arrays (e.g., 32Ãƒâ€”32) deliver 50+ Gbps aggregate capacity while consuming moderate power.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 20px; margin-bottom: 15px; font-size: 18px;">Rural Coverage Extension</h4>
+            <p>
+                By concentrating transmit power through beamforming, Massive MIMO extends coverage to remote areas with minimal base stations and lower transmission power per site.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 20px; margin-bottom: 15px; font-size: 18px;">Millimeter-Wave (mmWave) 5G/6G</h4>
+            <p>
+                Massive MIMO is essential for mmWave systems. Shorter wavelengths at 28/39/73 GHz allow compact antenna arrays with hundreds of elements in small enclosuresÃ¢â‚¬â€enabling directional beams for line-of-sight coverage.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 20px; margin-bottom: 15px; font-size: 18px;">Beyond 5G (6G) Vision</h4>
+            <p>
+                Next-generation networks will push to 1000+ antenna arrays, terahertz frequencies, and metasurface antennas. Reconfigurable Intelligent Surfaces (RIS) will complement Massive MIMO for programmable radio environments.
+            </p>
+        </div>
+
+        <div class="info-section">
+            <h3>Ã°Å¸â€Â§ Implementation Challenges & Solutions</h3>
+
+            <div class="benefit-box">
+                <strong>Ã¢Å¡Â Ã¯Â¸Â Challenge: Pilot Overhead</strong><br>
+                As antenna count grows, pilot signaling consumes more resources. <br>
+                Ã¢Å“â€¦ <strong>Solution:</strong> Compressed sensing, reduced pilot sequences, machine learning for CSI prediction.
+            </div>
+
+            <div class="benefit-box">
+                <strong>Ã¢Å¡Â Ã¯Â¸Â Challenge: Hardware Impairments</strong><br>
+                Phase noise, RF component mismatches degrade performance.<br>
+                Ã¢Å“â€¦ <strong>Solution:</strong> Robust precoding algorithms, hardware calibration, analog beamforming correction.
+            </div>
+
+            <div class="benefit-box">
+                <strong>Ã¢Å¡Â Ã¯Â¸Â Challenge: Channel Feedback (FDD Systems)</strong><br>
+                Returning full CSI from users saturates uplink bandwidth.<br>
+                Ã¢Å“â€¦ <strong>Solution:</strong> Quantized feedback, differential feedback, machine learning compression.
+            </div>
+
+            <div class="benefit-box">
+                <strong>Ã¢Å¡Â Ã¯Â¸Â Challenge: Thermal Management</strong><br>
+                Thousands of RF chains and antenna elements generate significant heat.<br>
+                Ã¢Å“â€¦ <strong>Solution:</strong> Advanced cooling, distributed antenna systems, power-aware scheduling.
+            </div>
+
+            <div class="benefit-box">
+                <strong>Ã¢Å¡Â Ã¯Â¸Â Challenge: Synchronization & Calibration</strong><br>
+                Precise timing and phase coherence across many antenna elements required.<br>
+                Ã¢Å“â€¦ <strong>Solution:</strong> Distributed synchronization networks, in-band calibration loops, timing markers.
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>Ã°Å¸Å½â€œ Key Takeaways</h3>
+            <ul style="margin-left: 25px; margin-top: 15px;">
+                <li style="color: #666; font-size: 15px; line-height: 1.8; margin-bottom: 10px;"><strong>Massive MIMO is a Game-Changer:</strong> 400-500% spectral efficiency gains transform network capacity and user experience.</li>
+                <li style="color: #666; font-size: 15px; line-height: 1.8; margin-bottom: 10px;"><strong>Math + Hardware Innovation:</strong> Channel orthogonality and advanced precoding algorithms enable simultaneous multi-user transmission on identical frequencies.</li>
+                <li style="color: #666; font-size: 15px; line-height: 1.8; margin-bottom: 10px;"><strong>Practical Trade-offs:</strong> Pilot overhead, hardware complexity, and thermal management require careful optimization.</li>
+                <li style="color: #666; font-size: 15px; line-height: 1.8; margin-bottom: 10px;"><strong>Foundation for 5G/6G:</strong> Massive MIMO is now fundamental to all major 5G deployments and essential for 6G vision.</li>
+                <li style="color: #666; font-size: 15px; line-height: 1.8; margin-bottom: 10px;"><strong>Future Directions:</strong> Intelligent surfaces (RIS), machine learning-driven algorithms, and terahertz systems will extend Massive MIMO capabilities.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TelecomHub. Advanced wireless technology expertise and professional engineering guidance.</p>
+        <p>By <a href="Html%20code.html">Amine Janah</a> Ã¢â‚¬â€ 5G/6G & Massive MIMO Specialist</p>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = 'Ã¢Ëœâ‚¬Ã¯Â¸Â';
+        }
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            themeToggle.textContent = isDarkMode ? 'Ã¢Ëœâ‚¬Ã¯Â¸Â' : 'Ã°Å¸Å’â„¢';
+        });
+    </script>
+</body>
+</html>

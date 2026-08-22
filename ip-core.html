@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP & Core Network Technology - TelecomHub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f6f8fb;
+            color: #333;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background: #0f1419;
+            color: #e0e0e0;
+        }
+
+        header {
+            background: linear-gradient(135deg, #06152d, #0c2b58);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1264e8;
+            text-decoration: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-buttons a, .nav-buttons button {
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-buttons a:hover, .nav-buttons button:hover {
+            box-shadow: 0 6px 16px rgba(18, 100, 232, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .hero-section h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-section p {
+            font-size: 18px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        body.dark-mode .hero-section p {
+            color: #b0b0b0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        body.dark-mode .content-card {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            border-color: #183c6c;
+        }
+
+        .content-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(18, 100, 232, 0.2);
+            border-color: #1264e8;
+        }
+
+        .card-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #1264e8;
+        }
+
+        body.dark-mode .card-title {
+            color: #5b9eff;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        body.dark-mode .card-description {
+            color: #c0c0c0;
+        }
+
+        .specs-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .specs-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        body.dark-mode .specs-list li {
+            border-bottom-color: #2a3d5a;
+            color: #b0b0b0;
+        }
+
+        .specs-list li:before {
+            content: "Ã¢Å“â€œ ";
+            color: #1264e8;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .info-section {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-section h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #1264e8;
+        }
+
+        body.dark-mode .info-section h3 {
+            color: #5b9eff;
+        }
+
+        .info-section p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        body.dark-mode .info-section p {
+            color: #b0b0b0;
+        }
+
+        footer {
+            background: #0f1419;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: #1264e8;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 32px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="Html%20code.html" class="logo">TELECOMHUB</a>
+            <div class="nav-buttons">
+                <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">Ã°Å¸Å’â„¢</button>
+                <a href="Html%20code.html">Ã¢â€ Â Back to Home</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero-section">
+            <h1>Ã°Å¸â€“Â¥Ã¯Â¸Â IP & Core Network Technology</h1>
+            <p>Comprehensive guide to packet core networks, IP technologies, and the central intelligence that orchestrates mobile network operations.</p>
+        </div>
+
+        <div class="content-grid">
+            <div class="content-card">
+                <h2 class="card-title">EPC (Evolved Packet Core)</h2>
+                <p class="card-description">
+                    4G core network architecture providing packet-only data services with simplified topology and improved latency. Foundation of LTE networks.
+                </p>
+                <ul class="specs-list">
+                    <li><strong>MME:</strong> Mobility Management Entity</li>
+                    <li><strong>S/P-GW:</strong> Serving/PDN Gateways</li>
+                    <li><strong>HSS:</strong> Home Subscriber Server</li>
+                    <li><strong>PCRF:</strong> Policy & Charging Rules Function</li>
+                    <li><strong>Topology:</strong> Flattened vs 3G hierarchy</li>
+                    <li><strong>Latency:</strong> Reduced with direct IP connectivity</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <h2 class="card-title">5G Core (5GC)</h2>
+                <p class="card-description">
+                    Next-generation service-based architecture with microservices, virtualization, and cloud-native design. Enables network slicing and advanced services.
+                </p>
+                <ul class="specs-list">
+                    <li><strong>AMF:</strong> Access & Mobility Management Function</li>
+                    <li><strong>SMF:</strong> Session Management Function</li>
+                    <li><strong>UPF:</strong> User Plane Function</li>
+                    <li><strong>UDM:</strong> Unified Data Management</li>
+                    <li><strong>Network Slicing:</strong> Multiple isolated networks</li>
+                    <li><strong>Edge Computing:</strong> MEC integration for low latency</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <h2 class="card-title">Network Slicing</h2>
+                <p class="card-description">
+                    Virtualized end-to-end networks optimized for specific use cases. Enables diverse service requirements (eMBB, URLLC, mMTC) on same infrastructure.
+                </p>
+                <ul class="specs-list">
+                    <li><strong>eMBB Slice:</strong> Enhanced Mobile Broadband</li>
+                    <li><strong>URLLC Slice:</strong> Ultra-Reliable Low Latency</li>
+                    <li><strong>mMTC Slice:</strong> Massive Machine Type Communication</li>
+                    <li><strong>Isolation:</strong> Independent traffic handling</li>
+                    <li><strong>Resource Allocation:</strong> Dynamic per slice requirements</li>
+                    <li><strong>SLA Management:</strong> Per-slice performance guarantees</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>Ã°Å¸Å¡â‚¬ Advanced IP & Core Concepts</h3>
+            
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">SDN & NFV Integration</h4>
+            <p>
+                Software-Defined Networking (SDN) provides programmable control plane. Network Function Virtualization (NFV) runs network functions on standard hardware. Together they enable flexible, scalable, cost-effective core networks.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Multi-Access Edge Computing (MEC)</h4>
+            <p>
+                Moves computation closer to users, reducing latency and backhaul congestion. Enables ultra-low latency applications, local content delivery, and context-aware services. Critical for AR/VR and IoT.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">IMS (IP Multimedia Subsystem)</h4>
+            <p>
+                Architecture for delivering multimedia services (voice, video, messaging) over IP. Provides Rich Communication Services (RCS), VoLTE (Voice over LTE), and video calling. Bridges legacy and IP-based services.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Policy & Charging</h4>
+            <p>
+                PCRF in 4G and Policy Function in 5G manage traffic policies, QoS enforcement, and real-time charging. Enables service-aware network management and monetization of diverse services.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TelecomHub. A professional platform by <a href="Html%20code.html">Amine Janah</a></p>
+        <p>Dedicated to telecom engineering excellence and core network expertise</p>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = 'Ã¢Ëœâ‚¬Ã¯Â¸Â';
+        }
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            themeToggle.textContent = isDarkMode ? 'Ã¢Ëœâ‚¬Ã¯Â¸Â' : 'Ã°Å¸Å’â„¢';
+        });
+    </script>
+</body>
+</html>
+

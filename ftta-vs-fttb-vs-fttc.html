@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FTTA vs FTTB vs FTTC: What's the Difference? - TelecomHub</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f6f8fb;
+            color: #333;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background: #0f1419;
+            color: #e0e0e0;
+        }
+
+        header {
+            background: linear-gradient(135deg, #06152d, #0c2b58);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1264e8;
+            text-decoration: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-buttons a, .nav-buttons button {
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-buttons a:hover, .nav-buttons button:hover {
+            box-shadow: 0 6px 16px rgba(18, 100, 232, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero-section {
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #ffffff, #f8fbff);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        body.dark-mode .hero-section {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1.5fr 0.9fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .hero-copy { text-align: left; }
+
+        .poster-wrap { display: flex; justify-content: center; }
+
+        .poster-image {
+            width: min(100%, 430px);
+            object-fit: cover;
+            border-radius: 18px;
+            box-shadow: 0 16px 36px rgba(18, 100, 232, 0.25);
+            border: 2px solid rgba(18,100,232,0.15);
+            background: #fff;
+        }
+
+        .hero-section h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            text-align: left;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 20px;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        body.dark-mode .hero-subtitle { color: #b0b0b0; }
+
+        .hero-section p {
+            font-size: 17px;
+            color: #666;
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        body.dark-mode .hero-section p { color: #b0b0b0; }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        body.dark-mode .content-card {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+            border-color: #183c6c;
+        }
+
+        .content-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(18,100,232,0.2);
+            border-color: #1264e8;
+        }
+
+        .card-icon { font-size: 48px; margin-bottom: 15px; }
+
+        .card-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #1264e8;
+        }
+
+        body.dark-mode .card-title { color: #5b9eff; }
+
+        .card-description {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        body.dark-mode .card-description { color: #c0c0c0; }
+
+        .specs-list {
+            list-style: none;
+            margin-bottom: 0;
+        }
+
+        .specs-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        body.dark-mode .specs-list li {
+            border-bottom-color: #2a3d5a;
+            color: #b0b0b0;
+        }
+
+        .specs-list li:before {
+            content: "✓ ";
+            color: #1264e8;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .info-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        body.dark-mode .info-section {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+        }
+
+        .info-section h3 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #1264e8;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        body.dark-mode .info-section h3 { color: #5b9eff; }
+
+        .info-section p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        body.dark-mode .info-section p { color: #b0b0b0; }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #666;
+        }
+
+        body.dark-mode .comparison-table td {
+            border-bottom-color: #2a3d5a;
+            color: #b0b0b0;
+        }
+
+        .comparison-table tr:hover { background: #f9f9f9; }
+        body.dark-mode .comparison-table tr:hover { background: rgba(18,100,232,0.1); }
+
+        .benefit-box {
+            background: linear-gradient(135deg, #f0f4ff, #e8f0ff);
+            border-left: 4px solid #1264e8;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        body.dark-mode .benefit-box {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            border-left-color: #5b9eff;
+        }
+
+        .benefit-box strong { color: #1264e8; }
+        body.dark-mode .benefit-box strong { color: #5b9eff; }
+
+        footer {
+            background: #0f1419;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        footer a { color: #1264e8; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffd89b 0%, #19547b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .hero-layout { grid-template-columns: 1fr; }
+            .hero-copy { text-align: center; }
+            .hero-section h1, .hero-subtitle, .hero-section p { text-align: center; }
+            .hero-section h1 { font-size: 32px; }
+            .content-grid { grid-template-columns: 1fr; }
+            .comparison-table { font-size: 12px; }
+            .comparison-table th, .comparison-table td { padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="Html%20code.html" class="logo">TELECOMHUB</a>
+            <div class="nav-buttons">
+                <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button>
+                <a href="Html%20code.html">← Back to Home</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero-section">
+            <div class="hero-layout">
+                <div class="hero-copy">
+                    <h1>💡 FTTA vs FTTB vs FTTC</h1>
+                    <p class="hero-subtitle">Understanding the Main Fiber Access Architectures</p>
+                    <p>FTTA, FTTB, and FTTC are common fiber access deployment models used by operators to deliver broadband services closer to the end user. The key difference lies in how far the fiber extends and how the final connection to the customer is completed.</p>
+                </div>
+                <div class="poster-wrap">
+                    <img class="poster-image" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=80" alt="Fiber access network" />
+                </div>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="content-card">
+                <div class="card-icon">🏢</div>
+                <h2 class="card-title">FTTB</h2>
+                <p class="card-description">Fiber to the Building means the fiber reaches the building boundary, and the last connection is completed using copper or internal distribution.</p>
+                <ul class="specs-list">
+                    <li>Fiber terminates at the building</li>
+                    <li>Shared among multiple users inside the building</li>
+                    <li>Common in apartments and offices</li>
+                    <li>Lower cost than FTTH</li>
+                    <li>Good balance of performance and economics</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <div class="card-icon">🏠</div>
+                <h2 class="card-title">FTTC</h2>
+                <p class="card-description">Fiber to the Curb brings the fiber close to the customer, usually near the street or curb, then copper continues for the final segment.</p>
+                <ul class="specs-list">
+                    <li>Fiber reaches the curb or cabinet</li>
+                    <li>Last mile uses copper DSL/VDSL</li>
+                    <li>Cost-effective upgrade path</li>
+                    <li>Shorter copper segment than legacy networks</li>
+                    <li>Popular in urban and suburban areas</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <div class="card-icon">💡</div>
+                <h2 class="card-title">FTTA</h2>
+                <p class="card-description">Fiber to the Antenna is used mainly in mobile network infrastructure, where the fiber connects the base station equipment to the antenna site.</p>
+                <ul class="specs-list">
+                    <li>Fiber runs to the antenna site</li>
+                    <li>Supports 4G/5G radio equipment</li>
+                    <li>Used in distributed / remote radio unit deployments</li>
+                    <li>Reduces RF loss over long coax runs</li>
+                    <li>Essential for modern mobile networks</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>📊 Side-by-Side Comparison</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Architecture</th>
+                        <th>Fiber Endpoint</th>
+                        <th>Final Connection</th>
+                        <th>Best Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>FTTC</strong></td>
+                        <td>Curb / cabinet</td>
+                        <td>Copper (DSL/VDSL)</td>
+                        <td>Cost-efficient broadband upgrades</td>
+                    </tr>
+                    <tr>
+                        <td><strong>FTTB</strong></td>
+                        <td>Building</td>
+                        <td>Internal distribution / copper</td>
+                        <td>Apartment blocks, offices, multi-dwelling buildings</td>
+                    </tr>
+                    <tr>
+                        <td><strong>FTTA</strong></td>
+                        <td>Antenna / radio site</td>
+                        <td>RF or optical fronthaul to radio units</td>
+                        <td>4G/5G cell sites and mobile networks</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="info-section">
+            <h3>🏢 FTTB: Fiber to the Building</h3>
+            <p>FTTB is often used in residential and commercial buildings where the fiber reaches the building entrance or basement and then distributes the service inside the property. This model is attractive when a building already has internal distribution infrastructure and when operators want to serve multiple users efficiently.</p>
+            <p>It offers a better balance between cost and performance than fully extending fiber to each unit. In many multi-dwelling buildings, it is one of the most practical fiber access strategies.</p>
+            <div class="benefit-box">
+                <strong>Best for:</strong> apartment buildings, office campuses, hotels, and buildings with shared internal networks.
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>🚧 FTTC: Fiber to the Curb</h3>
+            <p>FTTC moves the fiber closer to the subscriber but stops before the last part of the connection. The final segment to the home or business uses copper-based technology, such as VDSL, which provides a faster and more stable connection than legacy DSL while remaining cost effective.</p>
+            <p>This approach is typically used where deploying full fiber all the way to the end user is not yet economically justified. It is an intermediate step for operators upgrading a network without massive civil work.</p>
+            <div class="benefit-box">
+                <strong>Best for:</strong> urban and suburban residential upgrades where copper last-mile economics still matter.
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>💡 FTTA: Fiber to the Antenna</h3>
+            <p>FTTA is not primarily a residential architecture. It is a mobile network solution where fiber connects the baseband unit or centralized equipment to a remotely located antenna or radio unit. This reduces signal loss compared to long coaxial runs and supports the higher density and bandwidth needs of 4G and 5G.</p>
+            <p>Because the RF signal is sensitive to losses, fiber becomes the preferred transport medium between the radio equipment and the antenna site, especially in dense urban deployments.</p>
+            <div class="benefit-box">
+                <strong>Best for:</strong> 4G/5G radio access networks, urban densification, and sites with strict performance demands.
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>✓ Which One is Better?</h3>
+            <p>There is no single “best” architecture. The correct choice depends on the service type, network strategy, and cost constraints:</p>
+            <p><span class="highlight">FTTC</span> is often a fast and affordable upgrade path.</p>
+            <p><span class="highlight">FTTB</span> is a stronger choice when serving multi-dwelling buildings efficiently.</p>
+            <p><span class="highlight">FTTA</span> is essential for mobile networks where the fiber must feed radio equipment at the network edge.</p>
+            <p>In short, FTTC is cost-focused, FTTB is building-focused, and FTTA is mobile-network-focused.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TelecomHub. Fiber access network expertise and broadband architecture knowledge.</p>
+        <p>By <a href="Html%20code.html">Amine Janah</a> — Fiber & Access Network Specialist</p>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️';
+        }
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            themeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5G | 4G | 3G Network Architectures - TelecomHub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f6f8fb;
+            color: #333;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background: #0f1419;
+            color: #e0e0e0;
+        }
+
+        /* ================= HEADER ================= */
+        header {
+            background: linear-gradient(135deg, #06152d, #0c2b58);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1264e8;
+            text-decoration: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-buttons a, .nav-buttons button {
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-buttons a:hover, .nav-buttons button:hover {
+            box-shadow: 0 6px 16px rgba(18, 100, 232, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* ================= MAIN CONTAINER ================= */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .hero-section h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-section p {
+            font-size: 18px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        body.dark-mode .hero-section p {
+            color: #b0b0b0;
+        }
+
+        /* ================= ARCHITECTURE GRID ================= */
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .arch-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        body.dark-mode .arch-card {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            border-color: #183c6c;
+        }
+
+        .arch-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(18, 100, 232, 0.2);
+            border-color: #1264e8;
+        }
+
+        .arch-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .arch-card h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #1264e8;
+        }
+
+        body.dark-mode .arch-card h2 {
+            color: #5b9eff;
+        }
+
+        .arch-year {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        body.dark-mode .arch-year {
+            color: #999;
+        }
+
+        .arch-description {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        body.dark-mode .arch-description {
+            color: #c0c0c0;
+        }
+
+        .arch-specs {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .arch-specs li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        body.dark-mode .arch-specs li {
+            border-bottom-color: #2a3d5a;
+            color: #b0b0b0;
+        }
+
+        .arch-specs li:before {
+            content: "Ã¢Å“â€œ ";
+            color: #1264e8;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .arch-specs li:last-child {
+            border-bottom: none;
+        }
+
+        /* ================= DETAILED COMPARISON ================= */
+        .comparison-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .comparison-section {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .comparison-section h3 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #1264e8;
+        }
+
+        body.dark-mode .comparison-section h3 {
+            color: #5b9eff;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow-x: auto;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #06152d, #0c2b58);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #555;
+        }
+
+        body.dark-mode .comparison-table td {
+            border-bottom-color: #2a3d5a;
+            color: #b0b0b0;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(18, 100, 232, 0.05);
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            background: #0f1419;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: #1264e8;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 32px;
+            }
+
+            .architecture-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-table {
+                font-size: 14px;
+            }
+
+            .comparison-table th, .comparison-table td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ================= HEADER ================= -->
+    <header>
+        <div class="header-container">
+            <a href="Html%20code.html" class="logo">TELECOMHUB</a>
+            <div class="nav-buttons">
+                <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">Ã°Å¸Å’â„¢</button>
+                <a href="Html%20code.html">Ã¢â€ Â Back to Home</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <div class="container">
+        <div class="hero-section">
+            <h1>5G | 4G | 3G Network Architectures</h1>
+            <p>Comprehensive overview of telecom network evolution, from 3G to cutting-edge 5G technology. Understand the architecture, capabilities, and specifications of each generation.</p>
+        </div>
+
+        <!-- ================= ARCHITECTURE CARDS ================= -->
+        <div class="architecture-grid">
+            <!-- 5G CARD -->
+            <div class="arch-card">
+                <span class="arch-badge">LATEST GENERATION</span>
+                <h2>5G</h2>
+                <p class="arch-year">Launched: 2020-2023 | Status: Active Deployment</p>
+                <p class="arch-description">
+                    Fifth Generation mobile network technology offering ultra-high speeds, low latency, and massive connectivity for IoT devices and critical applications.
+                </p>
+                <ul class="arch-specs">
+                    <li><strong>Peak Speed:</strong> Up to 10 Gbps</li>
+                    <li><strong>Latency:</strong> 1-10 milliseconds (ultra-low)</li>
+                    <li><strong>Frequency Bands:</strong> Sub-6 GHz, mmWave (24-100 GHz)</li>
+                    <li><strong>Core Architecture:</strong> Service-Based Architecture (SBA)</li>
+                    <li><strong>Network Slicing:</strong> Yes (eMBB, URLLC, mMTC)</li>
+                    <li><strong>Device Support:</strong> Massive MIMO, beamforming</li>
+                    <li><strong>Use Cases:</strong> AR/VR, autonomous vehicles, smart cities</li>
+                </ul>
+            </div>
+
+            <!-- 4G CARD -->
+            <div class="arch-card">
+                <span class="arch-badge">WIDELY DEPLOYED</span>
+                <h2>4G (LTE)</h2>
+                <p class="arch-year">Launched: 2009-2012 | Status: Legacy + Active</p>
+                <p class="arch-description">
+                    Fourth Generation mobile network with significant improvements in speed and capacity. Backbone of current mobile data services worldwide.
+                </p>
+                <ul class="arch-specs">
+                    <li><strong>Peak Speed:</strong> Up to 300 Mbps (LTE-A: 1 Gbps)</li>
+                    <li><strong>Latency:</strong> 50-100 milliseconds</li>
+                    <li><strong>Frequency Bands:</strong> 700 MHz - 3.8 GHz</li>
+                    <li><strong>Core Architecture:</strong> Evolved Packet Core (EPC)</li>
+                    <li><strong>MIMO Technology:</strong> Yes (2x2, 4x4)</li>
+                    <li><strong>Spectrum Efficiency:</strong> Good</li>
+                    <li><strong>Use Cases:</strong> Mobile broadband, video streaming, IoT</li>
+                </ul>
+            </div>
+
+            <!-- 3G CARD -->
+            <div class="arch-card">
+                <span class="arch-badge">LEGACY TECHNOLOGY</span>
+                <h2>3G (UMTS)</h2>
+                <p class="arch-year">Launched: 2002-2006 | Status: Phasing Out</p>
+                <p class="arch-description">
+                    Third Generation mobile network that introduced mobile data services. Predecessor to modern high-speed networks with voice and data capabilities.
+                </p>
+                <ul class="arch-specs">
+                    <li><strong>Peak Speed:</strong> Up to 2 Mbps (HSPA: 42 Mbps)</li>
+                    <li><strong>Latency:</strong> 100-150 milliseconds</li>
+                    <li><strong>Frequency Bands:</strong> 800 MHz - 2.1 GHz</li>
+                    <li><strong>Core Architecture:</strong> Circuit + Packet Core</li>
+                    <li><strong>MIMO Technology:</strong> Limited</li>
+                    <li><strong>Spectrum Efficiency:</strong> Moderate</li>
+                    <li><strong>Use Cases:</strong> Voice, basic data, mobile email</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ================= DETAILED COMPARISON ================= -->
+        <div class="comparison-section">
+            <h3>Ã°Å¸â€Â Detailed Technical Comparison</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>3G (UMTS)</th>
+                        <th>4G (LTE)</th>
+                        <th>5G NR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Peak Download Speed</strong></td>
+                        <td>2 Mbps (14 Mbps HSPA+)</td>
+                        <td>300 Mbps (1 Gbps LTE-A)</td>
+                        <td>10 Gbps</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Peak Upload Speed</strong></td>
+                        <td>0.384 Mbps (5.7 Mbps HSPA+)</td>
+                        <td>75 Mbps (500 Mbps LTE-A)</td>
+                        <td>500 Mbps</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Latency</strong></td>
+                        <td>100-150 ms</td>
+                        <td>50-100 ms</td>
+                        <td>1-10 ms</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Frequency Spectrum</strong></td>
+                        <td>800 MHz - 2.1 GHz</td>
+                        <td>700 MHz - 3.8 GHz</td>
+                        <td>Sub-6 GHz, mmWave (24-100 GHz)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Modulation</strong></td>
+                        <td>QPSK, 16QAM</td>
+                        <td>QPSK, 16QAM, 64QAM, 256QAM</td>
+                        <td>QPSK, 16QAM, 64QAM, 256QAM, 1024QAM</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Duplexing</strong></td>
+                        <td>FDD, TDD</td>
+                        <td>FDD, TDD</td>
+                        <td>FDD, TDD, Full-Duplex</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Channel Bandwidth</strong></td>
+                        <td>5 MHz</td>
+                        <td>1.4 - 20 MHz</td>
+                        <td>50 MHz - 400 MHz (sub-6), up to 2 GHz (mmWave)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MIMO Capability</strong></td>
+                        <td>Single antenna primarily</td>
+                        <td>2x2, 4x4, 8x8</td>
+                        <td>Massive MIMO (64x64, 256x256)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Network Architecture</strong></td>
+                        <td>Hierarchical (Circuit + Packet)</td>
+                        <td>Flat (EPC)</td>
+                        <td>Service-Based (SBA)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Spectrum Efficiency</strong></td>
+                        <td>0.5-0.9 bps/Hz</td>
+                        <td>1.5-2.5 bps/Hz</td>
+                        <td>3-5 bps/Hz</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Network Slicing</strong></td>
+                        <td>No</td>
+                        <td>No</td>
+                        <td>Yes (eMBB, URLLC, mMTC)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Key Features</strong></td>
+                        <td>Mobile data intro, voice+data</td>
+                        <td>Broadband experience, high capacity</td>
+                        <td>Ultra-low latency, massive connectivity, AI-ready</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ================= KEY TECHNOLOGIES ================= -->
+        <div class="comparison-section">
+            <h3>Ã°Å¸Å¡â‚¬ Key Differentiating Technologies</h3>
+            
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">5G Advanced Features:</h4>
+            <ul class="arch-specs">
+                <li><strong>Network Slicing:</strong> Virtual isolated networks for different use cases (eMBB, URLLC, mMTC)</li>
+                <li><strong>Massive MIMO:</strong> Arrays of 64+ antennas for higher capacity and efficiency</li>
+                <li><strong>Beamforming:</strong> Directional signal transmission to improve coverage and speed</li>
+                <li><strong>Full Duplex Communication:</strong> Send and receive simultaneously on same frequency</li>
+                <li><strong>Software-Defined Network (SDN):</strong> Programmable network infrastructure</li>
+                <li><strong>Edge Computing (MEC):</strong> Processing closer to users for lower latency</li>
+                <li><strong>Service-Based Architecture:</strong> Microservices-based network functions</li>
+            </ul>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">4G Innovations:</h4>
+            <ul class="arch-specs">
+                <li><strong>OFDMA Modulation:</strong> Efficient spectrum utilization</li>
+                <li><strong>Evolved Packet Core (EPC):</strong> Flattened network architecture</li>
+                <li><strong>Enhanced MIMO:</strong> 2x2 to 8x8 antenna configurations</li>
+                <li><strong>Carrier Aggregation:</strong> Combining multiple frequency bands for higher speeds</li>
+                <li><strong>CoMP Technology:</strong> Coordinated Multi-Point transmission</li>
+            </ul>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">3G Foundations:</h4>
+            <ul class="arch-specs">
+                <li><strong>WCDMA (Wideband CDMA):</strong> Spread spectrum technology</li>
+                <li><strong>Circuit + Packet Switching:</strong> Separate networks for voice and data</li>
+                <li><strong>HSPA Evolution:</strong> High-Speed Packet Access (3.5G, 3.75G)</li>
+                <li><strong>Basic MIMO:</strong> Foundation for multi-antenna systems</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <p>&copy; 2024 TelecomHub. A professional platform by <a href="Html%20code.html">Amine Janah</a></p>
+        <p>Dedicated to telecom engineering excellence and 5G deployment knowledge</p>
+    </footer>
+
+    <!-- ================= DARK MODE SCRIPT ================= -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Check saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = 'Ã¢Ëœâ‚¬Ã¯Â¸Â';
+        }
+
+        // Toggle dark mode
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            themeToggle.textContent = isDarkMode ? 'Ã¢Ëœâ‚¬Ã¯Â¸Â' : 'Ã°Å¸Å’â„¢';
+        });
+    </script>
+</body>
+</html>
+

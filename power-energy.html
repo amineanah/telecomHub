@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power & Energy Technology - TelecomHub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f6f8fb;
+            color: #333;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background: #0f1419;
+            color: #e0e0e0;
+        }
+
+        header {
+            background: linear-gradient(135deg, #06152d, #0c2b58);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1264e8;
+            text-decoration: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-buttons a, .nav-buttons button {
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-buttons a:hover, .nav-buttons button:hover {
+            box-shadow: 0 6px 16px rgba(18, 100, 232, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .hero-section h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-section p {
+            font-size: 18px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        body.dark-mode .hero-section p {
+            color: #b0b0b0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        body.dark-mode .content-card {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            border-color: #183c6c;
+        }
+
+        .content-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(18, 100, 232, 0.2);
+            border-color: #1264e8;
+        }
+
+        .card-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #1264e8;
+        }
+
+        body.dark-mode .card-title {
+            color: #5b9eff;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        body.dark-mode .card-description {
+            color: #c0c0c0;
+        }
+
+        .specs-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .specs-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        body.dark-mode .specs-list li {
+            border-bottom-color: #2a3d5a;
+            color: #b0b0b0;
+        }
+
+        .specs-list li:before {
+            content: "✓ ";
+            color: #1264e8;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .info-section {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-section h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #1264e8;
+        }
+
+        body.dark-mode .info-section h3 {
+            color: #5b9eff;
+        }
+
+        .info-section p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        body.dark-mode .info-section p {
+            color: #b0b0b0;
+        }
+
+        footer {
+            background: #0f1419;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: #1264e8;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 32px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="Html%20code.html" class="logo">TELECOMHUB</a>
+            <div class="nav-buttons">
+                <button class="theme-toggle" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
+                <a href="Html%20code.html">← Back to Home</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero-section">
+            <h1>⚡ Power & Energy Technology</h1>
+            <p>Comprehensive guide to power systems, energy efficiency, and sustainability in telecom networks. Critical for site operations and operational costs.</p>
+        </div>
+
+        <div class="content-grid">
+            <div class="content-card">
+                <h2 class="card-title">Power Supply Systems</h2>
+                <p class="card-description">
+                    Reliable power delivery infrastructure for telecom sites with multiple redundancy levels ensuring continuous network operation.
+                </p>
+                <ul class="specs-list">
+                    <li><strong>AC Power:</strong> 230V/400V grid supply</li>
+                    <li><strong>DC Power:</strong> -48V/+24V distribution systems</li>
+                    <li><strong>UPS Systems:</strong> Battery backup for continuity</li>
+                    <li><strong>Rectifiers:</strong> AC to DC conversion 95%+ efficiency</li>
+                    <li><strong>Redundancy:</strong> N+1 or N+2 configurations</li>
+                    <li><strong>Monitoring:</strong> Real-time power parameters tracking</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <h2 class="card-title">Battery Technology</h2>
+                <p class="card-description">
+                    Battery systems providing backup power during grid failures. Critical for site availability and emergency operations.
+                </p>
+                <ul class="specs-list">
+                    <li><strong>Lead-Acid Batteries:</strong> Traditional, cost-effective</li>
+                    <li><strong>Lithium-Ion:</strong> Higher energy density, longer lifespan</li>
+                    <li><strong>Capacity:</strong> 2-6 hours backup typical (site dependent)</li>
+                    <li><strong>Charging Systems:</strong> Intelligent charge controllers</li>
+                    <li><strong>Maintenance:</strong> Regular testing, equalization cycles</li>
+                    <li><strong>Temperature Control:</strong> Optimal performance range</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <h2 class="card-title">Energy Efficiency</h2>
+                <p class="card-description">
+                    Optimization strategies reducing power consumption and operational expenses while maintaining network performance.
+                </p>
+                <ul class="specs-list">
+                    <li><strong>Sleep Modes:</strong> Base station power reduction off-peak</li>
+                    <li><strong>Efficient Amplifiers:</strong> GaN, LDMOS technologies</li>
+                    <li><strong>Cooling Optimization:</strong> Free-air cooling, economizers</li>
+                    <li><strong>LED Lighting:</strong> Reduced site lighting power</li>
+                    <li><strong>Smart Power Distribution:</strong> Per-equipment control</li>
+                    <li><strong>Renewable Energy:</strong> Solar, wind integration</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>🚀 Advanced Power Management</h3>
+            
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Energy Management Systems (EMS)</h4>
+            <p>
+                Centralized monitoring and control of site power consumption. Real-time dashboards showing power usage, battery status, and efficiency metrics. Enables predictive maintenance and optimization strategies.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Renewable Energy Integration</h4>
+            <p>
+                Solar panels and wind turbines reduce grid dependency and operational costs. Hybrid systems combine renewable sources with grid power and batteries. Critical for remote sites and sustainability goals.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Power Quality Management</h4>
+            <p>
+                Protection against voltage fluctuations, harmonics, and transients. UPS systems provide voltage regulation and filtering. Critical for equipment protection and network reliability.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Site Power Audit</h4>
+            <p>
+                Comprehensive analysis of power consumption patterns identifying optimization opportunities. Measures PUE (Power Usage Effectiveness) and identifies efficiency improvements for cost reduction.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TelecomHub. A professional platform by <a href="Html%20code.html">Amine Janah</a></p>
+        <p>Dedicated to telecom engineering excellence and power systems expertise</p>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️';
+        }
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            themeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+        });
+    </script>
+</body>
+</html>
+

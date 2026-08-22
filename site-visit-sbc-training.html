@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBC Site Visit & Training - TelecomHub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f6f8fb;
+            color: #333;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background: #0f1419;
+            color: #e0e0e0;
+        }
+
+        header {
+            background: linear-gradient(135deg, #06152d, #0c2b58);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1264e8;
+            text-decoration: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-buttons a, .nav-buttons button {
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-buttons a:hover, .nav-buttons button:hover {
+            box-shadow: 0 6px 16px rgba(18, 100, 232, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 50px;
+            background: white;
+            background-image: linear-gradient(135deg, rgba(6, 21, 45, 0.75), rgba(12, 43, 88, 0.75)), url('images/sbc-training-1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            border-radius: 12px;
+            padding: 80px 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .hero-section {
+            background: linear-gradient(135deg, rgba(26, 41, 66, 0.85), rgba(30, 58, 95, 0.85)), url('images/sbc-training-1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-section h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            color: white;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+        }
+
+        .meta-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            color: #ffffff;
+            font-size: 16px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .meta-info {
+            color: #ffffff;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-section p {
+            font-size: 17px;
+            color: #ffffff;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .hero-section p {
+            color: #ffffff;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .objective-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #1264e8;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .objective-card {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .objective-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(18, 100, 232, 0.2);
+        }
+
+        .objective-card h3 {
+            color: #1264e8;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        body.dark-mode .objective-card h3 {
+            color: #5b9eff;
+        }
+
+        .objective-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        body.dark-mode .objective-card p {
+            color: #b0b0b0;
+        }
+
+        .section-block {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .section-block {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-block h2 {
+            font-size: 32px;
+            margin-bottom: 25px;
+            color: #1264e8;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 15px;
+        }
+
+        body.dark-mode .section-block h2 {
+            color: #5b9eff;
+            border-bottom-color: #2a3d5a;
+        }
+
+        .section-block h3 {
+            font-size: 22px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #1264e8;
+        }
+
+        body.dark-mode .section-block h3 {
+            color: #5b9eff;
+        }
+
+        .section-block p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        body.dark-mode .section-block p {
+            color: #b0b0b0;
+        }
+
+        .section-block ul, .section-block ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        .section-block li {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        body.dark-mode .section-block li {
+            color: #b0b0b0;
+        }
+
+        .training-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            margin: 30px auto;
+            display: block;
+        }
+
+        .image-caption {
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        body.dark-mode .image-caption {
+            color: #777;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, #f0f4ff, #e8f0ff);
+            border-left: 4px solid #1264e8;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-style: italic;
+            color: #333;
+        }
+
+        body.dark-mode .quote-box {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            border-left-color: #5b9eff;
+            color: #b0b0b0;
+        }
+
+        .quote-attribution {
+            text-align: right;
+            margin-top: 10px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        body.dark-mode .quote-attribution {
+            color: #999;
+        }
+
+        footer {
+            background: #0f1419;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: #1264e8;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 28px;
+            }
+
+            .meta-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .objectives-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="Html%20code.html" class="logo">TELECOMHUB</a>
+            <div class="nav-buttons">
+                <button class="theme-toggle" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
+                <a href="Html%20code.html">← Back to Home</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero-section">
+            <h1>💡 SBC Site Visit & Hands-on Training</h1>
+            <div class="meta-info">
+                <span><strong>📍 Location:</strong> El Arjat</span>
+                <span><strong>📅 Date:</strong> April 2026</span>
+                <span><strong>✍️ Author:</strong> Amine Janah</span>
+            </div>
+            <p>Professional field report documenting a Small Cell Base (SBC) installation and commissioning training session. This comprehensive hands-on program covered safety procedures, equipment walkthrough, commissioning verification, and practical troubleshooting techniques with the field team.</p>
+        </div>
+
+        <div class="objectives-grid">
+            <div class="objective-card">
+                <h3>🔧 Components & Installation</h3>
+                <p>Review SBC components, mounting best practices, and proper installation procedures for field deployment.</p>
+            </div>
+            <div class="objective-card">
+                <h3>💡 RF & Power Connections</h3>
+                <p>Demonstrate proper RF and power connections, cable routing strategies, and best practices for reliable performance.</p>
+            </div>
+            <div class="objective-card">
+                <h3>✅ Commissioning & Verification</h3>
+                <p>Walk through step-by-step commissioning procedures and verification checks for successful site activation.</p>
+            </div>
+            <div class="objective-card">
+                <h3>🛡️ Safety & Compliance</h3>
+                <p>Highlight safety procedures and EHS compliance requirements on active telecom sites.</p>
+            </div>
+            <div class="objective-card">
+                <h3>🧰 Troubleshooting</h3>
+                <p>Give trainees hands-on experience with installation alignment and basic field troubleshooting techniques.</p>
+            </div>
+        </div>
+
+        <div class="section-block">
+            <h2>📌 Key Moments from the Visit</h2>
+
+            <h3>🦺 Safety First - PPE & Procedures</h3>
+            <p>Before any hands-on work began, we conducted a comprehensive safety briefing covering all critical aspects of working on an active telecom site:</p>
+            <ul>
+                <li>Personal Protective Equipment (PPE) requirements - helmets, high-visibility vests, safety shoes</li>
+                <li>Safe work distances around live RF and electrical equipment</li>
+                <li>Exclusion zone protocols and awareness procedures</li>
+                <li>Tool safety checks and inspection procedures</li>
+                <li>Lockout/permit procedures for energized equipment work</li>
+            </ul>
+            <p>All participants wore proper PPE and followed established lockout/permit-to-work procedures throughout the training session. This set a strong example of safety culture in field operations.</p>
+            
+            <img src="images/sbc-training-1.jpg" alt="SBC training — group briefing" class="training-image" loading="lazy" decoding="async">
+            <div class="image-caption">Team briefing session before the hands-on SBC training activities</div>
+
+            <h3>🔌 Equipment Walkthrough & Cable Management</h3>
+            <p>The trainer provided an in-depth explanation of SBC internals and subsystems:</p>
+            <ul>
+                <li><strong>Power Distribution:</strong> Understanding power rails, redundancy, and backup battery systems</li>
+                <li><strong>RF Terminations:</strong> Proper fiber optic and RF connector termination techniques</li>
+                <li><strong>Strain Relief:</strong> Correct use of cable routing, grommets, and protective conduits</li>
+                <li><strong>Torque Specifications:</strong> Critical connector torque values to ensure proper connections</li>
+                <li><strong>Environmental Sealing:</strong> Weatherproofing techniques to protect equipment in outdoor installations</li>
+                <li><strong>Routine Maintenance:</strong> Planned inspection and preventive maintenance schedules</li>
+            </ul>
+            <p>Trainees asked targeted technical questions about equipment operation, environmental considerations, and maintenance best practices. The interactive discussion clarified many practical aspects of SBC deployment.</p>
+
+            <img src="images/sbc-training-2.jpg" alt="SBC training — equipment and discussion" class="training-image" loading="lazy" decoding="async">
+            <div class="image-caption">Trainer explains SBC cabinet architecture and proper cable routing to the field crew</div>
+
+            <h3>✅ Hands-on Commissioning & Verification</h3>
+            <p>The live commissioning demonstration covered essential verification procedures that trainees performed under direct supervision:</p>
+            <ul>
+                <li><strong>Power-up Sequencing:</strong> Proper startup procedures and verifying all power supply rails</li>
+                <li><strong>Management Interface Checks:</strong> Initial system configuration and reading operational logs</li>
+                <li><strong>RF Verification:</strong> Using test equipment to confirm expected signal levels and coverage</li>
+                <li><strong>Basic Troubleshooting:</strong> Diagnostic procedures for common issues:
+                    <ul style="margin-top: 10px;">
+                        <li>Cable continuity and fault detection</li>
+                        <li>Ground continuity verification</li>
+                        <li>Connector integrity and alignment checks</li>
+                    </ul>
+                </li>
+            </ul>
+            <p>Each trainee had the opportunity to perform verification steps under expert supervision. This hands-on experience proved invaluable for building confidence and practical skills.</p>
+
+            <img src="images/sbc-training-3.jpg" alt="SBC training — live demo" class="training-image" loading="lazy" decoding="async">
+            <div class="image-caption">Live commissioning demonstration with trainees observing and performing measurements</div>
+        </div>
+
+        <div class="section-block">
+            <h2>📊 Observations & Recommendations</h2>
+            
+            <h3>Documentation & Checklists</h3>
+            <p>Recommendation: Produce a concise commissioning checklist with clear pass/fail criteria. This enables faster handovers and ensures consistency across multiple sites. Digital checklists with photographic evidence improve quality control.</p>
+
+            <h3>Cable Management & Labeling</h3>
+            <p>Recommendation: Use color-coded labeled ties and durable route markers to simplify future maintenance and troubleshooting. Proper documentation with as-built diagrams speeds up issue resolution by 30-40%.</p>
+
+            <h3>Training Frequency & Continuity</h3>
+            <p>Recommendation: Quarterly refresher training sessions are essential to keep field crews familiar with equipment updates and best practices. Include both new technicians and experienced staff for knowledge sharing.</p>
+
+            <h3>Safety Culture & Continuous Improvement</h3>
+            <p>Recommendation: Reinforce exclusion zone awareness through regular drills and near-miss reporting. Establish a feedback loop where field technicians can report safety concerns and training needs.</p>
+        </div>
+
+        <div class="section-block">
+            <h2>💬 Feedback from the Field</h2>
+
+            <div class="quote-box">
+                "Seeing the commissioning steps in person clarified the log warnings we've been getting and now I understand what each alarm really means."
+                <div class="quote-attribution">— Technician A</div>
+            </div>
+
+            <div class="quote-box">
+                "The hands-on section was the most valuable part. Theory and documentation alone don't prepare you for real-world challenges. Now I feel confident deploying new sites."
+                <div class="quote-attribution">— Trainee B</div>
+            </div>
+
+            <div class="quote-box">
+                "I appreciated the safety-first approach. Working with live RF equipment requires respect and proper procedures. This training reinforced that every step matters."
+                <div class="quote-attribution">— Field Supervisor</div>
+            </div>
+        </div>
+
+        <div class="section-block">
+            <h2>🚀 Next Steps & Action Items</h2>
+            <ol>
+                <li><strong>Share Report:</strong> Distribute this field report with the operations team and attach the commissioning checklist for standardized deployments</li>
+                <li><strong>Documentation Update:</strong> Update site documentation with as-built photos, cable labeling diagrams, and performance baselines</li>
+                <li><strong>Schedule Follow-up:</strong> Plan the next quarterly refresher training and invite a cross-section of field teams for knowledge sharing</li>
+                <li><strong>Feedback Integration:</strong> Incorporate field technician feedback into training materials for continuous improvement</li>
+                <li><strong>Skills Certification:</strong> Consider formalizing certification for SBC commissioning competency based on demonstrated field skills</li>
+            </ol>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TelecomHub. Professional telecom field training and operations documentation.</p>
+        <p>By <a href="Html%20code.html">Amine Janah</a> — Telecom Engineering Excellence</p>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️';
+        }
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            themeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+        });
+    </script>
+</body>
+</html>
+
