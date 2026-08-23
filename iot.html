@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TelecomHub IoT technology guide covering connectivity, protocols, applications, and advanced IoT concepts.">
     <title>IoT Technology - TelecomHub</title>
     <style>
         * {
@@ -179,7 +180,7 @@
         }
 
         .specs-list li:before {
-            content: "Ã¢Å“â€œ ";
+            content: "✓ ";
             color: #1264e8;
             font-weight: bold;
             margin-right: 8px;
@@ -256,15 +257,15 @@
         <div class="header-container">
             <a href="Html%20code.html" class="logo">TELECOMHUB</a>
             <div class="nav-buttons">
-                <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">Ã°Å¸Å’â„¢</button>
-                <a href="Html%20code.html">Ã¢â€ Â Back to Home</a>
+                <button class="theme-toggle" id="themeToggle" type="button" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
+                <a href="Html%20code.html">← Back to Home</a>
             </div>
         </div>
     </header>
 
     <div class="container">
         <div class="hero-section">
-            <h1>Ã°Å¸Å’Â IoT (Internet of Things)</h1>
+            <h1>🌐 IoT (Internet of Things)</h1>
             <p>Comprehensive guide to Internet of Things technologies, protocols, and applications leveraging telecom networks for connected device communication.</p>
         </div>
 
@@ -316,7 +317,7 @@
         </div>
 
         <div class="info-section">
-            <h3>Ã°Å¸Å¡â‚¬ Advanced IoT Concepts</h3>
+            <h3>🚀 Advanced IoT Concepts</h3>
             
             <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Massive Machine Type Communication (mMTC)</h4>
             <p>
@@ -347,18 +348,28 @@
 
     <script>
         const themeToggle = document.getElementById('themeToggle');
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            themeToggle.textContent = 'Ã¢Ëœâ‚¬Ã¯Â¸Â';
+
+        if (themeToggle) {
+            const savedTheme = localStorage.getItem('theme');
+
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                themeToggle.textContent = '☀️';
+                themeToggle.setAttribute('aria-label', 'Switch to light mode');
+            }
+
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                const isDarkMode = document.body.classList.contains('dark-mode');
+
+                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                themeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+                themeToggle.setAttribute(
+                    'aria-label',
+                    isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'
+                );
+            });
         }
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDarkMode = document.body.classList.contains('dark-mode');
-            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-            themeToggle.textContent = isDarkMode ? 'Ã¢Ëœâ‚¬Ã¯Â¸Â' : 'Ã°Å¸Å’â„¢';
-        });
     </script>
 </body>
 </html>
-
