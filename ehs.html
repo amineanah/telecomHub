@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>EHS - Environment, Health & Safety - TelecomHub</title>
+
     <style>
         * {
             margin: 0;
@@ -22,6 +24,8 @@
             background: #0f1419;
             color: #e0e0e0;
         }
+
+        /* ================= HEADER ================= */
 
         header {
             background: linear-gradient(135deg, #06152d, #0c2b58);
@@ -55,7 +59,8 @@
             align-items: center;
         }
 
-        .nav-buttons a, .nav-buttons button {
+        .nav-buttons a,
+        .nav-buttons button {
             background: linear-gradient(135deg, #1264e8, #0a47bc);
             color: white;
             padding: 10px 20px;
@@ -68,7 +73,8 @@
             font-weight: 600;
         }
 
-        .nav-buttons a:hover, .nav-buttons button:hover {
+        .nav-buttons a:hover,
+        .nav-buttons button:hover {
             box-shadow: 0 6px 16px rgba(18, 100, 232, 0.4);
             transform: translateY(-2px);
         }
@@ -79,7 +85,10 @@
             color: white;
             font-size: 20px;
             cursor: pointer;
+            padding: 10px;
         }
+
+        /* ================= MAIN CONTAINER ================= */
 
         .container {
             max-width: 1200px;
@@ -106,11 +115,14 @@
             color: #666;
             max-width: 700px;
             margin: 0 auto;
+            line-height: 1.6;
         }
 
         body.dark-mode .hero-section p {
             color: #b0b0b0;
         }
+
+        /* ================= CONTENT GRID ================= */
 
         .content-grid {
             display: grid;
@@ -161,6 +173,8 @@
             color: #c0c0c0;
         }
 
+        /* ================= SPECIFICATIONS ================= */
+
         .specs-list {
             list-style: none;
             margin-bottom: 25px;
@@ -171,6 +185,7 @@
             border-bottom: 1px solid #e0e0e0;
             color: #555;
             font-size: 14px;
+            line-height: 1.5;
         }
 
         body.dark-mode .specs-list li {
@@ -178,8 +193,8 @@
             color: #b0b0b0;
         }
 
-        .specs-list li:before {
-            content: "Ã¢Å“â€œ ";
+        .specs-list li::before {
+            content: "✓";
             color: #1264e8;
             font-weight: bold;
             margin-right: 8px;
@@ -188,6 +203,8 @@
         .specs-list li:last-child {
             border-bottom: none;
         }
+
+        /* ================= INFORMATION SECTION ================= */
 
         .info-section {
             background: white;
@@ -212,6 +229,17 @@
             color: #5b9eff;
         }
 
+        .info-section h4 {
+            color: #1264e8;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        body.dark-mode .info-section h4 {
+            color: #5b9eff;
+        }
+
         .info-section p {
             color: #666;
             font-size: 15px;
@@ -223,12 +251,15 @@
             color: #b0b0b0;
         }
 
+        /* ================= FOOTER ================= */
+
         footer {
             background: #0f1419;
             color: white;
             padding: 30px;
             text-align: center;
             margin-top: 60px;
+            line-height: 1.8;
         }
 
         footer a {
@@ -240,125 +271,404 @@
             text-decoration: underline;
         }
 
+        /* ================= RESPONSIVE ================= */
+
         @media (max-width: 768px) {
+
+            .header-container {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .nav-buttons {
+                gap: 8px;
+            }
+
+            .nav-buttons a {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .theme-toggle {
+                font-size: 18px;
+                padding: 8px;
+            }
+
+            .container {
+                padding: 30px 15px;
+            }
+
+            .hero-section {
+                margin-bottom: 40px;
+            }
+
             .hero-section h1 {
                 font-size: 32px;
+            }
+
+            .hero-section p {
+                font-size: 16px;
             }
 
             .content-grid {
                 grid-template-columns: 1fr;
             }
+
+            .content-card {
+                padding: 25px;
+            }
+
+            .info-section {
+                padding: 25px;
+            }
         }
     </style>
 </head>
+
 <body>
+
+    <!-- ================= HEADER ================= -->
+
     <header>
         <div class="header-container">
-            <a href="Html%20code.html" class="logo">TELECOMHUB</a>
+
+            <a href="Html%20code.html" class="logo">
+                TELECOMHUB
+            </a>
+
             <div class="nav-buttons">
-                <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">Ã°Å¸Å’â„¢</button>
-                <a href="Html%20code.html">Ã¢â€ Â Back to Home</a>
+
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    title="Toggle dark mode"
+                    aria-label="Toggle dark mode">
+                    🌙
+                </button>
+
+                <a href="Html%20code.html">
+                    ← Back to Home
+                </a>
+
             </div>
         </div>
     </header>
 
-    <div class="container">
-        <div class="hero-section">
-            <h1>Ã°Å¸Â¦Âº EHS - Environment, Health & Safety</h1>
-            <p>Comprehensive guide to workplace safety, environmental protection, and health standards in telecom operations and site management.</p>
-        </div>
 
-        <div class="content-grid">
-            <div class="content-card">
-                <h2 class="card-title">Workplace Safety</h2>
-                <p class="card-description">
-                    Critical safety protocols for telecom site operations, equipment handling, and personnel protection during installation and maintenance.
-                </p>
-                <ul class="specs-list">
-                    <li><strong>PPE Requirements:</strong> Hard hats, safety harnesses, gloves</li>
-                    <li><strong>RF Safety:</strong> Exposure limits (ICNIRP, FCC standards)</li>
-                    <li><strong>Height Safety:</strong> Fall protection on towers</li>
-                    <li><strong>Electrical Safety:</strong> High voltage work procedures</li>
-                    <li><strong>Training:</strong> Regular safety certifications required</li>
-                    <li><strong>Incident Reporting:</strong> Near-miss and accident documentation</li>
-                </ul>
-            </div>
+    <!-- ================= MAIN CONTENT ================= -->
 
-            <div class="content-card">
-                <h2 class="card-title">Environmental Protection</h2>
-                <p class="card-description">
-                    Responsible management of environmental impact from telecom operations including emissions, waste disposal, and resource efficiency.
-                </p>
-                <ul class="specs-list">
-                    <li><strong>Carbon Footprint:</strong> Reduction through efficiency</li>
-                    <li><strong>Waste Management:</strong> E-waste recycling programs</li>
-                    <li><strong>Water Usage:</strong> Cooling system efficiency</li>
-                    <li><strong>Emissions:</strong> Backup generator compliance</li>
-                    <li><strong>Site Remediation:</strong> Environmental impact assessment</li>
-                    <li><strong>Biodiversity:</strong> Wildlife protection measures</li>
-                </ul>
-            </div>
+    <main class="container">
+
+        <!-- ================= HERO ================= -->
+
+        <section class="hero-section">
+
+            <h1>
+                🦺 EHS - Environment, Health & Safety
+            </h1>
+
+            <p>
+                Comprehensive guide to workplace safety, environmental protection,
+                and health standards in telecom operations and site management.
+            </p>
+
+        </section>
+
+
+        <!-- ================= CONTENT CARDS ================= -->
+
+        <section class="content-grid">
+
+            <!-- WORKPLACE SAFETY -->
 
             <div class="content-card">
-                <h2 class="card-title">Health Standards</h2>
+
+                <h2 class="card-title">
+                    Workplace Safety
+                </h2>
+
                 <p class="card-description">
-                    Compliance with health regulations and monitoring of worker health related to telecom operations and site conditions.
+                    Critical safety protocols for telecom site operations,
+                    equipment handling, and personnel protection during
+                    installation and maintenance.
                 </p>
+
                 <ul class="specs-list">
-                    <li><strong>RF Exposure Monitoring:</strong> Regular measurements</li>
-                    <li><strong>Medical Surveillance:</strong> Health check programs</li>
-                    <li><strong>Noise Control:</strong> Hearing protection measures</li>
-                    <li><strong>Air Quality:</strong> Generator emissions monitoring</li>
-                    <li><strong>Ergonomics:</strong> Workplace comfort assessment</li>
-                    <li><strong>Mental Health:</strong> Stress management support</li>
+
+                    <li>
+                        <strong>PPE Requirements:</strong>
+                        Hard hats, safety harnesses, gloves, safety footwear
+                    </li>
+
+                    <li>
+                        <strong>RF Safety:</strong>
+                        Exposure limits and controlled access procedures
+                    </li>
+
+                    <li>
+                        <strong>Height Safety:</strong>
+                        Fall protection systems for tower work
+                    </li>
+
+                    <li>
+                        <strong>Electrical Safety:</strong>
+                        Electrical isolation and safe working procedures
+                    </li>
+
+                    <li>
+                        <strong>Training:</strong>
+                        Regular safety training and competency certification
+                    </li>
+
+                    <li>
+                        <strong>Incident Reporting:</strong>
+                        Near-miss, incident, and accident documentation
+                    </li>
+
                 </ul>
+
             </div>
-        </div>
 
-        <div class="info-section">
-            <h3>Ã°Å¸Å¡â‚¬ EHS Management Systems</h3>
-            
-            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">ISO 14001 Environmental Management</h4>
+
+            <!-- ENVIRONMENTAL PROTECTION -->
+
+            <div class="content-card">
+
+                <h2 class="card-title">
+                    Environmental Protection
+                </h2>
+
+                <p class="card-description">
+                    Responsible management of environmental impacts from telecom
+                    operations, including emissions, waste disposal, and
+                    resource efficiency.
+                </p>
+
+                <ul class="specs-list">
+
+                    <li>
+                        <strong>Carbon Footprint:</strong>
+                        Energy efficiency and emissions reduction
+                    </li>
+
+                    <li>
+                        <strong>Waste Management:</strong>
+                        E-waste collection, reuse, and recycling
+                    </li>
+
+                    <li>
+                        <strong>Water Usage:</strong>
+                        Efficient water management where applicable
+                    </li>
+
+                    <li>
+                        <strong>Emissions:</strong>
+                        Generator emissions and environmental compliance
+                    </li>
+
+                    <li>
+                        <strong>Site Remediation:</strong>
+                        Restoration and environmental impact management
+                    </li>
+
+                    <li>
+                        <strong>Biodiversity:</strong>
+                        Protection of local ecosystems and wildlife
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- HEALTH STANDARDS -->
+
+            <div class="content-card">
+
+                <h2 class="card-title">
+                    Health Standards
+                </h2>
+
+                <p class="card-description">
+                    Compliance with health requirements and monitoring of
+                    occupational health risks associated with telecom
+                    operations and site conditions.
+                </p>
+
+                <ul class="specs-list">
+
+                    <li>
+                        <strong>RF Exposure Monitoring:</strong>
+                        Regular measurements and controlled access
+                    </li>
+
+                    <li>
+                        <strong>Medical Surveillance:</strong>
+                        Occupational health programs where required
+                    </li>
+
+                    <li>
+                        <strong>Noise Control:</strong>
+                        Hearing protection and noise exposure management
+                    </li>
+
+                    <li>
+                        <strong>Air Quality:</strong>
+                        Monitoring of generator and indoor air conditions
+                    </li>
+
+                    <li>
+                        <strong>Ergonomics:</strong>
+                        Safe manual handling and workplace design
+                    </li>
+
+                    <li>
+                        <strong>Wellbeing:</strong>
+                        Fatigue and stress management initiatives
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= EHS MANAGEMENT SYSTEMS ================= -->
+
+        <section class="info-section">
+
+            <h3>
+                🚀 EHS Management Systems
+            </h3>
+
+
+            <!-- ISO 14001 -->
+
+            <h4>
+                ISO 14001 Environmental Management
+            </h4>
+
             <p>
-                International standard for environmental management systems. Helps organizations minimize environmental impacts, comply with regulations, and demonstrate commitment to sustainability. Covers waste reduction, pollution prevention, and resource efficiency.
+                ISO 14001 provides a framework for environmental management
+                systems. It helps organizations identify environmental
+                impacts, meet applicable requirements, improve resource
+                efficiency, reduce waste, and support continuous improvement.
             </p>
 
-            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">OHSAS 18001 / ISO 45001 Occupational Health & Safety</h4>
+
+            <!-- ISO 45001 -->
+
+            <h4>
+                ISO 45001 Occupational Health & Safety
+            </h4>
+
             <p>
-                International standards for occupational health and safety management. Ensures systematic approach to hazard identification, risk assessment, and control measures. Reduces workplace incidents and promotes worker wellbeing.
+                ISO 45001 provides a systematic framework for occupational
+                health and safety management. It focuses on hazard
+                identification, risk assessment, worker participation,
+                operational controls, incident prevention, and continuous
+                improvement.
             </p>
 
-            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">RF Safety Compliance</h4>
+
+            <!-- RF SAFETY -->
+
+            <h4>
+                RF Safety Compliance
+            </h4>
+
             <p>
-                Radio Frequency safety is critical in telecom networks. Compliance with ICNIRP, FCC, and local standards. Personnel must maintain safe distances from RF sources. Signage, barriers, and monitoring systems essential. Training required for all personnel accessing RF areas.
+                Radio Frequency safety is critical in telecom networks.
+                Organizations should comply with applicable exposure limits
+                and local regulations. Personnel working near RF sources
+                must follow controlled-access procedures, maintain required
+                safety distances, use appropriate signage, and receive
+                relevant RF safety training.
             </p>
 
-            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Site Safety Audits</h4>
+
+            <!-- SITE SAFETY AUDITS -->
+
+            <h4>
+                Site Safety Audits
+            </h4>
+
             <p>
-                Regular inspections identifying hazards and safety improvements. Third-party audits ensure compliance and identify best practices. Corrective actions tracked and verified. Continuous improvement cycle maintains high safety standards.
+                Regular site inspections help identify hazards, verify
+                compliance, and improve working conditions. Findings should
+                be documented, assigned to responsible teams, tracked through
+                corrective actions, and verified until closure. This creates
+                a continuous EHS improvement cycle.
             </p>
-        </div>
-    </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
 
     <footer>
-        <p>&copy; 2024 TelecomHub. A professional platform by <a href="Html%20code.html">Amine Janah</a></p>
-        <p>Dedicated to telecom engineering excellence and workplace safety</p>
+
+        <p>
+            &copy; 2024 TelecomHub.
+            A professional platform by
+            <a href="Html%20code.html">Amine Janah</a>
+        </p>
+
+        <p>
+            Dedicated to telecom engineering excellence and workplace safety
+        </p>
+
     </footer>
 
+
+    <!-- ================= DARK MODE SCRIPT ================= -->
+
     <script>
-        const themeToggle = document.getElementById('themeToggle');
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            themeToggle.textContent = 'Ã¢Ëœâ‚¬Ã¯Â¸Â';
+
+        const themeToggle = document.getElementById("themeToggle");
+
+        // Check saved theme preference
+
+        const savedTheme = localStorage.getItem("theme");
+
+        if (savedTheme === "dark") {
+
+            document.body.classList.add("dark-mode");
+            themeToggle.textContent = "☀️";
+
+        } else {
+
+            themeToggle.textContent = "🌙";
+
         }
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDarkMode = document.body.classList.contains('dark-mode');
-            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-            themeToggle.textContent = isDarkMode ? 'Ã¢Ëœâ‚¬Ã¯Â¸Â' : 'Ã°Å¸Å’â„¢';
+
+
+        // Toggle dark mode
+
+        themeToggle.addEventListener("click", () => {
+
+            document.body.classList.toggle("dark-mode");
+
+            const isDarkMode =
+                document.body.classList.contains("dark-mode");
+
+            localStorage.setItem(
+                "theme",
+                isDarkMode ? "dark" : "light"
+            );
+
+            themeToggle.textContent =
+                isDarkMode ? "☀️" : "🌙";
+
         });
+
     </script>
+
 </body>
 </html>
-
