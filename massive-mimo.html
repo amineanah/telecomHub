@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Massive MIMO Technology Guide - TelecomHub</title>
+
     <style>
         * {
             margin: 0;
@@ -22,6 +24,8 @@
             background: #0f1419;
             color: #e0e0e0;
         }
+
+        /* ================= HEADER ================= */
 
         header {
             background: linear-gradient(135deg, #06152d, #0c2b58);
@@ -55,7 +59,8 @@
             align-items: center;
         }
 
-        .nav-buttons a, .nav-buttons button {
+        .nav-buttons a,
+        .nav-buttons button {
             background: linear-gradient(135deg, #1264e8, #0a47bc);
             color: white;
             padding: 10px 20px;
@@ -68,7 +73,8 @@
             font-weight: 600;
         }
 
-        .nav-buttons a:hover, .nav-buttons button:hover {
+        .nav-buttons a:hover,
+        .nav-buttons button:hover {
             box-shadow: 0 6px 16px rgba(18, 100, 232, 0.4);
             transform: translateY(-2px);
         }
@@ -79,13 +85,18 @@
             color: white;
             font-size: 20px;
             cursor: pointer;
+            padding: 10px;
         }
+
+        /* ================= MAIN CONTAINER ================= */
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
         }
+
+        /* ================= HERO ================= */
 
         .hero-section {
             margin-bottom: 60px;
@@ -154,7 +165,6 @@
             font-size: 17px;
             color: #666;
             max-width: 800px;
-            margin: 0 0 0;
             line-height: 1.8;
             text-align: left;
         }
@@ -162,6 +172,8 @@
         body.dark-mode .hero-section p {
             color: #b0b0b0;
         }
+
+        /* ================= CONTENT GRID ================= */
 
         .content-grid {
             display: grid;
@@ -217,6 +229,8 @@
             color: #c0c0c0;
         }
 
+        /* ================= SPECIFICATIONS ================= */
+
         .specs-list {
             list-style: none;
             margin-bottom: 0;
@@ -227,6 +241,7 @@
             border-bottom: 1px solid #e0e0e0;
             color: #555;
             font-size: 14px;
+            line-height: 1.5;
         }
 
         body.dark-mode .specs-list li {
@@ -234,8 +249,8 @@
             color: #b0b0b0;
         }
 
-        .specs-list li:before {
-            content: "Ã¢Å“â€œ ";
+        .specs-list li::before {
+            content: "✓";
             color: #1264e8;
             font-weight: bold;
             margin-right: 8px;
@@ -244,6 +259,8 @@
         .specs-list li:last-child {
             border-bottom: none;
         }
+
+        /* ================= INFORMATION SECTION ================= */
 
         .info-section {
             background: white;
@@ -271,6 +288,17 @@
             color: #5b9eff;
         }
 
+        .info-section h4 {
+            color: #1264e8;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        body.dark-mode .info-section h4 {
+            color: #5b9eff;
+        }
+
         .info-section p {
             color: #666;
             font-size: 15px;
@@ -282,8 +310,16 @@
             color: #b0b0b0;
         }
 
+        /* ================= COMPARISON TABLE ================= */
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
         .comparison-table {
             width: 100%;
+            min-width: 700px;
             border-collapse: collapse;
             margin-top: 20px;
             font-size: 14px;
@@ -316,12 +352,15 @@
             background: rgba(18, 100, 232, 0.1);
         }
 
+        /* ================= BENEFIT BOX ================= */
+
         .benefit-box {
             background: linear-gradient(135deg, #f0f4ff, #e8f0ff);
             border-left: 4px solid #1264e8;
             padding: 20px;
             margin: 15px 0;
             border-radius: 8px;
+            line-height: 1.7;
         }
 
         body.dark-mode .benefit-box {
@@ -337,6 +376,8 @@
             color: #5b9eff;
         }
 
+        /* ================= ANTENNA DIAGRAM ================= */
+
         .antenna-diagram {
             background: #f0f4ff;
             border-radius: 12px;
@@ -345,9 +386,10 @@
             margin: 25px 0;
             font-family: monospace;
             font-size: 12px;
-            line-height: 1.4;
+            line-height: 1.6;
             color: #1264e8;
             overflow-x: auto;
+            white-space: pre-line;
         }
 
         body.dark-mode .antenna-diagram {
@@ -355,12 +397,25 @@
             color: #5b9eff;
         }
 
+        /* ================= HIGHLIGHT ================= */
+
+        .highlight {
+            background: linear-gradient(120deg, #ffd89b 0%, #19547b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        /* ================= FOOTER ================= */
+
         footer {
             background: #0f1419;
             color: white;
             padding: 30px;
             text-align: center;
             margin-top: 60px;
+            line-height: 1.8;
         }
 
         footer a {
@@ -372,15 +427,36 @@
             text-decoration: underline;
         }
 
-        .highlight {
-            background: linear-gradient(120deg, #ffd89b 0%, #19547b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 600;
-        }
+        /* ================= RESPONSIVE ================= */
 
         @media (max-width: 768px) {
+
+            .header-container {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .nav-buttons {
+                gap: 8px;
+            }
+
+            .nav-buttons a {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .theme-toggle {
+                font-size: 18px;
+                padding: 8px;
+            }
+
+            .container {
+                padding: 30px 15px;
+            }
+
             .hero-layout {
                 grid-template-columns: 1fr;
             }
@@ -399,315 +475,858 @@
                 font-size: 32px;
             }
 
+            .hero-section {
+                padding: 25px;
+            }
+
             .content-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .content-card {
+                padding: 25px;
+            }
+
+            .info-section {
+                padding: 25px;
             }
 
             .comparison-table {
                 font-size: 12px;
             }
 
-            .comparison-table th, .comparison-table td {
+            .comparison-table th,
+            .comparison-table td {
                 padding: 10px;
             }
         }
     </style>
 </head>
+
 <body>
+
+    <!-- ================= HEADER ================= -->
+
     <header>
+
         <div class="header-container">
-            <a href="Html%20code.html" class="logo">TELECOMHUB</a>
+
+            <a href="Html%20code.html" class="logo">
+                TELECOMHUB
+            </a>
+
             <div class="nav-buttons">
-                <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">Ã°Å¸Å’â„¢</button>
-                <a href="Html%20code.html">Ã¢â€ Â Back to Home</a>
+
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    title="Toggle dark mode"
+                    aria-label="Toggle dark mode">
+                    🌙
+                </button>
+
+                <a href="Html%20code.html">
+                    ← Back to Home
+                </a>
+
             </div>
+
         </div>
+
     </header>
 
-    <div class="container">
-        <div class="hero-section">
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="container">
+
+        <!-- ================= HERO ================= -->
+
+        <section class="hero-section">
+
             <div class="hero-layout">
+
                 <div class="hero-copy">
-                    <h1>Ã°Å¸â€œÂ¡ Massive MIMO Technology</h1>
-                    <p class="hero-subtitle">A Complete Guide to Multi-Antenna Systems & Advanced Beamforming</p>
-                    <p>Massive Multiple-Input Multiple-Output (Massive MIMO) is a revolutionary wireless technology that uses hundreds of antennas to dramatically increase network capacity, spectral efficiency, and energy efficiency. Discover how 64Ãƒâ€”64 and 256Ãƒâ€”256 antenna arrays power next-generation 5G and 6G networks.</p>
+
+                    <h1>
+                        📡 Massive MIMO Technology
+                    </h1>
+
+                    <p class="hero-subtitle">
+                        A Complete Guide to Multi-Antenna Systems & Advanced Beamforming
+                    </p>
+
+                    <p>
+                        Massive Multiple-Input Multiple-Output (Massive MIMO) is a
+                        revolutionary wireless technology that uses large antenna
+                        arrays to dramatically increase network capacity, spectral
+                        efficiency, and energy efficiency. Discover how technologies
+                        such as 32T32R, 64T64R, and larger antenna arrays power
+                        next-generation 5G networks.
+                    </p>
+
                 </div>
+
                 <div class="poster-wrap">
-                    <img class="poster-image" src="images/Massive.png" alt="Massive MIMO poster" />
+
+                    <img
+                        class="poster-image"
+                        src="images/Massive.png"
+                        alt="Massive MIMO technology poster"
+                    >
+
                 </div>
-            </div>
-        </div>
 
-        <div class="content-grid">
-            <div class="content-card">
-                <div class="card-icon">Ã°Å¸â€œÂ¡</div>
-                <h2 class="card-title">What is Massive MIMO?</h2>
-                <p class="card-description">
-                    Massive MIMO technology enables base stations to communicate with many users simultaneously using large arrays of antennas. The key principle is exploiting spatial degrees of freedom to serve multiple terminals in the same frequency band.
-                </p>
-                <ul class="specs-list">
-                    <li>Hundreds of antennas at base station</li>
-                    <li>Simultaneous multi-user transmission</li>
-                    <li>Spatial multiplexing & beamforming</li>
-                    <li>Propagation channel orthogonality</li>
-                    <li>Interference suppression capabilities</li>
-                </ul>
             </div>
+
+        </section>
+
+
+        <!-- ================= CONTENT CARDS ================= -->
+
+        <section class="content-grid">
+
+            <!-- WHAT IS MASSIVE MIMO -->
 
             <div class="content-card">
-                <div class="card-icon">Ã°Å¸â€œÅ </div>
-                <h2 class="card-title">Configuration Sizes</h2>
+
+                <div class="card-icon">📡</div>
+
+                <h2 class="card-title">
+                    What is Massive MIMO?
+                </h2>
+
                 <p class="card-description">
-                    Massive MIMO deployments vary from moderate to ultra-large antenna arrays. Each configuration offers different trade-offs between performance, cost, power consumption, and physical size constraints.
+                    Massive MIMO technology enables base stations to communicate
+                    with many users simultaneously using large arrays of antennas.
+                    The key principle is exploiting spatial degrees of freedom
+                    to serve multiple terminals in the same frequency band.
                 </p>
+
                 <ul class="specs-list">
-                    <li><strong>32Ãƒâ€”32:</strong> 1,024 antenna elements</li>
-                    <li><strong>64Ãƒâ€”64:</strong> 4,096 antenna elements</li>
-                    <li><strong>128Ãƒâ€”128:</strong> 16,384 antenna elements</li>
-                    <li><strong>256Ãƒâ€”256:</strong> 65,536 antenna elements</li>
-                    <li><strong>Beyond 5G:</strong> 512Ãƒâ€”512+ configurations</li>
+
+                    <li>
+                        Large antenna arrays at the base station
+                    </li>
+
+                    <li>
+                        Simultaneous multi-user transmission
+                    </li>
+
+                    <li>
+                        Spatial multiplexing and beamforming
+                    </li>
+
+                    <li>
+                        Improved channel separation
+                    </li>
+
+                    <li>
+                        Interference suppression capabilities
+                    </li>
+
                 </ul>
+
             </div>
+
+
+            <!-- CONFIGURATION SIZES -->
 
             <div class="content-card">
-                <div class="card-icon">Ã¢Å¡Â¡</div>
-                <h2 class="card-title">Key Performance Gains</h2>
+
+                <div class="card-icon">📊</div>
+
+                <h2 class="card-title">
+                    Configuration Sizes
+                </h2>
+
                 <p class="card-description">
-                    Massive MIMO delivers substantial improvements across critical network metrics, enabling unprecedented spectral efficiency and user experience enhancements.
+                    Massive MIMO deployments vary from moderate to very large
+                    antenna arrays. Each configuration offers different trade-offs
+                    between performance, cost, power consumption, and physical size.
                 </p>
+
                 <ul class="specs-list">
-                    <li><strong>+400-500%</strong> spectral efficiency increase</li>
-                    <li><strong>10-50x</strong> energy efficiency improvement</li>
-                    <li><strong>Better coverage</strong> with lower transmission power</li>
-                    <li><strong>Reduced interference</strong> between users & cells</li>
-                    <li><strong>Superior channel accuracy</strong> with pilot signals</li>
+
+                    <li>
+                        <strong>32T32R:</strong>
+                        32 transmit and 32 receive paths
+                    </li>
+
+                    <li>
+                        <strong>64T64R:</strong>
+                        64 transmit and 64 receive paths
+                    </li>
+
+                    <li>
+                        <strong>128T128R:</strong>
+                        128 transmit and 128 receive paths
+                    </li>
+
+                    <li>
+                        <strong>256T256R:</strong>
+                        256 transmit and 256 receive paths
+                    </li>
+
+                    <li>
+                        <strong>Beyond 5G:</strong>
+                        Larger distributed and intelligent antenna systems
+                    </li>
+
                 </ul>
+
             </div>
-        </div>
 
-        <div class="info-section">
-            <h3>Ã°Å¸Å½Â¯ How Massive MIMO Works: The Core Principles</h3>
-            
-            <p>Massive MIMO operates on elegant mathematical principles that exploit the channel characteristics of wireless propagation:</p>
 
-            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px; font-size: 18px;">1Ã¯Â¸ÂÃ¢Æ’Â£ Channel Orthogonality</h4>
+            <!-- PERFORMANCE GAINS -->
+
+            <div class="content-card">
+
+                <div class="card-icon">⚡</div>
+
+                <h2 class="card-title">
+                    Key Performance Gains
+                </h2>
+
+                <p class="card-description">
+                    Massive MIMO can deliver substantial improvements across
+                    important network metrics, enabling higher capacity and
+                    better user experience.
+                </p>
+
+                <ul class="specs-list">
+
+                    <li>
+                        <strong>Higher spectral efficiency</strong>
+                        through spatial multiplexing
+                    </li>
+
+                    <li>
+                        <strong>Improved energy efficiency</strong>
+                        through focused transmission
+                    </li>
+
+                    <li>
+                        <strong>Better coverage</strong>
+                        through beamforming
+                    </li>
+
+                    <li>
+                        <strong>Reduced interference</strong>
+                        between users and cells
+                    </li>
+
+                    <li>
+                        <strong>Improved channel utilization</strong>
+                        with advanced precoding
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CORE PRINCIPLES ================= -->
+
+        <section class="info-section">
+
+            <h3>
+                🎯 How Massive MIMO Works: The Core Principles
+            </h3>
+
             <p>
-                When a base station has many more antennas than users, the channels become nearly orthogonal. This means signals to different users experience different propagation patterns, allowing the BS to distinguish between users and separate their signalsÃ¢â‚¬â€a process called <span class="highlight">precoding</span>.
+                Massive MIMO operates on advanced signal-processing principles
+                that exploit the characteristics of wireless propagation and
+                multiple antenna elements.
             </p>
 
-            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px; font-size: 18px;">2Ã¯Â¸ÂÃ¢Æ’Â£ Beamforming & Beam Management</h4>
+
+            <h4>
+                1️⃣ Channel Orthogonality
+            </h4>
+
             <p>
-                <strong>Transmit Beamforming:</strong> The base station calculates optimal weights for each antenna to create a focused beam toward each user. This concentrates energy where it's needed and suppresses interference elsewhere. <br>
-                <strong>Receive Beamforming:</strong> Signals from many antennas are combined using optimal weighting to enhance desired user signals while rejecting interference.
+                When a base station has many more antennas than active users,
+                user channels can become increasingly distinguishable. This
+                allows the base station to separate users and reduce mutual
+                interference through advanced precoding techniques.
             </p>
 
-            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px; font-size: 18px;">3Ã¯Â¸ÂÃ¢Æ’Â£ Pilot-Based Channel Estimation</h4>
+
+            <h4>
+                2️⃣ Beamforming & Beam Management
+            </h4>
+
             <p>
-                Users send pilot signals (known training sequences) that the BS uses to estimate the uplink channel. In FDD systems, this requires feedback of downlink channel estimates. In TDD systems, channel reciprocity allows reusing uplink estimates for downlink precodingÃ¢â‚¬â€a major advantage.
+                <strong>Transmit Beamforming:</strong>
+                The base station calculates antenna weights to direct radio
+                energy toward intended users while reducing unwanted radiation
+                toward other directions.
+                <br><br>
+
+                <strong>Receive Beamforming:</strong>
+                Signals received by multiple antenna elements are combined
+                intelligently to improve the desired signal and suppress
+                interference.
             </p>
 
-            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px; font-size: 18px;">4Ã¯Â¸ÂÃ¢Æ’Â£ Multi-User Detection & Interference Suppression</h4>
+
+            <h4>
+                3️⃣ Pilot-Based Channel Estimation
+            </h4>
+
             <p>
-                With perfect channel knowledge, the base station can compute precoding vectors that send signals to target users while nulling interference to others. This enables simultaneous transmission to many users on identical frequenciesÃ¢â‚¬â€massive capacity gains.
+                Users transmit pilot signals, also called reference signals,
+                that allow the base station to estimate the wireless channel.
+                In TDD systems, channel reciprocity can significantly reduce
+                downlink channel-estimation overhead compared with FDD systems.
             </p>
+
+
+            <h4>
+                4️⃣ Multi-User Detection & Interference Suppression
+            </h4>
+
+            <p>
+                With accurate channel information, the base station can calculate
+                precoding and combining vectors that allow simultaneous transmission
+                to multiple users on the same time-frequency resources while
+                controlling interference.
+            </p>
+
 
             <div class="antenna-diagram">
-Massive MIMO Antenna Array Concept<br>
-<br>
-Single Antenna System (4G):<br>
-    [BS] Ã¢â€ â€™ [User 1, User 2, User 3] (Interference & Crosstalk)<br>
-<br>
-Massive MIMO System (5G+):<br>
-    [=============================]<br>
-    [64 or 256 Antenna Array      ]<br>
-    [=============================]<br>
-         Ã¢â€ â€œ Directed Beams Ã¢â€ â€œ<br>
-    [User 1] [User 2] [User 3]  (Clean Separation)<br>
+
+Massive MIMO Antenna Array Concept
+
+Conventional Antenna System:
+    [BS] → [User 1 | User 2 | User 3]
+           ↑ Interference / Crosstalk
+
+Massive MIMO System:
+
+    [===============================]
+    [       64T64R Antenna Array    ]
+    [===============================]
+
+          ↘ Beam 1
+           → User 1
+
+          → Beam 2
+           → User 2
+
+          ↗ Beam 3
+           → User 3
+
+Multiple users can be served simultaneously
+using spatial separation and beamforming.
+
             </div>
-        </div>
 
-        <div class="info-section">
-            <h3>Ã°Å¸Å¡â‚¬ Advanced Techniques in Massive MIMO</h3>
+        </section>
 
-            <h4 style="color: #1264e8; margin-top: 20px; margin-bottom: 15px; font-size: 18px;">Zero Forcing (ZF) & Regularized Zero Forcing (RZF)</h4>
+
+        <!-- ================= ADVANCED TECHNIQUES ================= -->
+
+        <section class="info-section">
+
+            <h3>
+                🚀 Advanced Techniques in Massive MIMO
+            </h3>
+
+
+            <h4>
+                Zero Forcing (ZF) & Regularized Zero Forcing (RZF)
+            </h4>
+
             <p>
-                The base station inverts the channel matrix to compute precoding weights that completely null interference to other users. Zero Forcing is optimal under high SNR; Regularized ZF adds noise robustness for practical systems.
+                Zero Forcing precoding attempts to reduce inter-user interference
+                by using the estimated channel matrix to calculate suitable
+                precoding weights. Regularized Zero Forcing adds regularization
+                to improve robustness, particularly under noise and imperfect
+                channel conditions.
             </p>
 
-            <h4 style="color: #1264e8; margin-top: 20px; margin-bottom: 15px; font-size: 18px;">Maximum Ratio Transmission (MRT)</h4>
+
+            <h4>
+                Maximum Ratio Transmission (MRT)
+            </h4>
+
             <p>
-                Also called conjugate beamforming, MRT allocates antenna power proportionally to channel gain of each user. Simple and effective, especially when channel state information (CSI) quality is limited.
+                Maximum Ratio Transmission, also called conjugate beamforming,
+                aligns transmission with the estimated channel of each user.
+                It is computationally simpler than some interference-nulling
+                techniques and can perform well when interference is manageable.
             </p>
 
-            <h4 style="color: #1264e8; margin-top: 20px; margin-bottom: 15px; font-size: 18px;">Antenna Array Geometries</h4>
+
+            <h4>
+                Antenna Array Geometries
+            </h4>
+
+
             <div class="benefit-box">
-                <strong>Ã°Å¸â€Â· Uniform Linear Array (ULA):</strong> Antennas arranged in a line. Simple hardware, directional beams, limited 2D coverage.
-            </div>
-            <div class="benefit-box">
-                <strong>Ã°Å¸â€Â¶ Uniform Planar Array (UPA):</strong> 2D grid of antennas. Full 3D beamforming, full azimuth/elevation coverage, higher complexity.
-            </div>
-            <div class="benefit-box">
-                <strong>Ã°Å¸Å¸Â¢ 3D Array Configurations:</strong> Cylindrical, spherical, or distributed arrays for omnidirectional coverage with enhanced spatial resolution.
+
+                <strong>🔷 Uniform Linear Array (ULA):</strong>
+
+                Antennas are arranged in a line. It provides relatively simple
+                hardware implementation and directional beam control.
+
             </div>
 
-            <h4 style="color: #1264e8; margin-top: 20px; margin-bottom: 15px; font-size: 18px;">Hybrid Precoding (Analog + Digital)</h4>
+
+            <div class="benefit-box">
+
+                <strong>🔶 Uniform Planar Array (UPA):</strong>
+
+                Antennas are arranged in a two-dimensional grid. This enables
+                beam steering in both azimuth and elevation directions.
+
+            </div>
+
+
+            <div class="benefit-box">
+
+                <strong>🟢 3D Array Configurations:</strong>
+
+                Cylindrical, distributed, and other advanced antenna arrangements
+                can provide additional spatial control and coverage flexibility.
+
+            </div>
+
+
+            <h4>
+                Hybrid Precoding (Analog + Digital)
+            </h4>
+
             <p>
-                Practical systems combine analog (hardware) precoding on antenna subarrays with digital (software) precoding. This reduces RF chain count and power consumption while maintaining most benefits of full digital Massive MIMO.
-            </p>
-        </div>
-
-        <div class="info-section">
-            <h3>Ã°Å¸â€œË† Performance Comparison: Massive MIMO vs Conventional Systems</h3>
-            
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Metric</th>
-                        <th>4G (Single/Dual Antenna)</th>
-                        <th>5G Massive MIMO (64T64R)</th>
-                        <th>Next-Gen (256T256R)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Antenna Count</strong></td>
-                        <td>2-8</td>
-                        <td>4,096</td>
-                        <td>65,536</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Spectral Efficiency</strong></td>
-                        <td>6-8 bps/Hz</td>
-                        <td>30-50 bps/Hz</td>
-                        <td>100+ bps/Hz</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Energy Efficiency</strong></td>
-                        <td>1-2 Mbps/W</td>
-                        <td>20-40 Mbps/W</td>
-                        <td>100-200 Mbps/W</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Coverage Probability</strong></td>
-                        <td>70-80%</td>
-                        <td>95-99%</td>
-                        <td>99%+</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Inter-cell Interference</strong></td>
-                        <td>High (Ã¢Ë†â€™110 dBm)</td>
-                        <td>Very Low (Ã¢Ë†â€™130 dBm)</td>
-                        <td>Negligible (Ã¢Ë†â€™150 dBm)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Pilot Overhead</strong></td>
-                        <td>1-2%</td>
-                        <td>2-5%</td>
-                        <td>3-8%</td>
-                    </tr>
-                    <tr>
-                        <td><strong>TX Power (per user)</strong></td>
-                        <td>20-23 dBm</td>
-                        <td>5-10 dBm</td>
-                        <td>0-5 dBm</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="info-section">
-            <h3>Ã°Å¸â€™Â¡ Real-World Applications & Deployment</h3>
-
-            <h4 style="color: #1264e8; margin-top: 20px; margin-bottom: 15px; font-size: 18px;">Urban Dense Deployments</h4>
-            <p>
-                High-rise buildings with many users demand massive capacity. Massive MIMO base stations can serve 100+ simultaneous users per cell with clean channel separationÃ¢â‚¬â€dramatically improving per-user throughput and reducing latency.
+                Practical systems can combine analog beamforming with digital
+                precoding. This can reduce the number of required RF chains and
+                power consumption while maintaining many of the benefits of
+                advanced multi-antenna transmission.
             </p>
 
-            <h4 style="color: #1264e8; margin-top: 20px; margin-bottom: 15px; font-size: 18px;">Indoor & Enterprise Networks</h4>
+        </section>
+
+
+        <!-- ================= PERFORMANCE COMPARISON ================= -->
+
+        <section class="info-section">
+
+            <h3>
+                📈 Performance Comparison: Conventional vs Massive MIMO
+            </h3>
+
+            <div class="table-container">
+
+                <table class="comparison-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>Metric</th>
+                            <th>4G Conventional MIMO</th>
+                            <th>5G Massive MIMO</th>
+                            <th>Advanced Systems</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>
+                                <strong>Antenna Configuration</strong>
+                            </td>
+                            <td>
+                                2T2R – 8T8R
+                            </td>
+                            <td>
+                                32T32R – 64T64R
+                            </td>
+                            <td>
+                                128T128R and beyond
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>Spatial Multiplexing</strong>
+                            </td>
+                            <td>
+                                Limited
+                            </td>
+                            <td>
+                                High
+                            </td>
+                            <td>
+                                Very High
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>Beamforming</strong>
+                            </td>
+                            <td>
+                                Basic / Limited
+                            </td>
+                            <td>
+                                Advanced Digital Beamforming
+                            </td>
+                            <td>
+                                Advanced Hybrid / Digital
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>Spectral Efficiency</strong>
+                            </td>
+                            <td>
+                                Moderate
+                            </td>
+                            <td>
+                                High
+                            </td>
+                            <td>
+                                Very High
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>Interference Control</strong>
+                            </td>
+                            <td>
+                                Moderate
+                            </td>
+                            <td>
+                                Strong
+                            </td>
+                            <td>
+                                Advanced
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>Coverage Improvement</strong>
+                            </td>
+                            <td>
+                                Limited
+                            </td>
+                            <td>
+                                Significant
+                            </td>
+                            <td>
+                                Advanced Beam Management
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <strong>Multi-User Capacity</strong>
+                            </td>
+                            <td>
+                                Moderate
+                            </td>
+                            <td>
+                                High
+                            </td>
+                            <td>
+                                Very High
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= REAL WORLD APPLICATIONS ================= -->
+
+        <section class="info-section">
+
+            <h3>
+                💡 Real-World Applications & Deployment
+            </h3>
+
+
+            <h4>
+                Urban Dense Deployments
+            </h4>
+
             <p>
-                Corporate offices, shopping malls, and campuses with dense device traffic benefit from indoor Massive MIMO systems. Small form-factor arrays (e.g., 32Ãƒâ€”32) deliver 50+ Gbps aggregate capacity while consuming moderate power.
+                Dense urban environments with high user concentrations benefit
+                significantly from Massive MIMO. Advanced beamforming and
+                spatial multiplexing allow a cell to serve many users
+                simultaneously while improving capacity.
             </p>
 
-            <h4 style="color: #1264e8; margin-top: 20px; margin-bottom: 15px; font-size: 18px;">Rural Coverage Extension</h4>
+
+            <h4>
+                Indoor & Enterprise Networks
+            </h4>
+
             <p>
-                By concentrating transmit power through beamforming, Massive MIMO extends coverage to remote areas with minimal base stations and lower transmission power per site.
+                Corporate offices, shopping malls, campuses, and other high-density
+                environments can benefit from multi-antenna systems designed for
+                high aggregate capacity and improved coverage.
             </p>
 
-            <h4 style="color: #1264e8; margin-top: 20px; margin-bottom: 15px; font-size: 18px;">Millimeter-Wave (mmWave) 5G/6G</h4>
+
+            <h4>
+                Rural Coverage Extension
+            </h4>
+
             <p>
-                Massive MIMO is essential for mmWave systems. Shorter wavelengths at 28/39/73 GHz allow compact antenna arrays with hundreds of elements in small enclosuresÃ¢â‚¬â€enabling directional beams for line-of-sight coverage.
+                Beamforming can concentrate radio energy toward specific coverage
+                areas, potentially improving coverage and reducing unnecessary
+                transmission power.
             </p>
 
-            <h4 style="color: #1264e8; margin-top: 20px; margin-bottom: 15px; font-size: 18px;">Beyond 5G (6G) Vision</h4>
+
+            <h4>
+                Millimeter-Wave (mmWave) 5G
+            </h4>
+
             <p>
-                Next-generation networks will push to 1000+ antenna arrays, terahertz frequencies, and metasurface antennas. Reconfigurable Intelligent Surfaces (RIS) will complement Massive MIMO for programmable radio environments.
+                Massive MIMO is particularly important for mmWave systems.
+                Short wavelengths at frequencies such as 28 GHz and 39 GHz allow
+                many antenna elements to be integrated into relatively compact
+                antenna arrays.
             </p>
-        </div>
 
-        <div class="info-section">
-            <h3>Ã°Å¸â€Â§ Implementation Challenges & Solutions</h3>
 
-            <div class="benefit-box">
-                <strong>Ã¢Å¡Â Ã¯Â¸Â Challenge: Pilot Overhead</strong><br>
-                As antenna count grows, pilot signaling consumes more resources. <br>
-                Ã¢Å“â€¦ <strong>Solution:</strong> Compressed sensing, reduced pilot sequences, machine learning for CSI prediction.
-            </div>
+            <h4>
+                Beyond 5G and 6G
+            </h4>
 
-            <div class="benefit-box">
-                <strong>Ã¢Å¡Â Ã¯Â¸Â Challenge: Hardware Impairments</strong><br>
-                Phase noise, RF component mismatches degrade performance.<br>
-                Ã¢Å“â€¦ <strong>Solution:</strong> Robust precoding algorithms, hardware calibration, analog beamforming correction.
-            </div>
+            <p>
+                Future wireless systems are expected to explore larger antenna
+                arrays, higher frequencies, reconfigurable intelligent surfaces
+                (RIS), AI-assisted beam management, and advanced distributed
+                antenna architectures.
+            </p>
 
-            <div class="benefit-box">
-                <strong>Ã¢Å¡Â Ã¯Â¸Â Challenge: Channel Feedback (FDD Systems)</strong><br>
-                Returning full CSI from users saturates uplink bandwidth.<br>
-                Ã¢Å“â€¦ <strong>Solution:</strong> Quantized feedback, differential feedback, machine learning compression.
-            </div>
+        </section>
 
-            <div class="benefit-box">
-                <strong>Ã¢Å¡Â Ã¯Â¸Â Challenge: Thermal Management</strong><br>
-                Thousands of RF chains and antenna elements generate significant heat.<br>
-                Ã¢Å“â€¦ <strong>Solution:</strong> Advanced cooling, distributed antenna systems, power-aware scheduling.
-            </div>
+
+        <!-- ================= CHALLENGES ================= -->
+
+        <section class="info-section">
+
+            <h3>
+                🔧 Implementation Challenges & Solutions
+            </h3>
+
 
             <div class="benefit-box">
-                <strong>Ã¢Å¡Â Ã¯Â¸Â Challenge: Synchronization & Calibration</strong><br>
-                Precise timing and phase coherence across many antenna elements required.<br>
-                Ã¢Å“â€¦ <strong>Solution:</strong> Distributed synchronization networks, in-band calibration loops, timing markers.
-            </div>
-        </div>
 
-        <div class="info-section">
-            <h3>Ã°Å¸Å½â€œ Key Takeaways</h3>
+                <strong>⚠️ Challenge: Pilot Overhead</strong>
+
+                <br>
+
+                As the number of users and antenna dimensions increase,
+                channel estimation can consume additional radio resources.
+
+                <br>
+
+                ✓ <strong>Solution:</strong>
+                Efficient reference-signal design, channel prediction,
+                and advanced estimation techniques.
+
+            </div>
+
+
+            <div class="benefit-box">
+
+                <strong>⚠️ Challenge: Hardware Impairments</strong>
+
+                <br>
+
+                Phase noise, amplifier imperfections, RF mismatches,
+                and calibration errors can degrade performance.
+
+                <br>
+
+                ✓ <strong>Solution:</strong>
+                Hardware calibration, robust algorithms, and advanced
+                RF compensation techniques.
+
+            </div>
+
+
+            <div class="benefit-box">
+
+                <strong>⚠️ Challenge: Channel Feedback in FDD</strong>
+
+                <br>
+
+                FDD systems may require significant downlink channel
+                information feedback from users.
+
+                <br>
+
+                ✓ <strong>Solution:</strong>
+                Codebook-based feedback, quantization, compression,
+                and channel prediction.
+
+            </div>
+
+
+            <div class="benefit-box">
+
+                <strong>⚠️ Challenge: Thermal Management</strong>
+
+                <br>
+
+                Large antenna systems and RF electronics can generate
+                significant heat.
+
+                <br>
+
+                ✓ <strong>Solution:</strong>
+                Efficient power amplifiers, thermal design, cooling,
+                and power-aware scheduling.
+
+            </div>
+
+
+            <div class="benefit-box">
+
+                <strong>⚠️ Challenge: Synchronization & Calibration</strong>
+
+                <br>
+
+                Accurate timing, phase synchronization, and calibration
+                are required across multiple antenna branches.
+
+                <br>
+
+                ✓ <strong>Solution:</strong>
+                Distributed synchronization, reference clocks,
+                and regular antenna-chain calibration.
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= KEY TAKEAWAYS ================= -->
+
+        <section class="info-section">
+
+            <h3>
+                🎓 Key Takeaways
+            </h3>
+
             <ul style="margin-left: 25px; margin-top: 15px;">
-                <li style="color: #666; font-size: 15px; line-height: 1.8; margin-bottom: 10px;"><strong>Massive MIMO is a Game-Changer:</strong> 400-500% spectral efficiency gains transform network capacity and user experience.</li>
-                <li style="color: #666; font-size: 15px; line-height: 1.8; margin-bottom: 10px;"><strong>Math + Hardware Innovation:</strong> Channel orthogonality and advanced precoding algorithms enable simultaneous multi-user transmission on identical frequencies.</li>
-                <li style="color: #666; font-size: 15px; line-height: 1.8; margin-bottom: 10px;"><strong>Practical Trade-offs:</strong> Pilot overhead, hardware complexity, and thermal management require careful optimization.</li>
-                <li style="color: #666; font-size: 15px; line-height: 1.8; margin-bottom: 10px;"><strong>Foundation for 5G/6G:</strong> Massive MIMO is now fundamental to all major 5G deployments and essential for 6G vision.</li>
-                <li style="color: #666; font-size: 15px; line-height: 1.8; margin-bottom: 10px;"><strong>Future Directions:</strong> Intelligent surfaces (RIS), machine learning-driven algorithms, and terahertz systems will extend Massive MIMO capabilities.</li>
+
+                <li style="color: #666; font-size: 15px; line-height: 1.8; margin-bottom: 10px;">
+                    <strong>Massive MIMO is a key 5G technology:</strong>
+                    Large antenna arrays enable higher capacity and improved
+                    spatial multiplexing.
+                </li>
+
+                <li style="color: #666; font-size: 15px; line-height: 1.8; margin-bottom: 10px;">
+                    <strong>Beamforming is essential:</strong>
+                    Antenna weights are used to direct radio energy toward
+                    users and manage interference.
+                </li>
+
+                <li style="color: #666; font-size: 15px; line-height: 1.8; margin-bottom: 10px;">
+                    <strong>Precoding matters:</strong>
+                    Techniques such as MRT, ZF, and RZF help optimize
+                    multi-user transmission.
+                </li>
+
+                <li style="color: #666; font-size: 15px; line-height: 1.8; margin-bottom: 10px;">
+                    <strong>Practical trade-offs exist:</strong>
+                    Hardware complexity, power consumption, calibration,
+                    channel estimation, and thermal management require
+                    careful engineering.
+                </li>
+
+                <li style="color: #666; font-size: 15px; line-height: 1.8; margin-bottom: 10px;">
+                    <strong>Foundation for future networks:</strong>
+                    Massive MIMO and advanced beam management will remain
+                    important technologies as wireless networks evolve.
+                </li>
+
             </ul>
-        </div>
-    </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
 
     <footer>
-        <p>&copy; 2024 TelecomHub. Advanced wireless technology expertise and professional engineering guidance.</p>
-        <p>By <a href="Html%20code.html">Amine Janah</a> Ã¢â‚¬â€ 5G/6G & Massive MIMO Specialist</p>
+
+        <p>
+            &copy; 2024 TelecomHub.
+            Advanced wireless technology expertise and professional
+            engineering guidance.
+        </p>
+
+        <p>
+            By
+            <a href="Html%20code.html">
+                Amine Janah
+            </a>
+            — 5G/6G & Massive MIMO Specialist
+        </p>
+
     </footer>
 
+
+    <!-- ================= DARK MODE SCRIPT ================= -->
+
     <script>
-        const themeToggle = document.getElementById('themeToggle');
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            themeToggle.textContent = 'Ã¢Ëœâ‚¬Ã¯Â¸Â';
+
+        const themeToggle = document.getElementById("themeToggle");
+
+        const savedTheme = localStorage.getItem("theme");
+
+        if (savedTheme === "dark") {
+
+            document.body.classList.add("dark-mode");
+            themeToggle.textContent = "☀️";
+
+        } else {
+
+            themeToggle.textContent = "🌙";
+
         }
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDarkMode = document.body.classList.contains('dark-mode');
-            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-            themeToggle.textContent = isDarkMode ? 'Ã¢Ëœâ‚¬Ã¯Â¸Â' : 'Ã°Å¸Å’â„¢';
+
+
+        themeToggle.addEventListener("click", () => {
+
+            document.body.classList.toggle("dark-mode");
+
+            const isDarkMode =
+                document.body.classList.contains("dark-mode");
+
+            localStorage.setItem(
+                "theme",
+                isDarkMode ? "dark" : "light"
+            );
+
+            themeToggle.textContent =
+                isDarkMode ? "☀️" : "🌙";
+
         });
+
     </script>
+
 </body>
 </html>
