@@ -3569,6 +3569,100 @@
     </section>
 
 
+    <!-- ================= TELECOM AI INTERVIEW ================= -->
+<section class="telecom-interview" id="telecomInterview">
+    <div class="interview-shell">
+        <div class="interview-header">
+            <div class="interview-mic">🎤</div>
+            <h2>PASS THE TELECOM INTERVIEW</h2>
+            <p>Practice a realistic telecom interview by choosing your position and level. Answer 10 questions and receive instant answer analysis, scoring and improvement tips.</p>
+        </div>
+
+        <div class="interview-progress" aria-label="Interview progress">
+            <span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <div class="interview-step active" data-step="position">
+            <div class="interview-step-title">
+                <span class="kicker">Step 1</span>
+                <h3>Choose Position</h3>
+                <p>Select the telecom role you want to practice.</p>
+            </div>
+            <div class="interview-position-grid">
+                <button class="interview-choice" data-position="RAN">
+                    <span class="choice-icon">📡</span><strong>RAN</strong><small>Radio Access Network</small>
+                </button>
+                <button class="interview-choice" data-position="RF">
+                    <span class="choice-icon">〰️</span><strong>RF</strong><small>Radio Frequency Engineering</small>
+                </button>
+                <button class="interview-choice" data-position="QA/QC">
+                    <span class="choice-icon">📋</span><strong>QA/QC</strong><small>Quality & Site Assurance</small>
+                </button>
+            </div>
+        </div>
+
+        <div class="interview-step" data-step="level">
+            <div class="interview-step-title">
+                <span class="kicker">Step 2</span>
+                <h3>Choose Level</h3>
+                <p>Set the difficulty for your interview.</p>
+            </div>
+            <div class="interview-level-grid">
+                <button class="interview-level" data-level="Junior"><strong>Junior</strong><small>Fundamentals & field basics</small></button>
+                <button class="interview-level" data-level="Mid"><strong>Mid</strong><small>Troubleshooting & implementation</small></button>
+                <button class="interview-level" data-level="Senior"><strong>Senior</strong><small>Architecture & advanced decisions</small></button>
+            </div>
+            <div class="interview-actions">
+                <button class="interview-secondary" id="interviewBackPosition">← Back</button>
+                <button class="interview-primary" id="startInterviewBtn" disabled>▶ Start Interview</button>
+            </div>
+        </div>
+
+        <div class="interview-step" data-step="question">
+            <div class="interview-step-title">
+                <span class="kicker">Technical Interview</span>
+                <h3 id="interviewQuestionHeading">Question 1 / 10</h3>
+                <p id="interviewModeText">RAN • Junior</p>
+            </div>
+            <div class="interview-question-card">
+                <div class="interview-question-meta">
+                    <span id="questionCategory">Technical Question</span>
+                    <span id="questionCounter">1 / 10</span>
+                </div>
+                <h3 id="interviewQuestionText">Your question will appear here.</h3>
+                <textarea id="interviewAnswer" class="interview-answer" placeholder="Type your answer as if you were speaking to the interviewer..."></textarea>
+                <div class="interview-actions">
+                    <button class="interview-primary" id="evaluateAnswerBtn">✓ Submit Answer</button>
+                </div>
+                <div class="interview-feedback" id="interviewFeedback">
+                    <div class="interview-score-row">
+                        <strong>AI Answer Evaluation</strong>
+                        <span class="interview-score" id="answerScore">0/10</span>
+                    </div>
+                    <p id="answerFeedbackText"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="interview-step" data-step="final">
+            <div class="interview-final">
+                <div class="interview-trophy">🏆</div>
+                <h3>FINAL RESULT</h3>
+                <p>Your 10-question telecom interview is complete.</p>
+                <div class="big-score" id="finalScore">0%</div>
+                <div class="interview-result-grid">
+                    <div class="interview-result-card"><span>Position</span><strong id="finalPosition">—</strong></div>
+                    <div class="interview-result-card"><span>Level</span><strong id="finalLevel">—</strong></div>
+                    <div class="interview-result-card"><span>Questions</span><strong>10 / 10</strong></div>
+                </div>
+                <p class="interview-tip" id="finalTip">Your results and improvement advice will appear here.</p>
+                <div class="interview-actions">
+                    <button class="interview-primary" id="restartInterviewBtn">↻ Start New Interview</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- ================= VIDEO SHOWCASE ================= -->
 
