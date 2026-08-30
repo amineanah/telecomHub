@@ -3084,6 +3084,135 @@
 
         }
 
+    
+/* ================= TELECOM AI INTERVIEW ================= */
+.telecom-interview {
+    margin-top: 24px;
+    padding: 34px;
+    border-radius: 18px;
+    color: #f8fbff;
+    background:
+        radial-gradient(circle at 12% 18%, rgba(37,99,235,.18), transparent 28%),
+        radial-gradient(circle at 88% 25%, rgba(168,85,247,.15), transparent 28%),
+        linear-gradient(135deg, #030b18, #07162d 55%, #020817);
+    border: 1px solid rgba(77, 178, 255, .35);
+    box-shadow: 0 18px 55px rgba(2, 12, 30, .28);
+    overflow: hidden;
+    position: relative;
+}
+.telecom-interview::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 28px 28px;
+}
+.interview-shell { position: relative; z-index: 1; max-width: 1180px; margin: auto; }
+.interview-header { text-align: center; margin-bottom: 28px; }
+.interview-mic {
+    width: 62px; height: 62px; margin: 0 auto 13px;
+    display: grid; place-items: center; border-radius: 50%;
+    font-size: 30px; background: rgba(37,99,235,.14);
+    border: 1px solid rgba(74, 184, 255, .55);
+    box-shadow: 0 0 28px rgba(37,99,235,.18);
+}
+.interview-header h2 { font-size: 34px; letter-spacing: .02em; margin: 0 0 8px; }
+.interview-header p { color: #a9bdd7; font-size: 14px; margin: 0 auto; max-width: 720px; line-height: 1.6; }
+.interview-progress {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    margin: 22px auto 28px; max-width: 850px;
+}
+.interview-progress span {
+    height: 5px; flex: 1; border-radius: 20px; background: rgba(255,255,255,.1);
+    transition: .25s ease;
+}
+.interview-progress span.active { background: #38bdf8; box-shadow: 0 0 12px rgba(56,189,248,.55); }
+.interview-step { display: none; animation: interviewFade .3s ease; }
+.interview-step.active { display: block; }
+@keyframes interviewFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.interview-step-title { text-align: center; margin-bottom: 20px; }
+.interview-step-title .kicker { color: #67e8f9; font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.interview-step-title h3 { font-size: 24px; margin: 7px 0 5px; }
+.interview-step-title p { color: #9fb2cb; font-size: 13px; }
+.interview-position-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 900px; margin: 0 auto;
+}
+.interview-choice {
+    border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.055);
+    color: #fff; border-radius: 14px; padding: 24px 16px; cursor: pointer;
+    text-align: center; transition: .25s ease; font: inherit;
+}
+.interview-choice:hover, .interview-choice.selected {
+    transform: translateY(-3px); border-color: #38bdf8;
+    background: rgba(37,99,235,.13); box-shadow: 0 12px 30px rgba(37,99,235,.16);
+}
+.interview-choice .choice-icon { font-size: 34px; display: block; margin-bottom: 10px; }
+.interview-choice strong { display: block; font-size: 20px; margin-bottom: 5px; }
+.interview-choice small { color: #9fb2cb; font-size: 12px; }
+.interview-level-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 780px; margin: 0 auto 20px;
+}
+.interview-level {
+    border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.055);
+    color: white; border-radius: 12px; padding: 18px; cursor: pointer; font: inherit; transition: .25s;
+}
+.interview-level:hover, .interview-level.selected { border-color: #a855f7; background: rgba(168,85,247,.12); }
+.interview-level strong { display: block; font-size: 17px; }
+.interview-level small { display: block; color: #9fb2cb; margin-top: 5px; }
+.interview-primary, .interview-secondary {
+    border: none; border-radius: 9px; padding: 13px 24px; cursor: pointer;
+    font-weight: 800; font: inherit; transition: .2s;
+}
+.interview-primary { color: #06111f; background: linear-gradient(135deg,#67e8f9,#38bdf8); }
+.interview-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(56,189,248,.22); }
+.interview-secondary { color: #dbeafe; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); }
+.interview-actions { text-align: center; margin-top: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.interview-question-card {
+    max-width: 920px; margin: 0 auto; background: rgba(255,255,255,.055);
+    border: 1px solid rgba(56,189,248,.24); border-radius: 15px; padding: 24px;
+}
+.interview-question-meta { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; color: #67e8f9; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.interview-question-card h3 { font-size: 22px; line-height: 1.45; margin: 16px 0 18px; }
+.interview-answer {
+    width: 100%; min-height: 170px; resize: vertical; padding: 15px;
+    border-radius: 10px; border: 1px solid rgba(255,255,255,.16);
+    background: rgba(2,8,23,.78); color: #f8fbff; outline: none;
+    font: inherit; line-height: 1.55;
+}
+.interview-answer:focus { border-color: #38bdf8; box-shadow: 0 0 0 3px rgba(56,189,248,.1); }
+.interview-answer::placeholder { color: #6f829c; }
+.interview-feedback {
+    margin-top: 18px; display: none; border-radius: 12px; padding: 17px;
+    background: rgba(16,185,129,.08); border: 1px solid rgba(52,211,153,.3);
+}
+.interview-feedback.show { display: block; }
+.interview-score-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.interview-score { font-size: 30px; font-weight: 900; color: #67e8f9; }
+.interview-feedback p { margin: 6px 0 0; color: #bfd0e3; font-size: 13px; line-height: 1.55; }
+.interview-final {
+    max-width: 850px; margin: 0 auto; text-align: center; padding: 28px;
+    border-radius: 16px; background: rgba(34,197,94,.07); border: 1px solid rgba(74,222,128,.35);
+}
+.interview-trophy { font-size: 50px; margin-bottom: 8px; }
+.interview-final h3 { font-size: 30px; margin: 0 0 8px; }
+.interview-final .big-score { font-size: 52px; font-weight: 900; margin: 12px 0; color: #86efac; }
+.interview-result-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; text-align: left;
+}
+.interview-result-card { padding: 14px; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.1); border-radius: 10px; }
+.interview-result-card span { display: block; color: #8fa5bf; font-size: 10px; font-weight: 800; text-transform: uppercase; margin-bottom: 5px; }
+.interview-result-card strong { font-size: 16px; }
+.interview-tip { color: #a9bdd7; font-size: 13px; line-height: 1.6; margin: 12px auto 0; max-width: 650px; }
+@media(max-width:650px) {
+    .telecom-interview { padding: 24px 15px; }
+    .interview-header h2 { font-size: 27px; }
+    .interview-position-grid, .interview-level-grid, .interview-result-grid { grid-template-columns: 1fr; }
+    .interview-question-card { padding: 18px; }
+    .interview-question-card h3 { font-size: 18px; }
+}
+
     </style>
 
 </head>
@@ -3569,7 +3698,9 @@
     </section>
 
 
-    <!-- ================= TELECOM AI INTERVIEW ================= -->
+
+
+<!-- ================= TELECOM AI INTERVIEW ================= -->
 <section class="telecom-interview" id="telecomInterview">
     <div class="interview-shell">
         <div class="interview-header">
@@ -3663,6 +3794,7 @@
         </div>
     </div>
 </section>
+
 
     <!-- ================= VIDEO SHOWCASE ================= -->
 
@@ -5482,6 +5614,261 @@ window.addEventListener('load', loadLatestJobs);
 
 </script>
 
+
+
+
+<script>
+/* ================= TELECOM AI INTERVIEW ENGINE ================= */
+(function () {
+    const interviewQuestions = {
+        "RAN": {
+            "Junior": [
+                ["RAN Fundamentals","What is RAN and what are the main functions of a Radio Access Network?"],
+                ["LTE","What is the difference between LTE eNodeB and 5G NR gNodeB?"],
+                ["5G","What is the purpose of 5G NR in a mobile network?"],
+                ["Antenna","What is antenna azimuth and why is it important during site installation?"],
+                ["RRU / AAU","What is the role of an RRU or AAU in a 4G/5G site?"],
+                ["MIMO","What is MIMO and what benefit does it provide in a cellular network?"],
+                ["Coverage","What is the difference between coverage and capacity?"],
+                ["Handover","What is a handover in a mobile network?"],
+                ["Site Basics","What should you check before declaring a RAN installation complete?"],
+                ["Troubleshooting","A cell is down after installation. What basic checks would you perform first?"]
+            ],
+            "Mid": [
+                ["5G Architecture","Explain the difference between NSA and SA 5G deployment."],
+                ["Carrier Configuration","How would you investigate a cell with low throughput despite good RSRP?"],
+                ["MIMO","Explain the practical impact of Massive MIMO on 5G capacity and coverage."],
+                ["Parameters","What is the purpose of PCI planning in LTE/5G?"],
+                ["Interference","How can RF interference affect RAN performance?"],
+                ["Optimization","Which KPIs would you monitor to assess a problematic LTE/5G cell?"],
+                ["Handover","What can cause abnormal handover failures between cells?"],
+                ["Modernization","What should be controlled during a RAN modernization activity?"],
+                ["Transport","How can a transport/backhaul problem appear at RAN level?"],
+                ["Troubleshooting","Describe a structured approach to troubleshooting a high-drop-rate cell."]
+            ],
+            "Senior": [
+                ["Architecture","How would you design a 5G RAN strategy for a dense urban area?"],
+                ["Capacity","How would you identify and solve a 5G capacity bottleneck?"],
+                ["Massive MIMO","What trade-offs should be considered when deploying Massive MIMO?"],
+                ["NSA / SA","When would you recommend SA instead of NSA and why?"],
+                ["Optimization","How would you prioritize network optimization actions across hundreds of cells?"],
+                ["Mobility","Explain advanced mobility optimization between LTE and NR layers."],
+                ["Performance","How would you correlate accessibility, retainability and throughput KPIs?"],
+                ["Modernization","What are the major technical risks during multi-band RAN modernization?"],
+                ["Design","How would you validate a new RAN design before mass rollout?"],
+                ["Leadership","A major RAN rollout is behind schedule. How would you recover the project while protecting quality?"]
+            ]
+        },
+        "RF": {
+            "Junior": [
+                ["RF Basics","What is RSRP and what does it tell you about LTE/5G coverage?"],
+                ["RF Basics","What is RSRQ and how is it different from RSRP?"],
+                ["RF Basics","What is SINR and why is it important?"],
+                ["Antenna","What is antenna tilt and what happens if it is configured incorrectly?"],
+                ["Frequency","Why are different frequency bands used in mobile networks?"],
+                ["Coverage","What factors affect the coverage area of a cell?"],
+                ["Interference","What is RF interference?"],
+                ["Power","What is the relationship between transmit power and coverage?"],
+                ["Drive Test","What is the purpose of a drive test?"],
+                ["Troubleshooting","A site has poor SINR. What basic causes would you investigate?"]
+            ],
+            "Mid": [
+                ["RF Analysis","A cell has good RSRP but poor SINR. What would you investigate?"],
+                ["Optimization","How does antenna electrical or mechanical tilt affect coverage?"],
+                ["Interference","How would you distinguish coverage problems from interference problems?"],
+                ["KPIs","Which RF KPIs are most useful during drive-test analysis?"],
+                ["PCI","What problems can poor PCI planning create?"],
+                ["Capacity","How can RF conditions limit cell capacity?"],
+                ["5G","Explain the role of beamforming in 5G NR."],
+                ["TDD","What RF considerations are important for TDD networks?"],
+                ["Parameter","How would you validate an RF optimization change?"],
+                ["Troubleshooting","Describe your process for analyzing a coverage hole."]
+            ],
+            "Senior": [
+                ["RF Strategy","How would you build an RF optimization strategy for a national 5G rollout?"],
+                ["Interference","How would you systematically locate and mitigate inter-cell interference?"],
+                ["Beamforming","Explain how beam management affects 5G user experience."],
+                ["Propagation","How do frequency, clutter and morphology influence propagation?"],
+                ["Capacity","How would you balance coverage, capacity and interference in a dense city?"],
+                ["TDD","What are the major RF planning challenges of large-scale 5G TDD deployment?"],
+                ["Optimization","How would you prioritize RF actions using drive-test and KPI data?"],
+                ["Design","How would you validate an RF model against field measurements?"],
+                ["Performance","How would you investigate a sudden degradation of SINR across a cluster?"],
+                ["Leadership","How would you lead an RF optimization campaign involving several engineering teams?"]
+            ]
+        },
+        "QA/QC": {
+            "Junior": [
+                ["Quality Basics","What is the difference between QA and QC in telecom projects?"],
+                ["Site Inspection","What should be checked during a telecom site quality inspection?"],
+                ["EHS","Why is EHS compliance important during telecom installation?"],
+                ["Hardware","What checks would you perform after installing an RRU or AAU?"],
+                ["Cabling","What should be verified for telecom power and fiber cables?"],
+                ["PPE","What is PPE and when should it be used on a telecom site?"],
+                ["Documentation","Why is site documentation important for project acceptance?"],
+                ["Punch List","What is a punch list and how is it used?"],
+                ["Acceptance","What is the purpose of site acceptance?"],
+                ["Troubleshooting","You find an installation defect during inspection. What do you do next?"]
+            ],
+            "Mid": [
+                ["QA/QC","How would you build a quality-control checklist for a 5G RAN installation?"],
+                ["Inspection","How do you verify that installation follows technical specifications?"],
+                ["EHS","How would you handle a site that is technically complete but has an EHS non-compliance?"],
+                ["Acceptance","What evidence should support a site acceptance decision?"],
+                ["SBC","How would you control the quality of subcontractor installation work?"],
+                ["Findings","How should quality findings and corrective actions be tracked?"],
+                ["Hardware","What are common quality defects on RRU, AAU, BBU and antenna installations?"],
+                ["Project Control","How would you monitor quality from MOS through PAC?"],
+                ["Audit","How would you prepare a telecom site for a customer quality audit?"],
+                ["Escalation","When should a quality issue be escalated to the project manager?"]
+            ],
+            "Senior": [
+                ["Quality Strategy","How would you design an E2E QA/QC strategy for a large 5G rollout?"],
+                ["Risk","How would you identify and prioritize quality risks across hundreds of sites?"],
+                ["Subcontractors","How would you improve subcontractor quality performance without slowing deployment?"],
+                ["Governance","What KPIs would you use to manage telecom installation quality?"],
+                ["Acceptance","How would you reduce repeat findings before customer acceptance?"],
+                ["EHS","How would you integrate EHS and technical quality into one field-control process?"],
+                ["Root Cause","Explain how you would perform root-cause analysis for recurring site defects."],
+                ["Process","How would you standardize QC across multiple field teams?"],
+                ["Audit","How would you manage a major customer audit with significant findings?"],
+                ["Leadership","A rollout is under pressure to close sites quickly. How would you protect quality and still meet the target?"]
+            ]
+        }
+    };
+
+    let position = "";
+    let level = "";
+    let questionIndex = 0;
+    let scores = [];
+
+    const $ = id => document.getElementById(id);
+    const steps = document.querySelectorAll(".interview-step");
+    const progress = document.querySelectorAll(".interview-progress span");
+
+    function showStep(name) {
+        steps.forEach(step => step.classList.toggle("active", step.dataset.step === name));
+        const activeCount = name === "position" ? 0 : name === "level" ? 1 : name === "question" ? 2 : 10;
+        progress.forEach((bar, i) => bar.classList.toggle("active", i < activeCount));
+    }
+
+    function renderQuestion() {
+        const q = interviewQuestions[position][level][questionIndex];
+        $("interviewQuestionHeading").textContent = `Question ${questionIndex + 1} / 10`;
+        $("questionCounter").textContent = `${questionIndex + 1} / 10`;
+        $("questionCategory").textContent = q[0];
+        $("interviewQuestionText").textContent = q[1];
+        $("interviewModeText").textContent = `${position} • ${level}`;
+        $("interviewAnswer").value = "";
+        $("interviewFeedback").classList.remove("show");
+        $("evaluateAnswerBtn").disabled = false;
+        $("evaluateAnswerBtn").textContent = "✓ Submit Answer";
+        progress.forEach((bar, i) => bar.classList.toggle("active", i < questionIndex + 1));
+    }
+
+    function evaluateLocalAnswer(answer, question) {
+        const words = answer.trim().split(/\s+/).filter(Boolean);
+        const technicalTerms = {
+            "RAN": ["network","radio","cell","base","coverage","capacity","5g","4g","antenna","kpi","rru","aau","mimo","handover"],
+            "RF": ["rsrp","rsrq","sinr","interference","antenna","tilt","frequency","coverage","power","beam","propagation","kpi"],
+            "QA/QC": ["quality","inspection","standard","installation","ehs","safety","checklist","finding","acceptance","subcontractor","corrective","audit"]
+        };
+        const terms = technicalTerms[position] || [];
+        const lower = answer.toLowerCase();
+        const matched = terms.filter(term => lower.includes(term));
+        let score = 0;
+        if (words.length >= 20) score += 2;
+        else if (words.length >= 10) score += 1;
+        if (words.length >= 45) score += 2;
+        else if (words.length >= 25) score += 1;
+        score += Math.min(4, Math.round((matched.length / Math.max(terms.length * 0.35, 1)) * 4));
+        if (/[.!?]/.test(answer)) score += 1;
+        if (/(because|therefore|first|then|finally|for example|however)/i.test(answer)) score += 1;
+        score = Math.max(1, Math.min(10, score));
+
+        let comment;
+        if (score >= 8) comment = "Strong answer. You used relevant technical terminology and gave enough explanation. In a real interview, add a practical example or KPI whenever possible.";
+        else if (score >= 6) comment = "Good foundation. Your answer shows relevant knowledge, but make it more structured: explain the concept, the impact, and then give a practical field example.";
+        else if (score >= 4) comment = "Partial answer. Try to include the key telecom concepts, the cause/effect relationship, and how you would verify the result in the field.";
+        else comment = "Needs improvement. Give a direct definition first, then explain why it matters and describe the checks or actions you would perform.";
+        return { score, comment };
+    }
+
+    document.querySelectorAll(".interview-choice").forEach(button => {
+        button.addEventListener("click", () => {
+            document.querySelectorAll(".interview-choice").forEach(b => b.classList.remove("selected"));
+            button.classList.add("selected");
+            position = button.dataset.position;
+            showStep("level");
+        });
+    });
+
+    document.querySelectorAll(".interview-level").forEach(button => {
+        button.addEventListener("click", () => {
+            document.querySelectorAll(".interview-level").forEach(b => b.classList.remove("selected"));
+            button.classList.add("selected");
+            level = button.dataset.level;
+            $("startInterviewBtn").disabled = false;
+        });
+    });
+
+    $("interviewBackPosition").addEventListener("click", () => showStep("position"));
+
+    $("startInterviewBtn").addEventListener("click", () => {
+        if (!position || !level) return;
+        questionIndex = 0;
+        scores = [];
+        showStep("question");
+        renderQuestion();
+    });
+
+    $("evaluateAnswerBtn").addEventListener("click", () => {
+        const answer = $("interviewAnswer").value.trim();
+        if (!answer) {
+            $("interviewAnswer").focus();
+            return;
+        }
+
+        const q = interviewQuestions[position][level][questionIndex];
+        const result = evaluateLocalAnswer(answer, q);
+        scores.push(result.score);
+        $("answerScore").textContent = `${result.score}/10`;
+        $("answerFeedbackText").textContent = result.comment;
+        $("interviewFeedback").classList.add("show");
+
+        $("evaluateAnswerBtn").textContent = questionIndex === 9 ? "View Final Result →" : "Next Question →";
+        $("evaluateAnswerBtn").onclick = () => {
+            if (questionIndex === 9) {
+                const total = scores.reduce((a, b) => a + b, 0);
+                const percent = Math.round((total / 100) * 100);
+                $("finalScore").textContent = `${percent}%`;
+                $("finalPosition").textContent = position;
+                $("finalLevel").textContent = level;
+                $("finalTip").textContent =
+                    percent >= 80 ? "Excellent performance. Keep practicing with real project examples, KPIs and troubleshooting scenarios."
+                    : percent >= 60 ? "Good performance. Focus on structuring answers and adding more practical telecom examples."
+                    : "Keep practicing the fundamentals. Build each answer around definition → impact → troubleshooting/checks → practical example.";
+                showStep("final");
+            } else {
+                questionIndex++;
+                renderQuestion();
+                $("interviewQuestionText").scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+        };
+    });
+
+    $("restartInterviewBtn").addEventListener("click", () => {
+        position = "";
+        level = "";
+        questionIndex = 0;
+        scores = [];
+        document.querySelectorAll(".interview-choice, .interview-level").forEach(b => b.classList.remove("selected"));
+        $("startInterviewBtn").disabled = true;
+        showStep("position");
+        document.getElementById("telecomInterview").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+})();
+</script>
 
 
 </body>
