@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TelecomHub | Virtual Telecom Site Engineering Simulator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #070a12;
+            --bg-card: rgba(15, 23, 42, 0.75);
+            --bg-card-hover: rgba(30, 41, 59, 0.85);
+            --border-color: rgba(51, 65, 85, 0.6);
+            --border-glow: rgba(0, 242, 254, 0.4);
+            
+            --accent-cyan: #00f2fe;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-magenta: #ec4899;
+            
+            --status-green: #10b981;
+            --status-yellow: #f59e0b;
+            --status-red: #ef4444;
+            
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            
+            --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-code: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.5;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(0, 242, 254, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        /* --- NAVIGATION HEADER --- */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(7, 10, 18, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.85rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+            font-size: 1.2rem;
+        }
+
+        .brand span {
+            background: linear-gradient(135deg, #fff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 8px rgba(0, 242, 254, 0.5);
+        }
+
+        .system-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--status-green);
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--status-green);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--status-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 3rem 2rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, #ffffff 30%, var(--accent-cyan) 70%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+
+        /* --- MAIN SIMULATOR WRAPPER --- */
+        .simulator-container {
+            max-width: 1600px;
+            margin: 0 auto 3rem;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 1.25rem;
+        }
+
+        @media (max-width: 1200px) {
+            .simulator-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* --- CONTROL TOOLBARS --- */
+        .sim-main-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .toolbar-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.85rem 1.25rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .group-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-dim);
+            margin-right: 0.35rem;
+        }
+
+        .btn {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.45rem 0.85rem;
+            border-radius: 6px;
+            font-size: 0.825rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            user-select: none;
+        }
+
+        .btn:hover {
+            background: rgba(51, 65, 85, 0.9);
+            border-color: var(--accent-cyan);
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
+        .btn.active {
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.2), rgba(59, 130, 246, 0.3));
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+        }
+
+        .btn-danger {
+            border-color: rgba(239, 68, 68, 0.4);
+            color: #fca5a5;
+        }
+        .btn-danger:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--status-red);
+            color: #fff;
+        }
+
+        .btn-success {
+            border-color: rgba(16, 185, 129, 0.4);
+            color: #6ee7b7;
+        }
+        .btn-success:hover {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--status-green);
+            color: #fff;
+        }
+
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .toggle-switch input {
+            display: none;
+        }
+
+        .slider {
+            width: 34px;
+            height: 18px;
+            background-color: #334155;
+            border-radius: 20px;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .slider:before {
+            content: "";
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            left: 3px;
+            top: 3px;
+            background-color: white;
+            transition: 0.3s;
+        }
+
+        input:checked + .slider {
+            background-color: var(--accent-cyan);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(16px);
+        }
+
+        /* --- VISUAL CANVAS AREA --- */
+        .canvas-card {
+            background: rgba(10, 15, 28, 0.95);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            position: relative;
+            min-height: 580px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8);
+        }
+
+        .canvas-hud-overlay {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            right: 1rem;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .hud-badge {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 0.85rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-family: var(--font-code);
+            color: var(--text-muted);
+            pointer-events: auto;
+            backdrop-filter: blur(6px);
+        }
+
+        .hud-controls {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+
+        .zoom-btn {
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        /* --- SVG GRAPHICS STYLES --- */
+        svg.site-canvas {
+            width: 100%;
+            height: 580px;
+            user-select: none;
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .interactive-node {
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .interactive-node:hover {
+            filter: drop-shadow(0 0 10px var(--accent-cyan));
+            opacity: 1 !important;
+        }
+
+        .interactive-node:hover .node-shape {
+            stroke: var(--accent-cyan) !important;
+            stroke-width: 2.5px !important;
+        }
+
+        .cable-path {
+            stroke-dasharray: 8, 4;
+            animation: cableFlow 30s linear infinite;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cable-path:hover {
+            stroke-width: 5px !important;
+            filter: drop-shadow(0 0 8px currentColor);
+        }
+
+        @keyframes cableFlow {
+            to { stroke-dashoffset: -1000; }
+        }
+
+        .rf-beam {
+            stroke: var(--accent-cyan);
+            stroke-dasharray: 6, 6;
+            animation: beamPulse 1.5s infinite linear;
+            cursor: pointer;
+        }
+
+        .rf-beam.faulty {
+            stroke: var(--status-red) !important;
+            animation: beamFault 0.4s infinite alternate !important;
+        }
+
+        @keyframes beamPulse {
+            to { stroke-dashoffset: -40; }
+        }
+        @keyframes beamFault {
+            0% { opacity: 0.3; stroke-width: 2; }
+            100% { opacity: 1; stroke-width: 6; filter: drop-shadow(0 0 12px var(--status-red)); }
+        }
+
+        /* Particle animations for fibers/power */
+        .particle {
+            fill: #fff;
+            animation: moveParticle 3s infinite linear;
+        }
+
+        /* --- SIDEBAR & INSPECTOR PANELS --- */
+        .sim-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .panel-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+            padding-bottom: 0.6rem;
+        }
+
+        .panel-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .data-table tr {
+            border-bottom: 1px solid rgba(51, 65, 85, 0.25);
+        }
+
+        .data-table td {
+            padding: 0.45rem 0;
+        }
+
+        .data-table td:first-child {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .data-table td:last-child {
+            text-align: right;
+            font-family: var(--font-code);
+            font-weight: 600;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            font-family: var(--font-code);
+        }
+
+        .status-pill.ok { background: rgba(16, 185, 129, 0.15); color: var(--status-green); }
+        .status-pill.warn { background: rgba(245, 158, 11, 0.15); color: var(--status-yellow); }
+        .status-pill.crit { background: rgba(239, 68, 68, 0.15); color: var(--status-red); }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.65rem;
+        }
+
+        .kpi-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.65rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .kpi-label {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .kpi-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: var(--font-code);
+            color: var(--text-main);
+        }
+
+        /* --- TROUBLESHOOTING DRAWER / MODAL --- */
+        .trouble-card {
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid var(--accent-purple);
+            border-radius: 12px;
+            padding: 1rem;
+            display: none;
+        }
+
+        .trouble-card.active {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .quiz-option {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid var(--border-color);
+            padding: 0.6rem 0.85rem;
+            border-radius: 6px;
+            font-size: 0.825rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .quiz-option:hover {
+            background: rgba(51, 65, 85, 0.8);
+            border-color: var(--accent-cyan);
+        }
+
+        .feedback-box {
+            padding: 0.65rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            display: none;
+        }
+        .feedback-box.correct {
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid var(--status-green);
+            color: #6ee7b7;
+            display: block;
+        }
+        .feedback-box.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid var(--status-red);
+            color: #fca5a5;
+            display: block;
+        }
+
+        /* --- TELECOMHUB ARCHITECTURE & CONTENT SECTION --- */
+        .content-section {
+            max-width: 1400px;
+            margin: 2rem auto 4rem;
+            padding: 0 1.5rem;
+        }
+
+        .section-heading {
+            margin-bottom: 1.5rem;
+        }
+        .section-heading h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        .section-heading p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 992px) {
+            .grid-3 { grid-template-columns: 1fr; }
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .feature-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-cyan);
+        }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: rgba(5, 8, 15, 0.95);
+            border-top: 1px solid var(--border-color);
+            padding: 2.5rem 2rem 1.5rem;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        /* --- MOBILE BOTTOM SHEET RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2rem; }
+            svg.site-canvas { height: 420px; }
+            
+            .sim-sidebar {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 200;
+                background: #0b0f19;
+                border-top: 2px solid var(--accent-cyan);
+                border-radius: 16px 16px 0 0;
+                max-height: 70vh;
+                overflow-y: auto;
+                padding: 1rem;
+                box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.9);
+                transform: translateY(calc(100% - 48px));
+                transition: transform 0.3s ease;
+            }
+
+            .sim-sidebar.expanded {
+                transform: translateY(0);
+            }
+
+            .mobile-sheet-handle {
+                width: 40px;
+                height: 4px;
+                background: var(--text-dim);
+                border-radius: 2px;
+                margin: 0 auto 0.75rem;
+                cursor: pointer;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION HEADER -->
+    <header>
+        <a href="#" class="brand">
+            <div class="brand-logo">📡</div>
+            <div>Telecom<span>Hub</span></div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#simulator" class="active">Engineering Simulator</a></li>
+            <li><a href="#architecture">5G Architecture</a></li>
+            <li><a href="#troubleshooting">Diagnostics</a></li>
+            <li><a href="#docs">Documentation</a></li>
+        </ul>
+        <div class="system-badge">
+            <div class="pulse-dot"></div>
+            SITE: CASA-5G-001 [ONLINE]
+        </div>
+    </header>
+
+    <!-- HERO HEADER -->
+    <section class="hero">
+        <h1>Interactive Telecom Engineering Simulator</h1>
+        <p>Explore physical cell site components, trace fiber/power paths, analyze 18GHz microwave propagation, switch to logical 5G topology, and execute diagnostic troubleshooting scenarios.</p>
+    </section>
+
+    <!-- MAIN INTERACTIVE SIMULATOR SECTION -->
+    <section id="simulator" class="simulator-container">
+        
+        <!-- LEFT COLUMN: CONTROLS + SVG VISUAL CANVAS -->
+        <div class="sim-main-panel">
+            
+            <!-- MAIN TOOLBAR -->
+            <div class="toolbar-card">
+                <div class="control-group">
+                    <span class="group-label">View Mode:</span>
+                    <button class="btn active" id="btn-view-site" onclick="switchView('site')">📡 Physical Site</button>
+                    <button class="btn" id="btn-view-mw" onclick="switchView('microwave')">🛰️ Microwave Link</button>
+                    <button class="btn" id="btn-view-topo" onclick="switchView('topology')">🧠 5G Topology</button>
+                </div>
+
+                <div class="control-group">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="inspection-toggle" checked onchange="toggleInspectionMode(this.checked)">
+                        <span class="slider"></span>
+                        <span style="font-size: 0.8rem; font-weight: 600;">🔍 Inspection Mode</span>
+                    </label>
+                    <button class="btn" id="btn-exploded" onclick="toggleExplodedView()">🧩 Exploded View</button>
+                </div>
+            </div>
+
+            <!-- CABLE & TRACE CONTROL TOOLBAR -->
+            <div class="toolbar-card">
+                <div class="control-group">
+                    <span class="group-label">Cable Filter:</span>
+                    <button class="btn active" id="btn-filter-all" onclick="setCableFilter('ALL')">ALL</button>
+                    <button class="btn" id="btn-filter-fiber" onclick="setCableFilter('FIBER')">🔵 FIBER</button>
+                    <button class="btn" id="btn-filter-power" onclick="setCableFilter('POWER')">⚡ POWER</button>
+                    <button class="btn" id="btn-filter-ground" onclick="setCableFilter('GROUND')">🌍 GROUND</button>
+                </div>
+
+                <div class="control-group">
+                    <span class="group-label">Trace Path:</span>
+                    <button class="btn" onclick="tracePath('FIBER')">Trace Fiber</button>
+                    <button class="btn" onclick="tracePath('POWER')">Trace Power</button>
+                    <button class="btn" onclick="tracePath('GROUND')">Trace Ground</button>
+                    <button class="btn" onclick="tracePath('MICROWAVE')">Trace MW</button>
+                </div>
+            </div>
+
+            <!-- VISUAL SVG CANVAS -->
+            <div class="canvas-card" id="canvas-card">
+                
+                <div class="canvas-hud-overlay">
+                    <div class="hud-badge" id="hud-mode-indicator">MODE: PHYSICAL SITE INSPECTION</div>
+                    <div class="hud-badge" id="hud-status-indicator" style="color: var(--status-green);">STATUS: NORMAL OPERATING STATE</div>
+                </div>
+
+                <div class="hud-controls">
+                    <button class="btn zoom-btn" onclick="adjustZoom(0.15)">+</button>
+                    <button class="btn zoom-btn" onclick="adjustZoom(-0.15)">-</button>
+                    <button class="btn zoom-btn" onclick="resetZoom()">⟲</button>
+                </div>
+
+                <!-- SVG ENGINE -->
+                <svg id="main-svg" class="site-canvas" viewBox="0 0 1000 650" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <!-- Glow Filters -->
+                        <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="4" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+                        <filter id="glow-red" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="5" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+                        <!-- Cable Particle Gradient -->
+                        <linearGradient id="fiberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#00f2fe" />
+                            <stop offset="100%" stop-color="#3b82f6" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- CONTAINER FOR ZOOM/PAN -->
+                    <g id="svg-viewport" transform="translate(0,0) scale(1)">
+                        
+                        <!-- ================= VIEW 1: PHYSICAL TELECOM SITE ================= -->
+                        <g id="layer-physical-site">
+                            <!-- Sky/Ground Grid -->
+                            <line x1="100" y1="580" x2="900" y2="580" stroke="#1e293b" stroke-width="4"/>
+                            <path d="M 150 580 L 850 580 L 800 630 L 200 630 Z" fill="rgba(15, 23, 42, 0.6)" stroke="#334155" />
+                            <text x="500" y="610" fill="#64748b" font-size="12" text-anchor="middle" font-family="Fira Code">EARTH GROUND GRID / BURIED GROUND MAT</text>
+
+                            <!-- GROUNDING ROD & BUS BAR -->
+                            <g class="interactive-node" data-id="grounding" onclick="handleElementClick('grounding')">
+                                <rect class="node-shape" x="720" y="520" width="16" height="70" fill="#10b981" rx="2"/>
+                                <rect class="node-shape" x="690" y="510" width="80" height="12" fill="#059669" rx="2"/>
+                                <text x="730" y="500" fill="#10b981" font-size="11" font-weight="bold" text-anchor="middle">GROUND BUS BAR</text>
+                            </g>
+
+                            <!-- MAIN LATTICE TOWER -->
+                            <g id="tower-structure">
+                                <!-- Tower Legs & Steel Trusses -->
+                                <polyline points="420,580 470,120 530,120 580,580" fill="none" stroke="#475569" stroke-width="5"/>
+                                <!-- Cross Bracing -->
+                                <line x1="430" y1="520" x2="570" y2="520" stroke="#334155" stroke-width="2"/>
+                                <line x1="430" y1="520" x2="560" y2="440" stroke="#334155" stroke-width="2"/>
+                                <line x1="570" y1="520" x2="440" y2="440" stroke="#334155" stroke-width="2"/>
+                                <line x1="440" y1="440" x2="560" y2="440" stroke="#334155" stroke-width="2"/>
+                                <line x1="440" y1="440" x2="550" y2="340" stroke="#334155" stroke-width="2"/>
+                                <line x1="560" y1="440" x2="450" y2="340" stroke="#334155" stroke-width="2"/>
+                                <line x1="450" y1="340" x2="550" y2="340" stroke="#334155" stroke-width="2"/>
+                                <line x1="450" y1="340" x2="540" y2="220" stroke="#334155" stroke-width="2"/>
+                                <line x1="550" y1="340" x2="460" y2="220" stroke="#334155" stroke-width="2"/>
+                                <line x1="460" y1="220" x2="540" y2="220" stroke="#334155" stroke-width="2"/>
+                                <line x1="460" y1="220" x2="530" y2="120" stroke="#334155" stroke-width="2"/>
+                                <line x1="540" y1="220" x2="470" y2="120" stroke="#334155" stroke-width="2"/>
+                                <!-- Tower Head Mount Boom Arm -->
+                                <line x1="400" y1="140" x2="600" y2="140" stroke="#64748b" stroke-width="6"/>
+                            </g>
+
+                            <!-- TOP TOWER EQUIPMENT -->
+                            <!-- GPS DOME -->
+                            <g class="interactive-node" data-id="gps" onclick="handleElementClick('gps')" transform="translate(490, 80)">
+                                <path class="node-shape" d="M 0 20 A 10 10 0 0 1 20 20 Z" fill="#f8fafc" stroke="#00f2fe" stroke-width="1.5"/>
+                                <rect x="8" y="20" width="4" height="20" fill="#94a3b8"/>
+                                <text x="10" y="-5" fill="#f8fafc" font-size="10" font-weight="bold" text-anchor="middle">GPS</text>
+                            </g>
+
+                            <!-- SECTOR ANTENNAS & AAU/RRU HEADS -->
+                            <!-- AAU / Sector 1 (Left) -->
+                            <g class="interactive-node" data-id="aau" onclick="handleElementClick('aau')" transform="translate(390, 100)">
+                                <rect class="node-shape" x="0" y="0" width="22" height="75" rx="3" fill="#1e293b" stroke="#00f2fe" stroke-width="2"/>
+                                <rect x="4" y="8" width="14" height="25" fill="#8b5cf6" rx="2"/>
+                                <circle cx="11" cy="45" r="3" fill="#10b981"/>
+                                <text x="-10" y="40" fill="#00f2fe" font-size="11" font-weight="bold" text-anchor="end">5G AAU</text>
+                            </g>
+
+                            <!-- RRU / Sector 2 (Right) -->
+                            <g class="interactive-node" data-id="rru" onclick="handleElementClick('rru')" transform="translate(588, 100)">
+                                <rect class="node-shape" x="0" y="0" width="22" height="75" rx="3" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+                                <rect x="4" y="40" width="14" height="25" fill="#3b82f6" rx="2"/>
+                                <circle cx="11" cy="15" r="3" fill="#10b981"/>
+                                <text x="32" y="40" fill="#3b82f6" font-size="11" font-weight="bold">RRU / ANT</text>
+                            </g>
+
+                            <!-- MICROWAVE DISH (TOWER TOP) -->
+                            <g class="interactive-node" data-id="mw-antenna" onclick="handleElementClick('mw-antenna')" transform="translate(535, 170)">
+                                <path class="node-shape" d="M 0 0 A 25 25 0 0 1 0 50 Z" fill="#334155" stroke="#00f2fe" stroke-width="2"/>
+                                <line x1="0" y1="25" x2="20" y2="25" stroke="#00f2fe" stroke-width="3"/>
+                                <circle cx="20" cy="25" r="4" fill="#ec4899"/>
+                                <text x="30" y="30" fill="#ec4899" font-size="11" font-weight="bold">MW DISH</text>
+                            </g>
+
+                            <!-- BASE SHELTER / OUTDOOR CABINET -->
+                            <g transform="translate(180, 400)">
+                                <rect x="0" y="0" width="220" height="180" rx="6" fill="rgba(15, 23, 42, 0.9)" stroke="#475569" stroke-width="3"/>
+                                <text x="110" y="-12" fill="#94a3b8" font-size="12" font-weight="bold" text-anchor="middle">EQUIPMENT OUTDOOR CABINET</text>
+                                
+                                <!-- BBU / DU RACK -->
+                                <g class="interactive-node" data-id="du" onclick="handleElementClick('du')" transform="translate(15, 20)">
+                                    <rect class="node-shape" x="0" y="0" width="190" height="40" rx="4" fill="#0f172a" stroke="#00f2fe" stroke-width="1.5"/>
+                                    <rect x="10" y="8" width="40" height="24" fill="#1e293b" stroke="#334155"/>
+                                    <circle cx="20" cy="20" r="3" fill="#10b981"/>
+                                    <circle cx="30" cy="20" r="3" fill="#10b981"/>
+                                    <text x="60" y="25" fill="#00f2fe" font-size="11" font-weight="bold">BBU / 5G DU (BASEBAND)</text>
+                                </g>
+
+                                <!-- RECTIFIER UNIT -->
+                                <g class="interactive-node" data-id="rectifier" onclick="handleElementClick('rectifier')" transform="translate(15, 70)">
+                                    <rect class="node-shape" x="0" y="0" width="190" height="40" rx="4" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5"/>
+                                    <text x="60" y="25" fill="#f59e0b" font-size="11" font-weight="bold">AC/DC RECTIFIER POWER</text>
+                                    <rect x="10" y="10" width="35" height="20" fill="#f59e0b" opacity="0.2"/>
+                                    <text x="27" y="24" fill="#f59e0b" font-size="9" text-anchor="middle" font-family="Fira Code">48V</text>
+                                </g>
+
+                                <!-- BATTERY BANK -->
+                                <g class="interactive-node" data-id="battery" onclick="handleElementClick('battery')" transform="translate(15, 120)">
+                                    <rect class="node-shape" x="0" y="0" width="190" height="45" rx="4" fill="#0f172a" stroke="#10b981" stroke-width="1.5"/>
+                                    <text x="60" y="27" fill="#10b981" font-size="11" font-weight="bold">LiFePO4 BATTERY BANK</text>
+                                    <rect x="12" y="12" width="10" height="20" fill="#10b981"/>
+                                    <rect x="25" y="12" width="10" height="20" fill="#10b981"/>
+                                    <rect x="38" y="12" width="10" height="20" fill="#10b981"/>
+                                </g>
+                            </g>
+
+                            <!-- POWER GRID FEED (EXTERNAL) -->
+                            <g class="interactive-node" data-id="grid" onclick="handleElementClick('grid')" transform="translate(50, 440)">
+                                <circle class="node-shape" cx="25" cy="25" r="22" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+                                <text x="25" y="29" fill="#f59e0b" font-size="14" text-anchor="middle">⚡</text>
+                                <text x="25" y="60" fill="#f59e0b" font-size="10" font-weight="bold" text-anchor="middle">GRID 220V AC</text>
+                            </g>
+
+                            <!-- CABLES & PATH LINES -->
+                            <g id="cable-layer">
+                                <!-- 🔵 FIBER PATH (AAU/RRU -> DU) -->
+                                <path id="cable-fiber" class="cable-path" data-type="FIBER" onclick="handleCableClick('fiber')" d="M 400 175 L 400 380 L 290 380 L 290 420" fill="none" stroke="#00f2fe" stroke-width="3.5" filter="url(#glow-cyan)"/>
+                                
+                                <!-- ⚡ POWER CABLE PATH (GRID -> RECTIFIER -> BATTERY -> DU/AAU) -->
+                                <path id="cable-power-1" class="cable-path" data-type="POWER" onclick="handleCableClick('power')" d="M 75 465 L 195 465 L 195 470" fill="none" stroke="#f59e0b" stroke-width="3.5"/>
+                                <path id="cable-power-2" class="cable-path" data-type="POWER" onclick="handleCableClick('power')" d="M 290 510 L 290 520" fill="none" stroke="#f59e0b" stroke-width="3.5"/>
+                                <path id="cable-power-3" class="cable-path" data-type="POWER" onclick="handleCableClick('power')" d="M 370 470 L 440 470 L 440 175" fill="none" stroke="#f59e0b" stroke-width="3"/>
+
+                                <!-- 🌍 GROUNDING CABLE PATH -->
+                                <path id="cable-ground-1" class="cable-path" data-type="GROUND" onclick="handleCableClick('grounding')" d="M 390 140 L 370 140 L 370 520 L 690 520" fill="none" stroke="#10b981" stroke-width="2.5" stroke-dasharray="4,4"/>
+                                <path id="cable-ground-2" class="cable-path" data-type="GROUND" onclick="handleCableClick('grounding')" d="M 370 490 L 690 520" fill="none" stroke="#10b981" stroke-width="2.5" stroke-dasharray="4,4"/>
+                            </g>
+                        </g>
+
+                        <!-- ================= VIEW 2: 2-SITE MICROWAVE LINK ================= -->
+                        <g id="layer-microwave-site" style="display:none;">
+                            <!-- SITE A -->
+                            <g transform="translate(100, 100)">
+                                <text x="80" y="40" fill="#00f2fe" font-size="18" font-weight="bold">SITE A (CASA-5G-001)</text>
+                                <!-- Tower A Mini -->
+                                <polyline points="60,400 80,120 100,120 120,400" fill="none" stroke="#475569" stroke-width="4"/>
+                                <!-- Dish A -->
+                                <path class="interactive-node" data-id="mw-antenna" onclick="handleElementClick('mw-antenna')" d="M 100 130 A 20 20 0 0 1 100 170 Z" fill="#334155" stroke="#00f2fe" stroke-width="2"/>
+                                <circle cx="115" cy="150" r="4" fill="#ec4899"/>
+                            </g>
+
+                            <!-- SITE B -->
+                            <g transform="translate(650, 100)">
+                                <text x="80" y="40" fill="#8b5cf6" font-size="18" font-weight="bold">SITE B (CASA-5G-002)</text>
+                                <!-- Tower B Mini -->
+                                <polyline points="60,400 80,120 100,120 120,400" fill="none" stroke="#475569" stroke-width="4"/>
+                                <!-- Dish B -->
+                                <path class="interactive-node" data-id="mw-antenna-b" onclick="handleElementClick('mw-antenna')" d="M 80 130 A 20 20 0 0 0 80 170 Z" fill="#334155" stroke="#8b5cf6" stroke-width="2"/>
+                                <circle cx="65" cy="150" r="4" fill="#ec4899"/>
+                            </g>
+
+                            <!-- ANIMATED RF BEAM BETWEEN SITES -->
+                            <g onclick="handleCableClick('microwave')">
+                                <line id="mw-beam-line" class="rf-beam" x1="215" y1="250" x2="715" y2="250" stroke-width="4"/>
+                                <text x="465" y="230" fill="#00f2fe" font-size="13" font-weight="bold" text-anchor="middle" font-family="Fira Code">18 GHz LOS RF LINK (7.4 km)</text>
+                            </g>
+                        </g>
+
+                        <!-- ================= VIEW 3: 5G LOGICAL TOPOLOGY ================= -->
+                        <g id="layer-topology-view" style="display:none;">
+                            <g transform="translate(80, 260)">
+                                <!-- Nodes -->
+                                <g class="interactive-node" onclick="showTopoInfo('UE')">
+                                    <rect x="0" y="0" width="110" height="70" rx="8" fill="#1e293b" stroke="#00f2fe" stroke-width="2"/>
+                                    <text x="55" y="40" fill="#00f2fe" font-size="13" font-weight="bold" text-anchor="middle">5G UE (User)</text>
+                                </g>
+
+                                <line x1="110" y1="35" x2="160" y2="35" stroke="#00f2fe" stroke-width="3" stroke-dasharray="4,4"/>
+
+                                <g class="interactive-node" onclick="showTopoInfo('AAU')">
+                                    <rect x="160" y="0" width="110" height="70" rx="8" fill="#1e293b" stroke="#8b5cf6" stroke-width="2"/>
+                                    <text x="215" y="40" fill="#8b5cf6" font-size="13" font-weight="bold" text-anchor="middle">AAU (gNodeB)</text>
+                                </g>
+
+                                <line x1="270" y1="35" x2="320" y2="35" stroke="#8b5cf6" stroke-width="3"/>
+
+                                <g class="interactive-node" onclick="showTopoInfo('DU')">
+                                    <rect x="320" y="0" width="110" height="70" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+                                    <text x="375" y="40" fill="#3b82f6" font-size="13" font-weight="bold" text-anchor="middle">DU (Distributed)</text>
+                                </g>
+
+                                <line x1="430" y1="35" x2="480" y2="35" stroke="#3b82f6" stroke-width="3"/>
+
+                                <g class="interactive-node" onclick="showTopoInfo('CU')">
+                                    <rect x="480" y="0" width="110" height="70" rx="8" fill="#1e293b" stroke="#ec4899" stroke-width="2"/>
+                                    <text x="535" y="40" fill="#ec4899" font-size="13" font-weight="bold" text-anchor="middle">CU (Central)</text>
+                                </g>
+
+                                <line x1="590" y1="35" x2="640" y2="35" stroke="#ec4899" stroke-width="3"/>
+
+                                <g class="interactive-node" onclick="showTopoInfo('CORE')">
+                                    <rect x="640" y="0" width="110" height="70" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+                                    <text x="695" y="40" fill="#10b981" font-size="13" font-weight="bold" text-anchor="middle">5G CORE</text>
+                                </g>
+
+                                <line x1="750" y1="35" x2="800" y2="35" stroke="#10b981" stroke-width="3"/>
+
+                                <g class="interactive-node" onclick="showTopoInfo('INTERNET')">
+                                    <rect x="800" y="0" width="110" height="70" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+                                    <text x="855" y="40" fill="#f59e0b" font-size="13" font-weight="bold" text-anchor="middle">INTERNET</text>
+                                </g>
+                            </g>
+                        </g>
+
+                        <!-- ================= VIEW 4: EXPLODED COMPONENT VIEW ================= -->
+                        <g id="layer-exploded-view" style="display:none;">
+                            <g transform="translate(250, 80)">
+                                <text x="250" y="20" fill="#00f2fe" font-size="16" font-weight="bold" text-anchor="middle">AAU / BBU DISASSEMBLED ARCHITECTURE</text>
+                                
+                                <g transform="translate(100, 60)" class="exploded-part" id="exp-1">
+                                    <rect x="0" y="0" width="300" height="45" rx="6" fill="#1e293b" stroke="#00f2fe" stroke-width="2"/>
+                                    <text x="150" y="28" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">1. ANTENNA ELEMENT ARRAY (64T64R Massive MIMO)</text>
+                                </g>
+                                <g transform="translate(100, 140)" class="exploded-part" id="exp-2">
+                                    <rect x="0" y="0" width="300" height="45" rx="6" fill="#1e293b" stroke="#8b5cf6" stroke-width="2"/>
+                                    <text x="150" y="28" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">2. RF TRANSCEIVER MODULE & PA</text>
+                                </g>
+                                <g transform="translate(100, 220)" class="exploded-part" id="exp-3">
+                                    <rect x="0" y="0" width="300" height="45" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+                                    <text x="150" y="28" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">3. DIGITAL BASEBAND PROCESSOR (FPGA/ASIC)</text>
+                                </g>
+                                <g transform="translate(100, 300)" class="exploded-part" id="exp-4">
+                                    <rect x="0" y="0" width="300" height="45" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+                                    <text x="150" y="28" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">4. POWER MANAGEMENT UNIT (PMU & DC FILTER)</text>
+                                </g>
+                                <g transform="translate(100, 380)" class="exploded-part" id="exp-5">
+                                    <rect x="0" y="0" width="300" height="45" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+                                    <text x="150" y="28" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">5. PASSIVE COOLING HEATSINK & HOUSING</text>
+                                </g>
+                            </g>
+                        </g>
+
+                    </g>
+                </svg>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: SIDEBAR HUD & INSPECTION PANELS -->
+        <div class="sim-sidebar" id="sim-sidebar">
+            <div class="mobile-sheet-handle" onclick="toggleMobileSheet()"></div>
+            
+            <!-- PANEL 1: TECHNICAL INSPECTOR -->
+            <div class="panel-card">
+                <div class="panel-header">
+                    <span class="panel-title">📋 Equipment Inspector</span>
+                    <span class="status-pill ok" id="inspect-status-pill">ACTIVE</span>
+                </div>
+                <div id="inspector-content">
+                    <p style="color: var(--text-dim); font-size: 0.85rem;">Click on any site equipment, tower element, optical cable, or RF link to inspect real-time technical parameters.</p>
+                </div>
+            </div>
+
+            <!-- PANEL 2: MICROWAVE FAULT SIMULATION & HEALTH -->
+            <div class="panel-card">
+                <div class="panel-header">
+                    <span class="panel-title">🛰️ Microwave Link Controller</span>
+                </div>
+                <div style="display:flex; gap:0.5rem;">
+                    <button class="btn btn-danger" style="flex:1;" onclick="simulateMWFault()">⚠️ SIMULATE FAULT</button>
+                    <button class="btn btn-success" style="flex:1;" onclick="restoreMWLink()">🟢 RESTORE LINK</button>
+                </div>
+            </div>
+
+            <!-- PANEL 3: SITE KPI DASHBOARD -->
+            <div class="panel-card">
+                <div class="panel-header">
+                    <span class="panel-title">📊 Site Live KPIs</span>
+                    <span style="font-size:0.7rem; color:var(--text-dim); font-family:var(--font-code);">FREQ: 3.5 GHz</span>
+                </div>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <span class="kpi-label">Site Availability</span>
+                        <span class="kpi-value" id="kpi-avail" style="color:var(--status-green);">99.8%</span>
+                    </div>
+                    <div class="kpi-card">
+                        <span class="kpi-label">DL Throughput</span>
+                        <span class="kpi-value" id="kpi-dl">487 Mbps</span>
+                    </div>
+                    <div class="kpi-card">
+                        <span class="kpi-label">UL Throughput</span>
+                        <span class="kpi-value" id="kpi-ul">82 Mbps</span>
+                    </div>
+                    <div class="kpi-card">
+                        <span class="kpi-label">RSRP (Coverage)</span>
+                        <span class="kpi-value" id="kpi-rsrp">-87 dBm</span>
+                    </div>
+                    <div class="kpi-card">
+                        <span class="kpi-label">SINR (Quality)</span>
+                        <span class="kpi-value" id="kpi-sinr">19 dB</span>
+                    </div>
+                    <div class="kpi-card">
+                        <span class="kpi-label">VSWR (Antenna)</span>
+                        <span class="kpi-value" id="kpi-vswr">1.32</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 4: EQUIPMENT STATUS MATRIX -->
+            <div class="panel-card">
+                <div class="panel-header">
+                    <span class="panel-title">🟢 Equipment Subsystems</span>
+                </div>
+                <table class="data-table">
+                    <tr><td>Power Grid / AC</td><td><span class="status-pill ok" id="st-power">🟢 OK</span></td></tr>
+                    <tr><td>Transport / Fiber</td><td><span class="status-pill ok" id="st-transport">🟢 OK</span></td></tr>
+                    <tr><td>GPS Clock Sync</td><td><span class="status-pill ok" id="st-gps">🟢 OK</span></td></tr>
+                    <tr><td>AAU / 5G Radio</td><td><span class="status-pill ok" id="st-aau">🟢 OK</span></td></tr>
+                    <tr><td>DU Baseband</td><td><span class="status-pill ok" id="st-du">🟢 OK</span></td></tr>
+                    <tr><td>Microwave Link</td><td><span class="status-pill ok" id="st-mw">🟢 OK</span></td></tr>
+                </table>
+            </div>
+
+            <!-- PANEL 5: TROUBLESHOOTING ENGINE -->
+            <div class="panel-card">
+                <div class="panel-header">
+                    <span class="panel-title">🛠️ Diagnostics & Troubleshooting</span>
+                    <span style="font-size:0.8rem; font-weight:bold; color:var(--accent-cyan);" id="score-display">Score: 100</span>
+                </div>
+                <button class="btn" onclick="startTroubleshootingScenario()" style="width:100%;">LAUNCH DIAGNOSTIC SCENARIO</button>
+                
+                <div class="trouble-card" id="trouble-card">
+                    <strong id="trouble-title" style="color:var(--status-yellow); font-size:0.875rem;">⚠️ ALARM: HIGH VSWR DETECTED</strong>
+                    <p id="trouble-desc" style="font-size:0.8rem; color:var(--text-muted);">AAU RF output power reflection is elevated (>2.1). What is the recommended field engineer action?</p>
+                    <div id="trouble-options" style="display:flex; flex-direction:column; gap:0.4rem;">
+                        <!-- Injected by JS -->
+                    </div>
+                    <div class="feedback-box" id="trouble-feedback"></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CONTENT SECTION: TELECOMHUB REFERENCE ARCHITECTURE -->
+    <section id="architecture" class="content-section">
+        <div class="section-heading">
+            <h2>5G RAN & Transport Engineering Fundamentals</h2>
+            <p>Comprehensive overview of modern cellular architecture deployed in high-density 5G NR networks.</p>
+        </div>
+
+        <div class="grid-3">
+            <div class="feature-card">
+                <div class="feature-icon">📡</div>
+                <h3>Active Antenna Units (AAU)</h3>
+                <p>Combines passive antenna arrays with active RF transceivers. Utilizes 64T64R Massive MIMO technology to form targeted beamforming patterns toward active user equipment.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔵</div>
+                <h3>eCPRI Front-Haul Fiber</h3>
+                <p>High-speed optical interconnect linking the top-tower AAU with the ground Baseband Unit. Runs eCPRI protocols carrying digitized IQ baseband data at 10Gbps/25Gbps.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>DC Power Architecture</h3>
+                <p>Industrial rectifiers convert incoming 220V/380V AC utility power to -48V DC. Lithium Iron Phosphate (LiFePO4) battery banks provide emergency site backup.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div>
+                <strong>TelecomHub Engineering Platform</strong> &copy; 2026. Production-Ready Site Simulator.
+            </div>
+            <div>
+                Site ID: <code>CASA-5G-001</code> | Lat: 33.5731 N, Lon: -7.5898 W
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT ENGINE -->
+    <script>
+        // ================= STATE MANAGEMENT =================
+        const state = {
+            viewMode: 'site',          // 'site' | 'microwave' | 'topology' | 'exploded'
+            cableFilter: 'ALL',        // 'ALL' | 'FIBER' | 'POWER' | 'GROUND'
+            inspectionMode: true,
+            exploded: false,
+            zoomLevel: 1,
+            mwFaultActive: false,
+            engineerScore: 100,
+            selectedElement: null
+        };
+
+        // TECHNICAL DATA MATRIX
+        const techData = {
+            aau: {
+                title: "5G Active Antenna Unit (AAU)",
+                type: "64T64R Massive MIMO gNodeB",
+                vendor: "TelecomHub Prime",
+                txPower: "280W Total (4 x 70W)",
+                freq: "3.5 GHz (n78 Band)",
+                cpriStatus: "🟢 eCPRI 25 Gbps ACTIVE",
+                vswr: "1.18 (Normal)",
+                temp: "42 °C",
+                note: "* Simulated demo parameters"
+            },
+            rru: {
+                title: "Remote Radio Unit (RRU)",
+                type: "4T4R LTE/5G Multi-Band",
+                vendor: "TelecomHub Prime",
+                txPower: "160W (4 x 40W)",
+                freq: "1800 MHz / 2100 MHz",
+                cpriStatus: "🟢 CPRI 9.8 Gbps ACTIVE",
+                vswr: "1.22",
+                temp: "39 °C",
+                note: "* Simulated demo parameters"
+            },
+            du: {
+                title: "Distributed Baseband Unit (BBU/DU)",
+                type: "Virtual RAN 5G Baseband Computer",
+                capacity: "12 Cells / 10,000 Active Users",
+                clock: "GPS Phase Sync ±30ns",
+                ip: "10.240.88.14",
+                backhaul: "100G Optical Ring",
+                status: "🟢 ONLINE / NO ALARMS",
+                note: "* Simulated demo parameters"
+            },
+            gps: {
+                title: "GPS Sync Antenna Dome",
+                satellites: "14 Locked Satellites",
+                syncStatus: "🟢 PHASE LOCKED (1PPS)",
+                biasTeeVoltage: "5.0 V DC",
+                cableLoss: "2.4 dB",
+                note: "* Simulated demo parameters"
+            },
+            mwAntenna: {
+                title: "18 GHz Parabolic Microwave Antenna",
+                diameter: "0.6 Meter",
+                gain: "38.5 dBi",
+                polarization: "Vertical",
+                modulatingScheme: "4096 QAM",
+                txPower: "+18 dBm",
+                rsl: "-48 dBm (Excellent)",
+                snr: "31 dB",
+                availability: "99.999%",
+                status: "🟢 ACTIVE LINK",
+                note: "* Simulated demo parameters"
+            },
+            rectifier: {
+                title: "Industrial AC/DC Rectifier System",
+                input: "230V AC Single Phase",
+                output: "-48.5V DC",
+                loadCurrent: "42.4 Amps",
+                efficiency: "96.4%",
+                modules: "3 x 2000W Rectifier Trays",
+                status: "🟢 OK",
+                note: "* Simulated demo parameters"
+            },
+            battery: {
+                title: "LiFePO4 Backup Battery Bank",
+                voltage: "48.0 V DC",
+                capacity: "100 Ah (4.8 kWh)",
+                stateOfCharge: "100% (Float Charge)",
+                autonomyTime: "4.2 Hours at full load",
+                status: "🟢 HEALTHY",
+                note: "* Simulated demo parameters"
+            },
+            grid: {
+                title: "Utility Main Power Entry",
+                voltage: "220V AC / 50Hz",
+                surgeProtection: "Class II SPD Active",
+                status: "🟢 GRID STABLE",
+                note: "* Simulated demo parameters"
+            },
+            grounding: {
+                title: "Site Master Grounding Bus Bar",
+                resistance: "2.8 Ohms (Target < 5.0 Ω)",
+                connections: "Tower, Cabinets, Surge Protectors",
+                status: "🟢 PASSES SAFETY SPEC",
+                note: "* Simulated demo parameters"
+            },
+            fiberCable: {
+                title: "FIBER OPTIC FRONT-HAUL CABLE",
+                type: "Armored Multi-Mode Single Fiber Pair",
+                from: "AAU 5G Unit (Tower Top)",
+                to: "DU Baseband Unit (Cabinet)",
+                opticalPower: "-4.8 dBm",
+                loss: "1.2 dB",
+                status: "🟢 ACTIVE (25 Gbps eCPRI)",
+                note: "* Simulated optical fiber parameters"
+            },
+            powerCable: {
+                title: "-48V DC POWER FEED CABLE",
+                type: "2x16 mm² Shielded Copper Line",
+                from: "DC Rectifier / Battery",
+                to: "Tower Top AAU Head",
+                voltageDrop: "1.4V DC",
+                currentDraw: "18.2 Amps",
+                status: "🟢 NORMAL POWER FLOW",
+                note: "* Simulated power parameters"
+            }
+        };
+
+        // ================= VIEW SWITCHING =================
+        function switchView(view) {
+            state.viewMode = view;
+            
+            // Toggle active buttons
+            document.getElementById('btn-view-site').classList.toggle('active', view === 'site');
+            document.getElementById('btn-view-mw').classList.toggle('active', view === 'microwave');
+            document.getElementById('btn-view-topo').classList.toggle('active', view === 'topology');
+            
+            // Toggle SVG Layer Visibility
+            document.getElementById('layer-physical-site').style.display = (view === 'site' && !state.exploded) ? 'block' : 'none';
+            document.getElementById('layer-microwave-site').style.display = (view === 'microwave') ? 'block' : 'none';
+            document.getElementById('layer-topology-view').style.display = (view === 'topology') ? 'block' : 'none';
+            document.getElementById('layer-exploded-view').style.display = (state.exploded) ? 'block' : 'none';
+
+            const hudMsg = document.getElementById('hud-mode-indicator');
+            if (view === 'site') hudMsg.innerText = "MODE: PHYSICAL SITE INSPECTION";
+            if (view === 'microwave') hudMsg.innerText = "MODE: 2-SITE MICROWAVE LINK ANALYSIS";
+            if (view === 'topology') hudMsg.innerText = "MODE: 5G LOGICAL NETWORK ARCHITECTURE";
+        }
+
+        function toggleExplodedView() {
+            state.exploded = !state.exploded;
+            document.getElementById('btn-exploded').classList.toggle('active', state.exploded);
+            
+            if (state.exploded) {
+                document.getElementById('layer-physical-site').style.display = 'none';
+                document.getElementById('layer-microwave-site').style.display = 'none';
+                document.getElementById('layer-topology-view').style.display = 'none';
+                document.getElementById('layer-exploded-view').style.display = 'block';
+                document.getElementById('hud-mode-indicator').innerText = "MODE: AAU / BBU EXPLODED COMPONENT VIEW";
+            } else {
+                switchView(state.viewMode);
+            }
+        }
+
+        // ================= CABLE FILTERING =================
+        function setCableFilter(filter) {
+            state.cableFilter = filter;
+            
+            ['all', 'fiber', 'power', 'ground'].forEach(f => {
+                const btn = document.getElementById(`btn-filter-${f}`);
+                if (btn) btn.classList.toggle('active', f.toUpperCase() === filter);
+            });
+
+            const fiberCables = document.querySelectorAll('[data-type="FIBER"]');
+            const powerCables = document.querySelectorAll('[data-type="POWER"]');
+            const groundCables = document.querySelectorAll('[data-type="GROUND"]');
+
+            if (filter === 'ALL') {
+                fiberCables.forEach(c => c.style.opacity = "1");
+                powerCables.forEach(c => c.style.opacity = "1");
+                groundCables.forEach(c => c.style.opacity = "1");
+            } else if (filter === 'FIBER') {
+                fiberCables.forEach(c => c.style.opacity = "1");
+                powerCables.forEach(c => c.style.opacity = "0.15");
+                groundCables.forEach(c => c.style.opacity = "0.15");
+            } else if (filter === 'POWER') {
+                fiberCables.forEach(c => c.style.opacity = "0.15");
+                powerCables.forEach(c => c.style.opacity = "1");
+                groundCables.forEach(c => c.style.opacity = "0.15");
+            } else if (filter === 'GROUND') {
+                fiberCables.forEach(c => c.style.opacity = "0.15");
+                powerCables.forEach(c => c.style.opacity = "0.15");
+                groundCables.forEach(c => c.style.opacity = "1");
+            }
+        }
+
+        // ================= TRACE CONNECTION =================
+        function tracePath(type) {
+            if (type === 'MICROWAVE') {
+                switchView('microwave');
+                const beam = document.getElementById('mw-beam-line');
+                beam.style.strokeWidth = "8px";
+                beam.style.filter = "drop-shadow(0 0 15px #00f2fe)";
+                setTimeout(() => {
+                    beam.style.strokeWidth = "4px";
+                    beam.style.filter = "none";
+                }, 2500);
+                handleCableClick('microwave');
+                return;
+            }
+
+            switchView('site');
+            setCableFilter(type);
+
+            const targetCables = document.querySelectorAll(`[data-type="${type}"]`);
+            targetCables.forEach(c => {
+                c.style.strokeWidth = "6px";
+                c.style.filter = "drop-shadow(0 0 12px currentColor)";
+            });
+
+            setTimeout(() => {
+                targetCables.forEach(c => {
+                    c.style.strokeWidth = "";
+                    c.style.filter = "";
+                });
+            }, 2500);
+
+            if (type === 'FIBER') handleCableClick('fiber');
+            if (type === 'POWER') handleCableClick('power');
+            if (type === 'GROUND') handleCableClick('grounding');
+        }
+
+        // ================= ELEMENT INSPECTION =================
+        function toggleInspectionMode(enabled) {
+            state.inspectionMode = enabled;
+            const pill = document.getElementById('inspect-status-pill');
+            if (enabled) {
+                pill.className = "status-pill ok";
+                pill.innerText = "ACTIVE";
+            } else {
+                pill.className = "status-pill warn";
+                pill.innerText = "DISABLED";
+            }
+        }
+
+        function handleElementClick(id) {
+            if (!state.inspectionMode) return;
+            state.selectedElement = id;
+            const data = techData[id];
+            if (!data) return;
+
+            let html = `<h4 style="color:var(--accent-cyan); margin-bottom:0.5rem;">${data.title}</h4><table class="data-table">`;
+            for (let [k, v] of Object.entries(data)) {
+                if (k === 'title') continue;
+                html += `<tr><td>${k.toUpperCase()}</td><td>${v}</td></tr>`;
+            }
+            html += `</table>`;
+            document.getElementById('inspector-content').innerHTML = html;
+        }
+
+        function handleCableClick(type) {
+            if (!state.inspectionMode) return;
+            let data = (type === 'fiber') ? techData.fiberCable : techData.powerCable;
+            
+            if (type === 'grounding') {
+                data = techData.grounding;
+            } else if (type === 'microwave') {
+                data = techData.mwAntenna;
+            }
+
+            let html = `<h4 style="color:var(--accent-cyan); margin-bottom:0.5rem;">${data.title}</h4><table class="data-table">`;
+            for (let [k, v] of Object.entries(data)) {
+                if (k === 'title') continue;
+                html += `<tr><td>${k.toUpperCase()}</td><td>${v}</td></tr>`;
+            }
+            html += `</table>`;
+            document.getElementById('inspector-content').innerHTML = html;
+        }
+
+        function showTopoInfo(nodeType) {
+            const infoMap = {
+                UE: { title: "5G User Equipment (UE)", desc: "Smartphone / Industrial IoT terminal connected via 5G NR air interface." },
+                AAU: { title: "AAU / gNodeB Radio Head", desc: "Performs RF modulation, beamforming, and analog-to-digital processing." },
+                DU: { title: "Distributed Unit (DU)", desc: "Handles RLC, MAC, and High-PHY baseband protocol layers." },
+                CU: { title: "Centralized Unit (CU)", desc: "Manages SDAP, PDCP protocols and non-real-time radio control logic." },
+                CORE: { title: "5G Core Network (5GC)", desc: "UPF (User Plane Function) & AMF/SMF control plane functions." },
+                INTERNET: { title: "External Data Network", desc: "Global IP WAN & Cloud application services." }
+            };
+            const item = infoMap[nodeType];
+            document.getElementById('inspector-content').innerHTML = `
+                <h4 style="color:var(--accent-cyan);">${item.title}</h4>
+                <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">${item.desc}</p>
+                <p style="font-size:0.75rem; color:var(--text-dim); margin-top:0.5rem;">* 5G NR 3GPP Standalone Architecture Node</p>
+            `;
+        }
+
+        // ================= MICROWAVE FAULT SIMULATION =================
+        function simulateMWFault() {
+            state.mwFaultActive = true;
+            const beam = document.getElementById('mw-beam-line');
+            if (beam) beam.classList.add('faulty');
+
+            // Degrade parameters
+            techData.mwAntenna.rsl = "🔴 -82 dBm (CRITICAL FADE)";
+            techData.mwAntenna.snr = "8 dB (POOR)";
+            techData.mwAntenna.availability = "94.100% (DEGRADED)";
+            techData.mwAntenna.status = "🔴 LINK DEGRADED / FADING";
+
+            // Update UI & Status
+            document.getElementById('hud-status-indicator').innerText = "⚠️ ALARM: MICROWAVE LINK DEGRADATION";
+            document.getElementById('hud-status-indicator').style.color = "var(--status-red)";
+            document.getElementById('st-mw').className = "status-pill crit";
+            document.getElementById('st-mw').innerText = "🔴 FAULT";
+
+            // Update KPIs
+            document.getElementById('kpi-dl').innerText = "42 Mbps";
+            document.getElementById('kpi-dl').style.color = "var(--status-red)";
+            document.getElementById('kpi-avail').innerText = "94.1%";
+            document.getElementById('kpi-avail').style.color = "var(--status-yellow)";
+
+            if (state.selectedElement === 'mw-antenna') handleElementClick('mw-antenna');
+        }
+
+        function restoreMWLink() {
+            state.mwFaultActive = false;
+            const beam = document.getElementById('mw-beam-line');
+            if (beam) beam.classList.remove('faulty');
+
+            // Restore parameters
+            techData.mwAntenna.rsl = "-48 dBm (Excellent)";
+            techData.mwAntenna.snr = "31 dB";
+            techData.mwAntenna.availability = "99.999%";
+            techData.mwAntenna.status = "🟢 ACTIVE LINK";
+
+            // Update UI & Status
+            document.getElementById('hud-status-indicator').innerText = "STATUS: NORMAL OPERATING STATE";
+            document.getElementById('hud-status-indicator').style.color = "var(--status-green)";
+            document.getElementById('st-mw').className = "status-pill ok";
+            document.getElementById('st-mw').innerText = "🟢 OK";
+
+            // Restore KPIs
+            document.getElementById('kpi-dl').innerText = "487 Mbps";
+            document.getElementById('kpi-dl').style.color = "var(--text-main)";
+            document.getElementById('kpi-avail').innerText = "99.8%";
+            document.getElementById('kpi-avail').style.color = "var(--status-green)";
+
+            if (state.selectedElement === 'mw-antenna') handleElementClick('mw-antenna');
+        }
+
+        // ================= TROUBLESHOOTING ENGINE =================
+        const scenarios = [
+            {
+                title: "⚠️ ALARM: HIGH VSWR ON SECTOR 1 (AAU)",
+                desc: "The network management system reports high Voltage Standing Wave Ratio (VSWR 2.4) on the 5G AAU RF feeder port.",
+                options: [
+                    { text: "Replace the entire DU Baseband unit in the ground cabinet.", correct: false, exp: "Incorrect. High VSWR indicates RF power reflection between the AAU transmitter output, coaxial jumpers, or antenna port — not a baseband processor failure." },
+                    { text: "Inspect, clean, and torque coaxial jumper connections and check weatherproofing seals.", correct: true, exp: "Correct! Water ingress or loose RF jumper connectors are the leading cause of impedance mismatch and elevated VSWR on tower heads." },
+                    { text: "Increase the DC Rectifier output voltage to 58V.", correct: false, exp: "Incorrect. Adjusting DC power voltage will not resolve RF impedance mismatch and could damage downstream components." }
+                ]
+            },
+            {
+                title: "⚠️ ALARM: FRONT-HAUL FIBER LOSS OF SIGNAL (LOS)",
+                desc: "DU optical port SFP-1 reports complete optical signal loss from top-tower AAU.",
+                options: [
+                    { text: "Inspect fiber bend radius, clean optical SFP connectors with alcohol, or replace damaged patch cable.", correct: true, exp: "Correct! Micro-bends, dirty SFP ferrules, or pinched fiber lines cause total optical signal extinction (LOS)." },
+                    { text: "Re-align the Microwave dish antenna azimuth.", correct: false, exp: "Incorrect. Microwave propagation affects wireless backhaul, not the direct optical fiber front-haul linking the DU to the AAU." }
+                ]
+            }
+        ];
+
+        let currentScenarioIdx = 0;
+
+        function startTroubleshootingScenario() {
+            const sc = scenarios[currentScenarioIdx];
+            document.getElementById('trouble-card').classList.add('active');
+            document.getElementById('trouble-title').innerText = sc.title;
+            document.getElementById('trouble-desc').innerText = sc.desc;
+            document.getElementById('trouble-feedback').style.display = 'none';
+
+            let optsHtml = "";
+            sc.options.forEach((opt, idx) => {
+                optsHtml += `<div class="quiz-option" onclick="submitAnswer(${idx})">${opt.text}</div>`;
+            });
+            document.getElementById('trouble-options').innerHTML = optsHtml;
+        }
+
+        function submitAnswer(optIdx) {
+            const sc = scenarios[currentScenarioIdx];
+            const opt = sc.options[optIdx];
+            const fb = document.getElementById('trouble-feedback');
+
+            if (opt.correct) {
+                fb.className = "feedback-box correct";
+                fb.innerHTML = `<strong>🟢 CORRECT ACTION:</strong> ${opt.exp}`;
+                state.engineerScore = Math.min(100, state.engineerScore + 5);
+            } else {
+                fb.className = "feedback-box incorrect";
+                fb.innerHTML = `<strong>🔴 INCORRECT ACTION:</strong> ${opt.exp}`;
+                state.engineerScore = Math.max(0, state.engineerScore - 15);
+            }
+            document.getElementById('score-display').innerText = `Score: ${state.engineerScore}`;
+
+            // Rotate scenario next time
+            currentScenarioIdx = (currentScenarioIdx + 1) % scenarios.length;
+        }
+
+        // ================= ZOOM & PAN ENGINE =================
+        function adjustZoom(delta) {
+            state.zoomLevel = Math.max(0.6, Math.min(2.0, state.zoomLevel + delta));
+            applyTransform();
+        }
+
+        function resetZoom() {
+            state.zoomLevel = 1;
+            applyTransform();
+        }
+
+        function applyTransform() {
+            const vp = document.getElementById('svg-viewport');
+            vp.setAttribute('transform', `scale(${state.zoomLevel})`);
+        }
+
+        // ================= MOBILE SHEET TOGGLE =================
+        function toggleMobileSheet() {
+            const sidebar = document.getElementById('sim-sidebar');
+            sidebar.classList.toggle('expanded');
+        }
+
+        // ================= LIVE TELEMETRY SIMULATOR =================
+        setInterval(() => {
+            if (!state.mwFaultActive) {
+                // Add minor realistic variance to live KPIs
+                const randomJitter = (Math.random() * 6 - 3).toFixed(1);
+                const baseDl = 487;
+                document.getElementById('kpi-dl').innerText = `${Math.round(baseDl + parseFloat(randomJitter))} Mbps`;
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
