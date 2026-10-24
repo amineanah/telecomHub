@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EHS - Environment, Health & Safety - TelecomHub</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f6f8fb;
+            color: #333;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background: #0f1419;
+            color: #e0e0e0;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: linear-gradient(135deg, #06152d, #0c2b58);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1264e8;
+            text-decoration: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-buttons a,
+        .nav-buttons button {
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-buttons a:hover,
+        .nav-buttons button:hover {
+            box-shadow: 0 6px 16px rgba(18, 100, 232, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        /* ================= MAIN CONTAINER ================= */
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .hero-section h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-section p {
+            font-size: 18px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        body.dark-mode .hero-section p {
+            color: #b0b0b0;
+        }
+
+        /* ================= CONTENT GRID ================= */
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        body.dark-mode .content-card {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            border-color: #183c6c;
+        }
+
+        .content-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(18, 100, 232, 0.2);
+            border-color: #1264e8;
+        }
+
+        .card-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #1264e8;
+        }
+
+        body.dark-mode .card-title {
+            color: #5b9eff;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        body.dark-mode .card-description {
+            color: #c0c0c0;
+        }
+
+        /* ================= SPECIFICATIONS ================= */
+
+        .specs-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .specs-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+            color: #555;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        body.dark-mode .specs-list li {
+            border-bottom-color: #2a3d5a;
+            color: #b0b0b0;
+        }
+
+        .specs-list li::before {
+            content: "✓";
+            color: #1264e8;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* ================= INFORMATION SECTION ================= */
+
+        .info-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .info-section {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-section h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #1264e8;
+        }
+
+        body.dark-mode .info-section h3 {
+            color: #5b9eff;
+        }
+
+        .info-section h4 {
+            color: #1264e8;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        body.dark-mode .info-section h4 {
+            color: #5b9eff;
+        }
+
+        .info-section p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        body.dark-mode .info-section p {
+            color: #b0b0b0;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #0f1419;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            margin-top: 60px;
+            line-height: 1.8;
+        }
+
+        footer a {
+            color: #1264e8;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 768px) {
+
+            .header-container {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .nav-buttons {
+                gap: 8px;
+            }
+
+            .nav-buttons a {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .theme-toggle {
+                font-size: 18px;
+                padding: 8px;
+            }
+
+            .container {
+                padding: 30px 15px;
+            }
+
+            .hero-section {
+                margin-bottom: 40px;
+            }
+
+            .hero-section h1 {
+                font-size: 32px;
+            }
+
+            .hero-section p {
+                font-size: 16px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-card {
+                padding: 25px;
+            }
+
+            .info-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+        <div class="header-container">
+
+            <a href="Html%20code.html" class="logo">
+                TELECOMHUB
+            </a>
+
+            <div class="nav-buttons">
+
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    title="Toggle dark mode"
+                    aria-label="Toggle dark mode">
+                    🌙
+                </button>
+
+                <a href="index.html">
+                    ← Back to Home
+                </a>
+
+            </div>
+        </div>
+    </header>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="container">
+
+        <!-- ================= HERO ================= -->
+
+        <section class="hero-section">
+
+            <h1>
+                🦺 EHS - Environment, Health & Safety
+            </h1>
+
+            <p>
+                Comprehensive guide to workplace safety, environmental protection,
+                and health standards in telecom operations and site management.
+            </p>
+
+        </section>
+
+
+        <!-- ================= CONTENT CARDS ================= -->
+
+        <section class="content-grid">
+
+            <!-- WORKPLACE SAFETY -->
+
+            <div class="content-card">
+
+                <h2 class="card-title">
+                    Workplace Safety
+                </h2>
+
+                <p class="card-description">
+                    Critical safety protocols for telecom site operations,
+                    equipment handling, and personnel protection during
+                    installation and maintenance.
+                </p>
+
+                <ul class="specs-list">
+
+                    <li>
+                        <strong>PPE Requirements:</strong>
+                        Hard hats, safety harnesses, gloves, safety footwear
+                    </li>
+
+                    <li>
+                        <strong>RF Safety:</strong>
+                        Exposure limits and controlled access procedures
+                    </li>
+
+                    <li>
+                        <strong>Height Safety:</strong>
+                        Fall protection systems for tower work
+                    </li>
+
+                    <li>
+                        <strong>Electrical Safety:</strong>
+                        Electrical isolation and safe working procedures
+                    </li>
+
+                    <li>
+                        <strong>Training:</strong>
+                        Regular safety training and competency certification
+                    </li>
+
+                    <li>
+                        <strong>Incident Reporting:</strong>
+                        Near-miss, incident, and accident documentation
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- ENVIRONMENTAL PROTECTION -->
+
+            <div class="content-card">
+
+                <h2 class="card-title">
+                    Environmental Protection
+                </h2>
+
+                <p class="card-description">
+                    Responsible management of environmental impacts from telecom
+                    operations, including emissions, waste disposal, and
+                    resource efficiency.
+                </p>
+
+                <ul class="specs-list">
+
+                    <li>
+                        <strong>Carbon Footprint:</strong>
+                        Energy efficiency and emissions reduction
+                    </li>
+
+                    <li>
+                        <strong>Waste Management:</strong>
+                        E-waste collection, reuse, and recycling
+                    </li>
+
+                    <li>
+                        <strong>Water Usage:</strong>
+                        Efficient water management where applicable
+                    </li>
+
+                    <li>
+                        <strong>Emissions:</strong>
+                        Generator emissions and environmental compliance
+                    </li>
+
+                    <li>
+                        <strong>Site Remediation:</strong>
+                        Restoration and environmental impact management
+                    </li>
+
+                    <li>
+                        <strong>Biodiversity:</strong>
+                        Protection of local ecosystems and wildlife
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- HEALTH STANDARDS -->
+
+            <div class="content-card">
+
+                <h2 class="card-title">
+                    Health Standards
+                </h2>
+
+                <p class="card-description">
+                    Compliance with health requirements and monitoring of
+                    occupational health risks associated with telecom
+                    operations and site conditions.
+                </p>
+
+                <ul class="specs-list">
+
+                    <li>
+                        <strong>RF Exposure Monitoring:</strong>
+                        Regular measurements and controlled access
+                    </li>
+
+                    <li>
+                        <strong>Medical Surveillance:</strong>
+                        Occupational health programs where required
+                    </li>
+
+                    <li>
+                        <strong>Noise Control:</strong>
+                        Hearing protection and noise exposure management
+                    </li>
+
+                    <li>
+                        <strong>Air Quality:</strong>
+                        Monitoring of generator and indoor air conditions
+                    </li>
+
+                    <li>
+                        <strong>Ergonomics:</strong>
+                        Safe manual handling and workplace design
+                    </li>
+
+                    <li>
+                        <strong>Wellbeing:</strong>
+                        Fatigue and stress management initiatives
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= EHS MANAGEMENT SYSTEMS ================= -->
+
+        <section class="info-section">
+
+            <h3>
+                🚀 EHS Management Systems
+            </h3>
+
+
+            <!-- ISO 14001 -->
+
+            <h4>
+                ISO 14001 Environmental Management
+            </h4>
+
+            <p>
+                ISO 14001 provides a framework for environmental management
+                systems. It helps organizations identify environmental
+                impacts, meet applicable requirements, improve resource
+                efficiency, reduce waste, and support continuous improvement.
+            </p>
+
+
+            <!-- ISO 45001 -->
+
+            <h4>
+                ISO 45001 Occupational Health & Safety
+            </h4>
+
+            <p>
+                ISO 45001 provides a systematic framework for occupational
+                health and safety management. It focuses on hazard
+                identification, risk assessment, worker participation,
+                operational controls, incident prevention, and continuous
+                improvement.
+            </p>
+
+
+            <!-- RF SAFETY -->
+
+            <h4>
+                RF Safety Compliance
+            </h4>
+
+            <p>
+                Radio Frequency safety is critical in telecom networks.
+                Organizations should comply with applicable exposure limits
+                and local regulations. Personnel working near RF sources
+                must follow controlled-access procedures, maintain required
+                safety distances, use appropriate signage, and receive
+                relevant RF safety training.
+            </p>
+
+
+            <!-- SITE SAFETY AUDITS -->
+
+            <h4>
+                Site Safety Audits
+            </h4>
+
+            <p>
+                Regular site inspections help identify hazards, verify
+                compliance, and improve working conditions. Findings should
+                be documented, assigned to responsible teams, tracked through
+                corrective actions, and verified until closure. This creates
+                a continuous EHS improvement cycle.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            &copy; 2024 TelecomHub.
+            A professional platform by
+            <a href="Html%20code.html">Amine Janah</a>
+        </p>
+
+        <p>
+            Dedicated to telecom engineering excellence and workplace safety
+        </p>
+
+    </footer>
+
+
+    <!-- ================= DARK MODE SCRIPT ================= -->
+
+    <script>
+
+        const themeToggle = document.getElementById("themeToggle");
+
+        // Check saved theme preference
+
+        const savedTheme = localStorage.getItem("theme");
+
+        if (savedTheme === "dark") {
+
+            document.body.classList.add("dark-mode");
+            themeToggle.textContent = "☀️";
+
+        } else {
+
+            themeToggle.textContent = "🌙";
+
+        }
+
+
+        // Toggle dark mode
+
+        themeToggle.addEventListener("click", () => {
+
+            document.body.classList.toggle("dark-mode");
+
+            const isDarkMode =
+                document.body.classList.contains("dark-mode");
+
+            localStorage.setItem(
+                "theme",
+                isDarkMode ? "dark" : "light"
+            );
+
+            themeToggle.textContent =
+                isDarkMode ? "☀️" : "🌙";
+
+        });
+
+    </script>
+
+</body>
+</html>

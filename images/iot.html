@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Technology - TelecomHub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f6f8fb;
+            color: #333;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background: #0f1419;
+            color: #e0e0e0;
+        }
+
+        header {
+            background: linear-gradient(135deg, #06152d, #0c2b58);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1264e8;
+            text-decoration: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-buttons a, .nav-buttons button {
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-buttons a:hover, .nav-buttons button:hover {
+            box-shadow: 0 6px 16px rgba(18, 100, 232, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .hero-section h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #1264e8, #0a47bc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-section p {
+            font-size: 18px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        body.dark-mode .hero-section p {
+            color: #b0b0b0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        body.dark-mode .content-card {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            border-color: #183c6c;
+        }
+
+        .content-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(18, 100, 232, 0.2);
+            border-color: #1264e8;
+        }
+
+        .card-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #1264e8;
+        }
+
+        body.dark-mode .card-title {
+            color: #5b9eff;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        body.dark-mode .card-description {
+            color: #c0c0c0;
+        }
+
+        .specs-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .specs-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        body.dark-mode .specs-list li {
+            border-bottom-color: #2a3d5a;
+            color: #b0b0b0;
+        }
+
+        .specs-list li:before {
+            content: "Ã¢Å“â€œ ";
+            color: #1264e8;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .info-section {
+            background: linear-gradient(135deg, #1a2942, #1e3a5f);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-section h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #1264e8;
+        }
+
+        body.dark-mode .info-section h3 {
+            color: #5b9eff;
+        }
+
+        .info-section p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        body.dark-mode .info-section p {
+            color: #b0b0b0;
+        }
+
+        footer {
+            background: #0f1419;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: #1264e8;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 32px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="Html%20code.html" class="logo">TELECOMHUB</a>
+            <div class="nav-buttons">
+                <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">Ã°Å¸Å’â„¢</button>
+                <a href="Html%20code.html">Ã¢â€ Â Back to Home</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero-section">
+            <h1>Ã°Å¸Å’Â IoT (Internet of Things)</h1>
+            <p>Comprehensive guide to Internet of Things technologies, protocols, and applications leveraging telecom networks for connected device communication.</p>
+        </div>
+
+        <div class="content-grid">
+            <div class="content-card">
+                <h2 class="card-title">IoT Connectivity</h2>
+                <p class="card-description">
+                    Various wireless technologies enabling IoT device connectivity with different trade-offs in power consumption, range, and data rates.
+                </p>
+                <ul class="specs-list">
+                    <li><strong>NB-IoT:</strong> Ultra-narrow band, 200+ kHz bandwidth</li>
+                    <li><strong>LTE-M:</strong> Lower power LTE for IoT applications</li>
+                    <li><strong>LoRaWAN:</strong> Long-range, low-power wide-area</li>
+                    <li><strong>WiFi HaLow:</strong> 1 km range, low power WiFi</li>
+                    <li><strong>Sigfox:</strong> Ultra-narrow band sub-GHz technology</li>
+                    <li><strong>5G for IoT:</strong> URLLC and mMTC network slices</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <h2 class="card-title">IoT Protocols</h2>
+                <p class="card-description">
+                    Communication protocols enabling devices to exchange data efficiently over networks with varying conditions and requirements.
+                </p>
+                <ul class="specs-list">
+                    <li><strong>MQTT:</strong> Lightweight publish-subscribe protocol</li>
+                    <li><strong>CoAP:</strong> Constrained Application Protocol</li>
+                    <li><strong>HTTP/HTTPS:</strong> Traditional but heavier alternative</li>
+                    <li><strong>Zigbee:</strong> Short-range mesh networking</li>
+                    <li><strong>Bluetooth:</strong> Personal area network technology</li>
+                    <li><strong>AMQP:</strong> Advanced Message Queuing Protocol</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <h2 class="card-title">IoT Applications</h2>
+                <p class="card-description">
+                    Real-world use cases leveraging IoT technology to improve operations, monitoring, and automated services across industries.
+                </p>
+                <ul class="specs-list">
+                    <li><strong>Smart Cities:</strong> Traffic, utilities, public services</li>
+                    <li><strong>Smart Agriculture:</strong> Environmental monitoring, irrigation</li>
+                    <li><strong>Industrial IoT:</strong> Machine monitoring, predictive maintenance</li>
+                    <li><strong>Healthcare:</strong> Patient monitoring, wearable devices</li>
+                    <li><strong>Supply Chain:</strong> Asset tracking and logistics</li>
+                    <li><strong>Smart Homes:</strong> Automation and security systems</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>Ã°Å¸Å¡â‚¬ Advanced IoT Concepts</h3>
+            
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Massive Machine Type Communication (mMTC)</h4>
+            <p>
+                5G network slice supporting millions of connected devices with lower throughput requirements. Enables dense IoT deployments for smart cities, environmental monitoring, and industrial applications. Reduced latency and improved reliability compared to 4G.
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">Edge Computing for IoT</h4>
+            <p>
+                Processing data closer to IoT devices reduces latency and network congestion. Enables real-time responses and reduced backhaul requirements. Critical for applications requiring immediate decisions (autonomous vehicles, industrial control).
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">IoT Security</h4>
+            <p>
+                Securing millions of heterogeneous IoT devices presents unique challenges. Device authentication, end-to-end encryption, secure boot, and firmware updates essential. Network-level protection through firewalls and DPI (Deep Packet Inspection).
+            </p>
+
+            <h4 style="color: #1264e8; margin-top: 25px; margin-bottom: 15px;">IoT Analytics & AI</h4>
+            <p>
+                Processing massive volumes of IoT data reveals patterns and enables predictive analytics. Machine learning models identify anomalies, predict failures, and optimize operations. Real-time dashboards provide visibility into connected device ecosystems.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TelecomHub. A professional platform by <a href="Html%20code.html">Amine Janah</a></p>
+        <p>Dedicated to telecom engineering excellence and IoT technology expertise</p>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = 'Ã¢Ëœâ‚¬Ã¯Â¸Â';
+        }
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            themeToggle.textContent = isDarkMode ? 'Ã¢Ëœâ‚¬Ã¯Â¸Â' : 'Ã°Å¸Å’â„¢';
+        });
+    </script>
+</body>
+</html>
+
