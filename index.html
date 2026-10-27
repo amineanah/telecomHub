@@ -2,21 +2,6 @@
 <html lang="en">
 <head>
 
-
-<div class="auth-navigation">
-  <a id="login-link" href="/login.html" hidden>
-    Login / Sign Up
-  </a>
-
-  <span id="user-name" hidden></span>
-
-  <button id="logout-btn" type="button" hidden>
-    Logout
-  </button>
-</div>
-
-
-  
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZGS4SRV76V"></script>
 <script>
@@ -2130,34 +2115,97 @@
 
         /* ================= RESPONSIVE ================= */
 
-        @media(max-width: 1000px) {
-            nav { display: none; }
-            .main-grid, .content-grid, .site-workspace { grid-template-columns: 1fr; }
-            .categories { grid-template-columns: repeat(4, 1fr); }
-            .profile-details { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .service-header { flex-direction: column; align-items: flex-start; }
-            .service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .jobs { margin-top: 18px; }
-        }
+       
+/* TELECOMHUB RESPONSIVE NAVIGATION */
 
-        @media(max-width: 650px) {
-            .topbar { display: none; }
-            .header { padding: 15px; }
-            .logo h1 { font-size: 22px; }
-            .hero { min-height: 420px; padding: 30px 25px; }
-            .hero h2 { font-size: 32px; }
-            .article-grid { grid-template-columns: 1fr; }
-            .professional-profile { grid-template-columns: 1fr; padding: 22px; }
-            .profile-details { grid-template-columns: 1fr; }
-            .categories { grid-template-columns: repeat(2, 1fr); }
-            .footer-grid { grid-template-columns: 1fr; }
-            .subscribe { display: none; }
-            .specs-grid { grid-template-columns: 1fr; }
-            .tower-canvas-container { min-height: 450px; }
-            .service-highlights { padding: 22px 18px; }
-            .service-grid { grid-template-columns: 1fr; }
-            .service-header { gap: 16px; }
-            .jobs { padding: 18
+@media (max-width: 1000px) {
+
+  .header {
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 15px 4%;
+  }
+
+  nav {
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  nav a {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+
+  .auth-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  #user-name {
+    font-size: 12px;
+    overflow-wrap: anywhere;
+    text-align: center;
+  }
+
+  .login-button,
+  #logout-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}
+
+/* SMALL PHONES */
+
+@media (max-width: 480px) {
+
+  .logo h1 {
+    font-size: 22px;
+  }
+
+  nav {
+    gap: 8px;
+  }
+
+  nav a {
+    font-size: 12px;
+    padding: 7px 8px;
+  }
+
+  .auth-navigation {
+    gap: 8px;
+  }
+
+  .login-button,
+  #logout-btn {
+    font-size: 12px;
+    padding: 10px 14px;
+  }
+}
+
+      
+
+
+.jobs {
+  padding: 18px;
+}
+}
+
 .auth-navigation {
   display: flex;
   align-items: center;
@@ -2170,18 +2218,10 @@
   gap: 8px;
   padding: 11px 20px;
   border-radius: 10px;
-  background: linear-gradient(
-    135deg, #00c6ff, #0072ff
-  );
-  color: #fff;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: white;
   font-weight: 600;
   text-decoration: none;
-  transition: 0.3s ease;
-}
-
-.login-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 20px #00c6ff55;
 }
 
 #logout-btn {
@@ -2190,16 +2230,13 @@
   border-radius: 10px;
   background: #ef4444;
   color: white;
+  font-weight: 600;
   cursor: pointer;
 }
 
 [hidden] {
   display: none !important;
 }
-px; }
-        }
-
-
 
 
 
