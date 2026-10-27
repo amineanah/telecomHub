@@ -2155,8 +2155,53 @@
             .service-highlights { padding: 22px 18px; }
             .service-grid { grid-template-columns: 1fr; }
             .service-header { gap: 16px; }
-            .jobs { padding: 18px; }
+            .jobs { padding: 18
+.auth-navigation {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.login-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 10px;
+  background: linear-gradient(
+    135deg, #00c6ff, #0072ff
+  );
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.login-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px #00c6ff55;
+}
+
+#logout-btn {
+  padding: 11px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #ef4444;
+  color: white;
+  cursor: pointer;
+}
+
+[hidden] {
+  display: none !important;
+}
+px; }
         }
+
+
+
+
+
+         
     </style>
 </head>
 
@@ -2185,6 +2230,28 @@
         </div>
     </div>
     <nav>
+
+
+
+
+<div class="auth-navigation">
+  <a id="login-link"
+     href="/login.html"
+     class="login-button">
+    <span>👤</span> Login / Sign Up
+  </a>
+
+  <span id="user-name" hidden></span>
+
+  <button id="logout-btn"
+          type="button"
+          hidden>
+    Logout
+  </button>
+</div>
+
+
+         
         <a href="#">HOME</a>
         <a href="#virtualTelecomSite">VIRTUAL SITE</a>
         <a href="#telecomInterview">INTERVIEW</a>
