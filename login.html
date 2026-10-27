@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, follow">
+
+<title>Login & Sign Up | TelecomHub</title>
+
+<style>
+:root {
+  --bg: #061522;
+  --card: #102a40;
+  --cyan: #32d5e9;
+  --text: #f0f7fc;
+  --muted: #a9bfd0;
+  --border: #34566d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background:
+    radial-gradient(
+      ellipse at 20% 10%,
+      #154b68 0%,
+      transparent 45%
+    ),
+    linear-gradient(135deg, #061522, #0b2438);
+  color: var(--text);
+}
+
+.site-header {
+  padding: 24px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 1px solid #ffffff15;
+}
+
+.logo {
+  color: var(--cyan);
+  font-size: 23px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.home-link {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.home-link:hover {
+  color: var(--cyan);
+}
+
+.page {
+  min-height: calc(100vh - 85px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 35px 20px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 38px;
+  background: rgba(16, 42, 64, 0.96);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 20px 70px #0007;
+}
+
+.icon-box {
+  width: 65px;
+  height: 65px;
+  margin: 0 auto 20px;
+  display: grid;
+  place-items: center;
+  background: #16455a;
+  border: 1px solid #287d91;
+  border-radius: 18px;
+  font-size: 30px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 28px;
+  margin: 0 0 10px;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+label {
+  display: block;
+  margin: 18px 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  background: #071c2e;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px #32d5e922;
+}
+
+input::placeholder {
+  color: #7895a9;
+}
+
+.primary-btn {
+  width: 100%;
+  margin-top: 25px;
+  padding: 15px;
+  background: linear-gradient(
+    135deg,
+    #35d9ea,
+    #16a9d3
+  );
+  color: #041725;
+  font-weight: bold;
+  font-size: 15px;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px #00d5ff30;
+}
+
+.primary-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.auth-links {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.text-btn {
+  border: 0;
+  background: none;
+  color: var(--cyan);
+  cursor: pointer;
+  font-size: 13px;
+  padding: 5px 0;
+}
+
+.text-btn:hover {
+  text-decoration: underline;
+}
+
+#message {
+  min-height: 20px;
+  margin-top: 18px;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+#message.error {
+  color: #ff9292;
+}
+
+#message.success {
+  color: #70e5bb;
+}
+
+.footer-text {
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 28px;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 26px 22px;
+  }
+
+  h1 {
+    font-size: 25px;
+  }
+
+  .site-header {
+    padding: 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <a href="/" class="logo">
+    📡 TELECOMHUB
+  </a>
+
+  <a href="/" class="home-link">
+    ← Back to Website
+  </a>
+</header>
+
+<main class="page">
+  <section class="auth-card">
+
+    <div class="icon-box">📡</div>
+
+    <h1 id="heading">Welcome Back</h1>
+
+    <p class="subtitle" id="subtitle">
+      Sign in to your TelecomHub account
+    </p>
+
+    <form id="auth-form">
+
+      <div id="name-group" hidden>
+        <label for="full-name">
+          Full Name
+        </label>
+        <input
+          id="full-name"
+          type="text"
+          placeholder="Your full name"
+          autocomplete="name">
+      </div>
+
+      <label for="email">
+        Email Address
+      </label>
+      <input
+        id="email"
+        type="email"
+        placeholder="engineer@example.com"
+        autocomplete="email"
+        required>
+
+      <div id="password-group">
+        <label for="password">
+          Password
+        </label>
+        <input
+          id="password"
+          type="password"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+          minlength="6"
+          required>
+      </div>
+
+      <button
+        class="primary-btn"
+        id="submit-btn"
+        type="submit">
+        Sign In
+      </button>
+
+    </form>
+
+    <p id="message"
+       role="status"
+       aria-live="polite"></p>
+
+    <div class="auth-links">
+      <button
+        class="text-btn"
+        id="switch-btn"
+        type="button">
+        Create an Account
+      </button>
+
+      <button
+        class="text-btn"
+        id="forgot-btn"
+        type="button">
+        Forgot Password?
+      </button>
+    </div>
+
+    <p class="footer-text">
+      Secure Authentication • TelecomHub
+    </p>
+
+  </section>
+</main>
+
+<script type="module">
+import { initializeApp } from
+  "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  sendEmailVerification,
+  updateProfile,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+/* YOUR FIREBASE PROJECT */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC9lGPBtvYcIVvMsoyUrWjNHWh-veypVIo",
+  authDomain: "telecomhu-1c41c.firebaseapp.com",
+  databaseURL: "https://telecomhu-1c41c-default-rtdb.firebaseio.com",
+  projectId: "telecomhu-1c41c",
+  storageBucket: "telecomhu-1c41c.firebasestorage.app",
+  messagingSenderId: "795179788329",
+  appId: "1:795179788329:web:b95371b57ac24e071bd438",
+  measurementId: "G-VJP548NTZR"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+/* ELEMENTS */
+
+const form = document.getElementById("auth-form");
+const heading = document.getElementById("heading");
+const subtitle = document.getElementById("subtitle");
+const nameGroup = document.getElementById("name-group");
+const nameInput = document.getElementById("full-name");
+const emailInput = document.getElementById("email");
+const passwordGroup =
+  document.getElementById("password-group");
+const passwordInput =
+  document.getElementById("password");
+const submitBtn =
+  document.getElementById("submit-btn");
+const switchBtn =
+  document.getElementById("switch-btn");
+const forgotBtn =
+  document.getElementById("forgot-btn");
+const message =
+  document.getElementById("message");
+
+let mode = "login";
+
+/* MESSAGES */
+
+function showMessage(text, type = "") {
+  message.textContent = text;
+  message.className = type;
+}
+
+/* SWITCH BETWEEN MODES */
+
+function setMode(newMode) {
+  mode = newMode;
+  form.reset();
+  showMessage("");
+
+  nameGroup.hidden = mode !== "signup";
+  passwordGroup.hidden = mode === "reset";
+
+  nameInput.required = mode === "signup";
+  passwordInput.required = mode !== "reset";
+
+  passwordInput.autocomplete =
+    mode === "signup"
+      ? "new-password"
+      : "current-password";
+
+  if (mode === "login") {
+    heading.textContent = "Welcome Back";
+    subtitle.textContent =
+      "Sign in to your TelecomHub account";
+    submitBtn.textContent = "Sign In";
+    switchBtn.textContent = "Create an Account";
+    forgotBtn.hidden = false;
+  }
+
+  if (mode === "signup") {
+    heading.textContent = "Join TelecomHub";
+    subtitle.textContent =
+      "Create your engineering account";
+    submitBtn.textContent = "Create Account";
+    switchBtn.textContent = "Already have an account?";
+    forgotBtn.hidden = true;
+  }
+
+  if (mode === "reset") {
+    heading.textContent = "Reset Password";
+    subtitle.textContent =
+      "Receive a password reset link by email";
+    submitBtn.textContent = "Send Reset Email";
+    switchBtn.textContent = "Back to Login";
+    forgotBtn.hidden = true;
+  }
+}
+
+switchBtn.addEventListener("click", () => {
+  setMode(mode === "login" ? "signup" : "login");
+});
+
+forgotBtn.addEventListener("click", () => {
+  setMode("reset");
+});
+
+/* FIREBASE AUTHENTICATION */
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
+  const fullName = nameInput.value.trim();
+
+  if (mode === "signup" && !fullName) {
+    showMessage("Please enter your full name.", "error");
+    return;
+  }
+
+  if (mode === "signup" && password.length < 8) {
+    showMessage(
+      "Password must contain at least 8 characters.",
+      "error"
+    );
+    return;
+  }
+
+  submitBtn.disabled = true;
+  showMessage("Please wait...");
+
+  try {
+    if (mode === "signup") {
+      const result =
+        await createUserWithEmailAndPassword(
+          auth, email, password
+        );
+
+      try {
+        await updateProfile(result.user, {
+          displayName: fullName
+        });
+
+        await sendEmailVerification(result.user);
+
+        showMessage(
+          "Account created! Check your email for verification.",
+          "success"
+        );
+      } catch (setupError) {
+        console.error(setupError);
+
+        showMessage(
+          "Account created, but the verification email or profile update failed.",
+          "error"
+        );
+      } finally {
+        await signOut(auth);
+      }
+
+      return;
+    }
+
+    if (mode === "login") {
+      await signInWithEmailAndPassword(
+        auth, email, password
+      );
+
+      window.location.replace("/");
+      return;
+    }
+
+    if (mode === "reset") {
+      await sendPasswordResetEmail(auth, email);
+
+      showMessage(
+        "If an account exists, a reset email will be sent.",
+        "success"
+      );
+    }
+
+  } catch (error) {
+    console.error("Firebase error:", error.code);
+
+    const errors = {
+      "auth/email-already-in-use":
+        "This email is already registered.",
+      "auth/invalid-email":
+        "Please enter a valid email.",
+      "auth/weak-password":
+        "Please choose a stronger password.",
+      "auth/too-many-requests":
+        "Too many attempts. Please try later.",
+      "auth/operation-not-allowed":
+        "Enable Email/Password in Firebase Console."
+    };
+
+    showMessage(
+      errors[error.code] ||
+      "Authentication failed. Check your details and try again.",
+      "error"
+    );
+  } finally {
+    submitBtn.disabled = false;
+  }
+});
+
+setMode("login");
+</script>
+
+</body>
+</html>
