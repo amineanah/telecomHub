@@ -2180,7 +2180,35 @@
         #user-name { color: #f8fafc; font-size: 13px; font-weight: 700; overflow-wrap: anywhere; }
         [hidden] { display: none !important; }
 
-    </style>
+    
+/* ================= TELECOM KNOWLEDGE HUB ================= */
+.telecom-hub{background:radial-gradient(ellipse at 5% 0%,rgba(31,83,183,.18),transparent 42%),linear-gradient(145deg,#071326,#081b2e 72%,#0a2035);color:#edf7ff;border:1px solid #213c5d;border-radius:24px;padding:clamp(24px,3vw,48px);margin:32px 0 48px;box-shadow:0 20px 65px rgba(0,0,0,.16);isolation:isolate}
+.telecom-hub *{box-sizing:border-box}.hub-heading{text-align:center;margin:0 auto 28px;max-width:860px}.hub-eyebrow{display:inline-block;padding:7px 14px;border:1px solid #2d668f;border-radius:999px;color:#8fdaff;font-size:11px;font-weight:800;letter-spacing:.14em;background:#0b2a49}
+.telecom-hub .hub-heading h2{color:white;font-size:clamp(28px,4vw,51px);line-height:1.15;margin:18px 0 12px;letter-spacing:-.04em}.hub-heading h2 span{background:linear-gradient(90deg,#3ad7e7,#4098ff);background-clip:text;-webkit-background-clip:text;color:transparent}
+.hub-heading p{font-size:clamp(14px,1.35vw,17px);color:#b6cce0;line-height:1.75;margin:0}
+.hub-features{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:28px auto 32px;max-width:1140px}
+.hub-features>span{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:10px;align-items:center;border:1px solid #234669;border-radius:12px;padding:13px;color:#57d5ff;font-size:21px;background:#0d2946}
+.hub-features strong{font-size:13px;color:#fff;line-height:1.25}.hub-features small{grid-column:2;color:#a1b9cf;font-size:11px;line-height:1.3}
+.hub-controls{display:flex;gap:14px;align-items:center;justify-content:space-between;margin:0 0 14px;flex-wrap:wrap}
+.hub-filters{display:flex;gap:8px;flex:1 1 720px;flex-wrap:wrap}.telecom-hub .hub-filter{border:1px solid #315173;border-radius:10px;background:#112b45;color:#d9e8fa;padding:10px 13px;cursor:pointer;font-size:12px;font-weight:650;transition:background .2s,border-color .2s,transform .2s}
+.telecom-hub .hub-filter:hover{border-color:#37bbef;transform:translateY(-1px)}.telecom-hub .hub-filter.is-active{background:linear-gradient(105deg,#137bd6,#7542e8);border-color:#3889ff;color:white}
+.hub-search-label{display:flex;align-items:center;gap:8px;flex:1 1 240px;max-width:310px;color:#c2e5ff;border-radius:10px;background:#112b45;border:1px solid #315173;padding:0 12px}
+.hub-search-label>span:first-child{font-size:25px}.hub-search-label input{width:100%;background:transparent;color:#fff;border:0;outline:none;font-size:13px;padding:13px 0;min-width:0}.hub-search-label input::placeholder{color:#9bb1c9}
+.hub-sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.hub-search-label:focus-within{outline:2px solid #2da7ff;outline-offset:2px}
+.hub-results{text-align:right;font-size:12px;margin:4px 0 16px;color:#91afc9}
+.hub-card-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.hub-card{min-width:0;background:#0d233b;border:1px solid #244363;border-radius:15px;overflow:hidden;transition:transform .2s,border-color .2s,box-shadow .2s}.hub-card:hover{transform:translateY(-5px);border-color:#36b3ed;box-shadow:0 15px 35px #0005}
+.hub-card[hidden],.hub-empty[hidden]{display:none!important}.hub-card-link{display:flex;flex-direction:column;color:inherit;text-decoration:none;height:100%}.hub-card-media{height:170px;position:relative;overflow:hidden;background:#143456}.hub-card-media img{height:100%;width:100%;object-fit:cover;display:block;transition:transform .3s}.hub-card:hover .hub-card-media img{transform:scale(1.045)}
+.hub-card-category{position:absolute;top:12px;left:12px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;border-radius:999px;padding:6px 10px;background:#075eaedb;color:white;backdrop-filter:blur(4px)}
+.hub-card-content{display:flex;flex-direction:column;align-items:flex-start;flex:1;padding:17px}.hub-card-type{color:#72caff;text-transform:uppercase;font-size:10px;letter-spacing:.09em;font-weight:800}.telecom-hub .hub-card h3{color:#fff;margin:8px 0 9px;line-height:1.4;font-size:clamp(15px,1.25vw,18px);letter-spacing:-.01em}.hub-card p{font-size:12px;line-height:1.65;color:#bdcfe0;margin:0 0 16px;flex:1}.hub-card-action{font-size:12px;font-weight:800;color:#65d9ff;margin-top:auto}.hub-card-action span{display:inline-block;transition:transform .2s}.hub-card:hover .hub-card-action span{transform:translateX(4px)}
+.hub-empty{text-align:center;background:#102a45;border:1px dashed #507296;border-radius:12px;padding:28px;color:#d4e9ff}
+.hub-bottom{display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;background:linear-gradient(105deg,#112f50,#0e2945);border:1px solid #295479;border-radius:15px;padding:20px 23px;margin-top:27px}.hub-bottom h3{font-size:17px;color:white;margin:0 0 5px}.hub-bottom p{color:#afc8df;margin:0;font-size:12px;line-height:1.5}.hub-bottom-links{display:flex;gap:10px;flex-wrap:wrap}.hub-bottom-links a{padding:9px 13px;border-radius:9px;background:#1761a2;color:#fff;text-decoration:none;font-size:12px;font-weight:750}.hub-bottom-links a:hover{background:#287ec6}
+@media(max-width:1450px){.hub-card-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:1050px){.hub-card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hub-features{grid-template-columns:repeat(2,minmax(0,1fr))}.hub-search-label{max-width:none}}
+@media(max-width:640px){.telecom-hub{padding:22px 14px;border-radius:16px;margin:22px 0}.hub-card-grid{grid-template-columns:1fr}.hub-features{grid-template-columns:1fr 1fr;gap:7px}.hub-features>span{padding:9px;column-gap:6px}.hub-features strong{font-size:11px}.hub-features small{font-size:10px}.hub-card-media{height:195px}.hub-search-label{max-width:none;flex-basis:100%}.hub-controls{gap:13px}.hub-bottom{padding:17px}.hub-bottom-links a{flex:1 1 100%}}
+@media(prefers-reduced-motion:reduce){.hub-card,.hub-card-media img,.hub-filter{transition:none!important}}
+
+</style>
 </head>
 
 <body>
@@ -2692,402 +2720,149 @@
         </div>
     </section>
 
-    <!-- ================= ARTICLES + JOBS ================= -->
-
-    <div class="content-grid">
-        <section class="articles">
-            <h2 class="section-title">POPULAR ARTICLES</h2>
-            <div class="article-grid">
-                <article class="article">
-                    <a href="site-visit-sbc-training.html">
-                        <img src="images/sbc-training-3.jpg.JPG" alt="SBC training">
-                    </a>
-                    <div class="article-content">
-                        <div class="article-category">SITE VISIT</div>
-                        <h3><a href="site-visit-sbc-training.html">SBC Training: Field Commissioning & Hands-on</a></h3>
-                        <p>Hands-on SBC commissioning training at El Arjat — practical demos and safety-focused walkthroughs.</p>
-                        <div class="article-date">April 2026</div>
-                    </div>
-                </article>
-
-
-
-
-<article class="article feature-card">
-    <a href="https://aminelife1.blogspot.com/2026/10/parabolic-antenna-simulator.html" target="_blank" rel="noopener noreferrer" style="display: flex; width: 100%; text-decoration: none; color: inherit;">
-        <img class="article-image" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Parabolic reflector antennas article">
-        <div class="article-content">
-            <div class="article-category">RF & ANTENNAS</div>
-            <h3>Parabolic Reflector Antennas</h3>
-            <div class="article-date">October 25, 2026</div>
-        </div>
-    </a>
-</article>
-
-
-
-
-<article class="article feature-card">
-    <a href="https://aminelife1.blogspot.com/2026/10/data-center-power-distribution-from.html" target="_blank" rel="noopener noreferrer" style="display: flex; width: 100%; text-decoration: none; color: inherit;">
-        <img class="article-image" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85" alt="Parabolic reflector antennas article">
-        <div class="article-content">
-            <div class="article-category">AI & Power</div>
-            <h3>Interactive Data Center Power Simulator: From Utility Grid to GPU | UPS, Transformers & AI Rack Power</h3>
-            <div class="article-date">October 25, 2026</div>
-        </div>
-    </a>
-</article>
-
-
-              
-
-
-              
-                <article class="article">
-                    <a href="massive-mimo.html">
-                        <img src="images/Massive1.png" alt="Massive MIMO Guide">
-                    </a>
-                    <div class="article-content">
-                        <div class="article-category">ENGINEERING</div>
-                        <h3>What is Massive MIMO? A Complete Guide</h3>
-                        <p>Learn how Massive MIMO works and how 64T64R beamforming systems operate.</p>
-                        <div class="article-date">August 7, 2026</div>
-                    </div>
-                </article>
-
-                <article class="article feature-card">
-                    <a href="ai-and-automation-in-telecom.html" style="display: flex; width: 100%; text-decoration: none; color: inherit;">
-                        <img class="article-image" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" alt="AI and automation in telecom">
-                        <div class="article-content">
-                            <div class="article-category">TECHNOLOGY</div>
-                            <h3>AI and Automation in Telecom</h3>
-                            <div class="article-date">August 9, 2026</div>
-                        </div>
-                    </a>
-                </article>
-
-                <article class="article">
-
-
-
-                    <a href="positive-site-inspection.html" style="text-decoration: none; color: inherit;">
-
-
-
-                    <img
-
-                        src="images/Image-5.jpg"
-
-                    >
-
-
-
-                    <div class="article-content">
-
-
-
-                        <div class="article-category">
-
-                            COMPLIANCE
-
-                        </div>
-
-
-
-                        <h3>
-
-                            Positive Site Inspection:
-
-                            Full Compliance Achieved
-
-                        </h3>
-
-
-
-                        <p>
-
-                            Professional audit report with quality
-
-                            assurance, environmental compliance,
-
-                            and operational performance verification.
-
-                        </p>
-
-
-
-                        <div class="article-date">
-
-                            August 11, 2026
-
-                        </div>
-
-
-
-                    </div>
-
-
-
-                    </a>
-
-
-
-                </article>
-
-
-
-
-
-                <article class="article">
-
-
-
-                    <a href="gpon-vs-xgs-pon.html" style="text-decoration: none; color: inherit;">
-
-
-
-                    <img
-
-                        src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80"
-
-                        alt="GPON vs XGS-PON technology article"
-
-                    >
-
-
-
-                    <div class="article-content">
-
-
-
-                        <div class="article-category">
-
-                            FIBER OPTICS
-
-                        </div>
-
-
-
-                        <h3>
-
-                            GPON vs XGS-PON:
-
-                            Which is Better?
-
-                        </h3>
-
-
-
-                        <p>
-
-                            Compare GPON and XGS-PON
-
-                            and understand where each
-
-                            technology is used.
-
-                        </p>
-
-
-
-                        <div class="article-date">
-
-                            August 5, 2026
-
-                        </div>
-
-
-
-                    </div>
-
-
-
-                    </a>
-
-
-
-                </article>
-
-
-
-
-
-                <article class="article">
-
-
-
-                    <a href="telecom-site-installation-best-practices.html" style="text-decoration: none; color: inherit;">
-
-
-
-                    <img
-
-                        src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"
-
-                        alt="Telecom site installation best practices"
-
-                    >
-
-
-
-                    <div class="article-content">
-
-
-
-                        <div class="article-category">
-
-                            ENGINEERING
-
-                        </div>
-
-
-
-                        <h3>
-
-                            Telecom Site Installation:
-
-                            Best Practices
-
-                        </h3>
-
-
-
-                        <p>
-
-                            Practical guidelines for
-
-                            telecom installation quality,
-
-                            safety and commissioning.
-
-                        </p>
-
-
-
-                        <div class="article-date">
-
-                            August 4, 2026
-
-                        </div>
-
-
-
-                    </div>
-
-
-
-                    </a>
-
-
-
-                </article>
-
-
-
-
-
-                <article class="article">
-
-
-
-                    <a href="ftta-vs-fttb-vs-fttc.html" style="text-decoration: none; color: inherit;">
-
-
-
-                    <img
-
-                        src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80"
-
-                        alt="FTTA vs FTTB vs FTTC article"
-
-                    >
-
-
-
-                    <div class="article-content">
-
-
-
-                        <div class="article-category">
-
-                            FIBER OPTICS
-
-                        </div>
-
-
-
-                        <h3>
-
-                            FTTA vs FTTB vs FTTC:
-
-                            What's the Difference?
-
-                        </h3>
-
-
-
-                        <p>
-
-                            Learn how fiber access architectures differ and
-
-                            which model fits each network deployment.
-
-                        </p>
-
-
-
-                        <div class="article-date">
-
-                            August 3, 2026
-
-                        </div>
-
-
-
-                    </div>
-
-
-
-                    </a>
-
-
-
-                </article>
-
-
-
-
-
-            </div>
-
-
-
-        </section>
-
-        <aside class="jobs" aria-label="Quick telecom services sidebar">
-            <h3 class="section-title" style="margin-bottom:12px; font-size:18px; letter-spacing:0.04em;">Quick Access</h3>
-
-            <div class="job">
-                <h4>5G / RAN Deployment</h4>
-                <div class="company">Planning, installation and quality assurance support</div>
-                <div class="location">Network engineering</div>
-            </div>
-
-            <div class="job">
-                <h4>QA / QC Review</h4>
-                <div class="company">Site acceptance, inspection and performance checks</div>
-                <div class="location">Field operations</div>
-            </div>
-
-            <div class="job">
-                <h4>Fiber & Transmission</h4>
-                <div class="company">Backhaul design guidance and infrastructure support</div>
-                <div class="location">Transport systems</div>
-            </div>
-
-            <a href="https://www.linkedin.com/in/amine-janah-58070a236/" target="_blank" rel="noopener noreferrer" class="all-jobs">Book a consultation →</a>
-        </aside>
+    <!-- ================= TELECOM KNOWLEDGE HUB ================= -->
+<section id="telecom-knowledge-hub" class="telecom-hub" aria-labelledby="hub-heading">
+  <div class="hub-heading">
+    <span class="hub-eyebrow">✦ ARTICLES, GUIDES & LEARNING TOOLS</span>
+    <h2 id="hub-heading">Telecom <span>Knowledge Hub</span></h2>
+    <p>Practical engineering insights, field experience and accessible guides across 5G, RAN, fiber optics, quality assurance and more.</p>
+  </div>
+  <div class="hub-features" aria-label="What you can explore">
+    <span>◈ <strong>Field insights</strong><small>Experience-based learning</small></span>
+    <span>▤ <strong>Technical guides</strong><small>From fundamentals to practice</small></span>
+    <span>⚙ <strong>Interactive tools</strong><small>Explore concepts hands-on</small></span>
+    <span>↗ <strong>Career development</strong><small>Build useful engineering skills</small></span>
+  </div>
+  <div class="hub-controls">
+    <div class="hub-filters" role="group" aria-label="Filter articles by topic">
+      <button class="hub-filter is-active" type="button" data-hub-filter="all" aria-pressed="true">All resources</button>
+      <button class="hub-filter" type="button" data-hub-filter="5g" aria-pressed="false">5G Networks</button>
+      <button class="hub-filter" type="button" data-hub-filter="ran" aria-pressed="false">RAN &amp; Radio</button>
+      <button class="hub-filter" type="button" data-hub-filter="fiber" aria-pressed="false">Fiber Optics</button>
+      <button class="hub-filter" type="button" data-hub-filter="ehs" aria-pressed="false">EHS &amp; Quality</button>
+      <button class="hub-filter" type="button" data-hub-filter="site" aria-pressed="false">Site Engineering</button>
+      <button class="hub-filter" type="button" data-hub-filter="ai" aria-pressed="false">AI &amp; Automation</button>
+      <button class="hub-filter" type="button" data-hub-filter="tools" aria-pressed="false">Tools</button>
+      <button class="hub-filter" type="button" data-hub-filter="core" aria-pressed="false">Core &amp; Transport</button>
+      <button class="hub-filter" type="button" data-hub-filter="power" aria-pressed="false">Power &amp; IoT</button>
     </div>
+    <label class="hub-search-label" for="hub-search"><span aria-hidden="true">⌕</span><span class="hub-sr-only">Search telecom articles</span><input id="hub-search" type="search" placeholder="Search articles…" autocomplete="off"></label>
+  </div>
+  <p id="hub-results" class="hub-results" role="status" aria-live="polite">Showing all 18 resources</p>
+  <div id="hub-card-grid" class="hub-card-grid">
+    <article class="hub-card" data-hub-category="5g" data-hub-search="5g &amp; 4g network fundamentals 5g networks explore cellular network architecture, core concepts and practical mobile-network technologies.">
+  <a class="hub-card-link" href="networks.html" aria-label="5G &amp; 4G Network Fundamentals">
+    <div class="hub-card-media"><img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="5G &amp; 4G Network Fundamentals" loading="lazy" decoding="async"><span class="hub-card-category">5G Networks</span></div>
+    <div class="hub-card-content"><span class="hub-card-type">Guide</span><h3>5G &amp; 4G Network Fundamentals</h3><p>Explore cellular network architecture, core concepts and practical mobile-network technologies.</p><span class="hub-card-action">Read & explore <span aria-hidden="true">→</span></span></div>
+  </a>
+</article>
+    <article class="hub-card" data-hub-category="ran" data-hub-search="ran technology explained ran &amp; radio understand radio access networks, radio equipment and the path from antennas to the core.">
+  <a class="hub-card-link" href="ran.html" aria-label="RAN Technology Explained">
+    <div class="hub-card-media"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="RAN Technology Explained" loading="lazy" decoding="async"><span class="hub-card-category">RAN &amp; Radio</span></div>
+    <div class="hub-card-content"><span class="hub-card-type">Guide</span><h3>RAN Technology Explained</h3><p>Understand radio access networks, radio equipment and the path from antennas to the core.</p><span class="hub-card-action">Read & explore <span aria-hidden="true">→</span></span></div>
+  </a>
+</article>
+    <article class="hub-card" data-hub-category="ran" data-hub-search="what is massive mimo? a complete guide ran &amp; radio learn about beamforming, antenna arrays and 64t64r systems used in modern mobile networks.">
+  <a class="hub-card-link" href="massive-mimo.html" aria-label="What Is Massive MIMO? A Complete Guide">
+    <div class="hub-card-media"><img src="images/Massive1.png" alt="What Is Massive MIMO? A Complete Guide" loading="lazy" decoding="async"><span class="hub-card-category">RAN &amp; Radio</span></div>
+    <div class="hub-card-content"><span class="hub-card-type">Guide</span><h3>What Is Massive MIMO? A Complete Guide</h3><p>Learn about beamforming, antenna arrays and 64T64R systems used in modern mobile networks.</p><span class="hub-card-action">Read & explore <span aria-hidden="true">→</span></span></div>
+  </a>
+</article>
+    <article class="hub-card" data-hub-category="fiber" data-hub-search="fiber optics technology fiber optics explore optical transmission, fiber infrastructure and the fundamentals of high-capacity connections.">
+  <a class="hub-card-link" href="fiber-optics.html" aria-label="Fiber Optics Technology">
+    <div class="hub-card-media"><img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Fiber Optics Technology" loading="lazy" decoding="async"><span class="hub-card-category">Fiber Optics</span></div>
+    <div class="hub-card-content"><span class="hub-card-type">Guide</span><h3>Fiber Optics Technology</h3><p>Explore optical transmission, fiber infrastructure and the fundamentals of high-capacity connections.</p><span class="hub-card-action">Read & explore <span aria-hidden="true">→</span></span></div>
+  </a>
+</article>
+    <article class="hub-card" data-hub-category="fiber" data-hub-search="gpon vs xgs-pon: which is better? fiber optics compare passive optical network standards and learn where each technology fits.">
+  <a class="hub-card-link" href="gpon-vs-xgs-pon.html" aria-label="GPON vs XGS-PON: Which Is Better?">
+    <div class="hub-card-media"><img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="GPON vs XGS-PON: Which Is Better?" loading="lazy" decoding="async"><span class="hub-card-category">Fiber Optics</span></div>
+    <div class="hub-card-content"><span class="hub-card-type">Comparison</span><h3>GPON vs XGS-PON: Which Is Better?</h3><p>Compare passive optical network standards and learn where each technology fits.</p><span class="hub-card-action">Read & explore <span aria-hidden="true">→</span></span></div>
+  </a>
+</article>
+    <article class="hub-card" data-hub-category="fiber" data-hub-search="ftta vs fttb vs fttc fiber optics discover how different fiber access architectures support network deployments.">
+  <a class="hub-card-link" href="ftta-vs-fttb-vs-fttc.html" aria-label="FTTA vs FTTB vs FTTC">
+    <div class="hub-card-media"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="FTTA vs FTTB vs FTTC" loading="lazy" decoding="async"><span class="hub-card-category">Fiber Optics</span></div>
+    <div class="hub-card-content"><span class="hub-card-type">Comparison</span><h3>FTTA vs FTTB vs FTTC</h3><p>Discover how different fiber access architectures support network deployments.</p><span class="hub-card-action">Read & explore <span aria-hidden="true">→</span></span></div>
+  </a>
+</article>
+    <article class="hub-card" data-hub-category="site" data-hub-search="telecom site installation: best practices site engineering practical guidance for installation quality, safe workflows and commissioning.">
+  <a class="hub-card-link" href="telecom-site-installation-best-practices.html" aria-label="Telecom Site Installation: Best Practices">
+    <div class="hub-card-media"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Telecom Site Installation: Best Practices" loading="lazy" decoding="async"><span class="hub-card-category">Site Engineering</span></div>
+    <div class="hub-card-content"><span class="hub-card-type">Guide</span><h3>Telecom Site Installation: Best Practices</h3><p>Practical guidance for installation quality, safe workflows and commissioning.</p><span class="hub-card-action">Read & explore <span aria-hidden="true">→</span></span></div>
+  </a>
+</article>
+    <article class="hub-card" data-hub-category="site" data-hub-search="sbc training: field commissioning &amp; hands-on site engineering field-oriented sbc commissioning, practical demonstrations and safe-site walkthroughs.">
+  <a class="hub-card-link" href="site-visit-sbc-training.html" aria-label="SBC Training: Field Commissioning &amp; Hands-on">
+    <div class="hub-card-media"><img src="images/sbc-training-3.jpg.JPG" alt="SBC Training: Field Commissioning &amp; Hands-on" loading="lazy" decoding="async"><span class="hub-card-category">Site Engineering</span></div>
+    <div class="hub-card-content"><span class="hub-card-type">Field notes</span><h3>SBC Training: Field Commissioning &amp; Hands-on</h3><p>Field-oriented SBC commissioning, practical demonstrations and safe-site walkthroughs.</p><span class="hub-card-action">Read & explore <span aria-hidden="true">→</span></span></div>
+  </a>
+</article>
+    <article class="hub-card" data-hub-category="ehs" data-hub-search="positive site inspection: full compliance achieved ehs &amp; quality learn about inspection reporting, quality assurance and operational checks.">
+  <a class="hub-card-link" href="positive-site-inspection.html" aria-label="Positive Site Inspection: Full Compliance Achieved">
+    <div class="hub-card-media"><img src="images/Image-5.jpg" alt="Positive Site Inspection: Full Compliance Achieved" loading="lazy" decoding="async"><span class="hub-card-category">EHS &amp; Quality</span></div>
+    <div class="hub-card-content"><span class="hub-card-type">Field report</span><h3>Positive Site Inspection: Full Compliance Achieved</h3><p>Learn about inspection reporting, quality assurance and operational checks.</p><span class="hub-card-action">Read & explore <span aria-hidden="true">→</span></span></div>
+  </a>
+</article>
+    <article class="hub-card" data-hub-category="ehs" data-hub-search="ehs in telecom engineering ehs &amp; quality explore environmental, health and safety principles for engineering teams.">
+  <a class="hub-card-link" href="ehs.html" aria-label="EHS in Telecom Engineering">
+    <div class="hub-card-media"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="EHS in Telecom Engineering" loading="lazy" decoding="async"><span class="hub-card-category">EHS &amp; Quality</span></div>
+    <div class="hub-card-content"><span class="hub-card-type">Guide</span><h3>EHS in Telecom Engineering</h3><p>Explore environmental, health and safety principles for engineering teams.</p><span class="hub-card-action">Read & explore <span aria-hidden="true">→</span></span></div>
+  </a>
+</article>
+    <article class="hub-card" data-hub-category="ai" data-hub-search="ai and automation in telecom ai &amp; automation see how intelligent operations, predictive analysis and automation affect telecom networks.">
+  <a class="hub-card-link" href="ai-and-automation-in-telecom.html" aria-label="AI and Automation in Telecom">
+    <div class="hub-card-media"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="AI and Automation in Telecom" loading="lazy" decoding="async"><span class="hub-card-category">AI &amp; Automation</span></div>
+    <div class="hub-card-content"><span class="hub-card-type">Guide</span><h3>AI and Automation in Telecom</h3><p>See how intelligent operations, predictive analysis and automation affect telecom networks.</p><span class="hub-card-action">Read & explore <span aria-hidden="true">→</span></span></div>
+  </a>
+</article>
+    <article class="hub-card" data-hub-category="tools" data-hub-search="virtual telecom site inspector tools &amp; practical explore the interactive virtual site environment for practical engineering learning.">
+  <a class="hub-card-link" href="virtual-telecom-site.html.html" aria-label="Virtual Telecom Site Inspector">
+    <div class="hub-card-media"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Virtual Telecom Site Inspector" loading="lazy" decoding="async"><span class="hub-card-category">Tools &amp; Practical</span></div>
+    <div class="hub-card-content"><span class="hub-card-type">Interactive tool</span><h3>Virtual Telecom Site Inspector</h3><p>Explore the interactive virtual site environment for practical engineering learning.</p><span class="hub-card-action">Read & explore <span aria-hidden="true">→</span></span></div>
+  </a>
+</article>
+    <article class="hub-card" data-hub-category="core" data-hub-search="ip core networks core &amp; transport learn essential ip core infrastructure and its role in service delivery.">
+  <a class="hub-card-link" href="ip-core.html" aria-label="IP Core Networks">
+    <div class="hub-card-media"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="IP Core Networks" loading="lazy" decoding="async"><span class="hub-card-category">Core &amp; Transport</span></div>
+    <div class="hub-card-content"><span class="hub-card-type">Guide</span><h3>IP Core Networks</h3><p>Learn essential IP core infrastructure and its role in service delivery.</p><span class="hub-card-action">Read & explore <span aria-hidden="true">→</span></span></div>
+  </a>
+</article>
+    <article class="hub-card" data-hub-category="core" data-hub-search="transmission systems core &amp; transport understand transport technologies that connect telecom sites and networks.">
+  <a class="hub-card-link" href="transmission.html" aria-label="Transmission Systems">
+    <div class="hub-card-media"><img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Transmission Systems" loading="lazy" decoding="async"><span class="hub-card-category">Core &amp; Transport</span></div>
+    <div class="hub-card-content"><span class="hub-card-type">Guide</span><h3>Transmission Systems</h3><p>Understand transport technologies that connect telecom sites and networks.</p><span class="hub-card-action">Read & explore <span aria-hidden="true">→</span></span></div>
+  </a>
+</article>
+    <article class="hub-card" data-hub-category="power" data-hub-search="telecom power &amp; energy power &amp; iot explore the power systems and energy considerations behind network infrastructure.">
+  <a class="hub-card-link" href="power-energy.html" aria-label="Telecom Power &amp; Energy">
+    <div class="hub-card-media"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Telecom Power &amp; Energy" loading="lazy" decoding="async"><span class="hub-card-category">Power &amp; IoT</span></div>
+    <div class="hub-card-content"><span class="hub-card-type">Guide</span><h3>Telecom Power &amp; Energy</h3><p>Explore the power systems and energy considerations behind network infrastructure.</p><span class="hub-card-action">Read & explore <span aria-hidden="true">→</span></span></div>
+  </a>
+</article>
+    <article class="hub-card" data-hub-category="power" data-hub-search="internet of things (iot) power &amp; iot discover connected devices and iot applications within modern networks.">
+  <a class="hub-card-link" href="iot.html" aria-label="Internet of Things (IoT)">
+    <div class="hub-card-media"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Internet of Things (IoT)" loading="lazy" decoding="async"><span class="hub-card-category">Power &amp; IoT</span></div>
+    <div class="hub-card-content"><span class="hub-card-type">Guide</span><h3>Internet of Things (IoT)</h3><p>Discover connected devices and IoT applications within modern networks.</p><span class="hub-card-action">Read & explore <span aria-hidden="true">→</span></span></div>
+  </a>
+</article>
+    <article class="hub-card" data-hub-category="ran" data-hub-search="parabolic reflector antennas ran &amp; radio explore parabolic antennas and rf fundamentals through an interactive learning article.">
+  <a class="hub-card-link" href="https://aminelife1.blogspot.com/2026/10/parabolic-antenna-simulator.html" target="_blank" rel="noopener noreferrer" aria-label="Parabolic Reflector Antennas">
+    <div class="hub-card-media"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Parabolic Reflector Antennas" loading="lazy" decoding="async"><span class="hub-card-category">RAN &amp; Radio</span></div>
+    <div class="hub-card-content"><span class="hub-card-type">External resource</span><h3>Parabolic Reflector Antennas</h3><p>Explore parabolic antennas and RF fundamentals through an interactive learning article.</p><span class="hub-card-action">Explore resource <span aria-hidden="true">→</span></span></div>
+  </a>
+</article>
+    <article class="hub-card" data-hub-category="tools" data-hub-search="interactive data center power simulator tools &amp; practical follow data-center power from utility distribution to ups, transformers and rack equipment.">
+  <a class="hub-card-link" href="https://aminelife1.blogspot.com/2026/10/data-center-power-distribution-from.html" target="_blank" rel="noopener noreferrer" aria-label="Interactive Data Center Power Simulator">
+    <div class="hub-card-media"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Interactive Data Center Power Simulator" loading="lazy" decoding="async"><span class="hub-card-category">Tools &amp; Practical</span></div>
+    <div class="hub-card-content"><span class="hub-card-type">External resource</span><h3>Interactive Data Center Power Simulator</h3><p>Follow data-center power from utility distribution to UPS, transformers and rack equipment.</p><span class="hub-card-action">Explore resource <span aria-hidden="true">→</span></span></div>
+  </a>
+</article>
+  </div>
+  <p id="hub-empty" class="hub-empty" hidden>No matching resources found. Try another topic or search term.</p>
+  <div class="hub-bottom"><div><h3>Looking for hands-on telecom guidance?</h3><p>Explore the virtual inspector, interview practice, or contact us about telecom engineering services.</p></div><div class="hub-bottom-links"><a href="virtual-telecom-site.html.html">Virtual Site Inspector →</a><a href="#telecomInterview">Interview Practice →</a><a href="contact.html">Contact TelecomHub →</a></div></div>
+</section>
+<!-- ================= END KNOWLEDGE HUB ================= -->
 
     <!-- ABOUT US MODAL -->
     <div id="aboutModal" class="modal">
@@ -3727,5 +3502,39 @@
   <a href="/contact.html" style="color:#dbeeff;text-decoration:underline;margin:0 10px">Contact &amp; About</a>
   <a href="https://policies.google.com/technologies/partner-sites" style="color:#dbeeff;text-decoration:underline;margin:0 10px" target="_blank" rel="noopener noreferrer">Google data use</a>
 </footer>
+
+<script>
+/* Telecom Knowledge Hub search and category filters. Runs locally, no personal data sent. */
+(function(){
+  const section=document.getElementById("telecom-knowledge-hub");
+  if(!section)return;
+  const cards=Array.from(section.querySelectorAll(".hub-card"));
+  const buttons=Array.from(section.querySelectorAll(".hub-filter"));
+  const search=section.querySelector("#hub-search");
+  const count=section.querySelector("#hub-results");
+  const empty=section.querySelector("#hub-empty");
+  let active="all";
+  function update(){
+    const term=(search.value||"").trim().toLocaleLowerCase();
+    let shown=0;
+    cards.forEach(card=>{
+      const categoryOk=active==="all"||card.dataset.hubCategory===active;
+      const textOk=!term||(card.dataset.hubSearch||"").includes(term);
+      card.hidden=!(categoryOk&&textOk);
+      if(!card.hidden)shown++;
+    });
+    count.textContent="Showing "+shown+" of "+cards.length+" resources";
+    empty.hidden=shown!==0;
+  }
+  buttons.forEach(button=>button.addEventListener("click",()=>{
+    active=button.dataset.hubFilter;
+    buttons.forEach(item=>{const selected=item===button;item.classList.toggle("is-active",selected);item.setAttribute("aria-pressed",String(selected));});
+    update();
+  }));
+  search.addEventListener("input",update);
+  update();
+})();
+</script>
+
 </body>
 </html>
