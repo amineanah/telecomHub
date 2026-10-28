@@ -21,9 +21,10 @@
     const toggle=document.getElementById("themeToggle")||document.getElementById("telecom-global-theme");
     if(toggle){
       toggle.textContent=next==="dark"?"☀️":"🌙";
+      toggle.classList.add("telecom-icon-only");
       toggle.setAttribute("aria-label",next==="dark"?"Switch to light mode":"Switch to dark mode");
       toggle.setAttribute("aria-pressed",String(next==="dark"));
-      toggle.title=next==="dark"?"Switch to light mode":"Switch to dark mode";
+      toggle.removeAttribute("title");
     }
   }
   function start(){
