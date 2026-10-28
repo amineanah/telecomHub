@@ -2182,6 +2182,8 @@
 
     
 /* ================= TELECOM KNOWLEDGE HUB ================= */
+.hub-placeholder{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 25% 25%,#2064a6,#07162d 70%)}.hub-placeholder-mark{font-size:14px;letter-spacing:.12em;color:#b1e1ff;font-weight:850}
+
 .telecom-hub{background:radial-gradient(ellipse at 5% 0%,rgba(31,83,183,.18),transparent 42%),linear-gradient(145deg,#071326,#081b2e 72%,#0a2035);color:#edf7ff;border:1px solid #213c5d;border-radius:24px;padding:clamp(24px,3vw,48px);margin:32px 0 48px;box-shadow:0 20px 65px rgba(0,0,0,.16);isolation:isolate}
 .telecom-hub *{box-sizing:border-box}.hub-heading{text-align:center;margin:0 auto 28px;max-width:860px}.hub-eyebrow{display:inline-block;padding:7px 14px;border:1px solid #2d668f;border-radius:999px;color:#8fdaff;font-size:11px;font-weight:800;letter-spacing:.14em;background:#0b2a49}
 .telecom-hub .hub-heading h2{color:white;font-size:clamp(28px,4vw,51px);line-height:1.15;margin:18px 0 12px;letter-spacing:-.04em}.hub-heading h2 span{background:linear-gradient(90deg,#3ad7e7,#4098ff);background-clip:text;-webkit-background-clip:text;color:transparent}
@@ -2749,6 +2751,7 @@
     <label class="hub-search-label" for="hub-search"><span aria-hidden="true">⌕</span><span class="hub-sr-only">Search telecom articles</span><input id="hub-search" type="search" placeholder="Search articles…" autocomplete="off"></label>
   </div>
   <p id="hub-results" class="hub-results" role="status" aria-live="polite">Showing all 18 resources</p>
+  <p id="hub-dynamic-status" class="hub-results" role="status" aria-live="polite"></p>
   <div id="hub-card-grid" class="hub-card-grid">
     <article class="hub-card" data-hub-category="5g" data-hub-search="5g &amp; 4g network fundamentals 5g networks explore cellular network architecture, core concepts and practical mobile-network technologies.">
   <a class="hub-card-link" href="networks.html" aria-label="5G &amp; 4G Network Fundamentals">
@@ -3508,7 +3511,7 @@
 (function(){
   const section=document.getElementById("telecom-knowledge-hub");
   if(!section)return;
-  const cards=Array.from(section.querySelectorAll(".hub-card"));
+  let cards=Array.from(section.querySelectorAll(".hub-card"));
   const buttons=Array.from(section.querySelectorAll(".hub-filter"));
   const search=section.querySelector("#hub-search");
   const count=section.querySelector("#hub-results");
@@ -3532,9 +3535,14 @@
     update();
   }));
   search.addEventListener("input",update);
+  document.addEventListener("telecom:articles-loaded",()=>{
+    cards=Array.from(section.querySelectorAll(".hub-card"));
+    update();
+  });
   update();
 })();
 </script>
 
+<script type="module" src="js/articles-public.js"></script>
 </body>
 </html>
