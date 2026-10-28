@@ -244,9 +244,16 @@
         /* ================= MAIN ================= */
 
         .container {
-            width: 92%;
-            max-width: 1450px;
+            /* Fill wide screens without leaving a large unused side gutter. */
+            width: 96%;
+            max-width: 2400px;
             margin: 30px auto;
+        }
+
+        /* Permit nested grid content to shrink without creating sideways scroll. */
+        .main-grid > *,
+        .content-grid > * {
+            min-width: 0;
         }
 
         .main-grid {
