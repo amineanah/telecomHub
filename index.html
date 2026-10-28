@@ -2210,6 +2210,23 @@
 @media(max-width:640px){.telecom-hub{padding:22px 14px;border-radius:16px;margin:22px 0}.hub-card-grid{grid-template-columns:1fr}.hub-features{grid-template-columns:1fr 1fr;gap:7px}.hub-features>span{padding:9px;column-gap:6px}.hub-features strong{font-size:11px}.hub-features small{font-size:10px}.hub-card-media{height:195px}.hub-search-label{max-width:none;flex-basis:100%}.hub-controls{gap:13px}.hub-bottom{padding:17px}.hub-bottom-links a{flex:1 1 100%}}
 @media(prefers-reduced-motion:reduce){.hub-card,.hub-card-media img,.hub-filter{transition:none!important}}
 
+
+/* Request a Quote dialog */
+#open-quote-dialog{border:0;cursor:pointer;font-family:inherit}
+#quote-dialog{box-sizing:border-box;width:min(94vw,590px);max-height:90vh;overflow:auto;margin:auto;border:1px solid var(--border,#c7d6e4);border-radius:17px;padding:clamp(18px,3vw,30px);background:var(--bg-card,#fff);color:var(--text-main,#183451);box-shadow:0 20px 70px #0007;font:15px/1.5 system-ui,Arial}
+#quote-dialog::backdrop{background:rgba(5,18,37,.77)}
+.quote-dialog-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#quote-title{color:var(--text-main,#183451);margin:0;font-size:25px}
+#quote-close{border:1px solid var(--border,#c7d6e4);background:transparent;color:inherit;border-radius:8px;width:37px;height:37px;font-size:25px;cursor:pointer}
+.quote-intro{color:var(--text-muted,#566c82);margin:12px 0}
+#quote-form{display:grid;gap:7px}#quote-form label{font-size:13px;font-weight:750;margin-top:8px}
+#quote-form input,#quote-form textarea{box-sizing:border-box;width:100%;font:inherit;background:var(--bg-card,#fff);color:var(--text-main,#183451);border:1px solid var(--border,#a4c3de);border-radius:9px;padding:11px}
+#quote-form input:focus-visible,#quote-form textarea:focus-visible{outline:2px solid var(--primary,#0879ba);outline-offset:1px}
+.quote-actions{display:flex;gap:9px;flex-wrap:wrap;margin:15px 0}
+.quote-actions button,.quote-address button{border:1px solid var(--border,#a4c3de);border-radius:9px;cursor:pointer;background:var(--primary,#086bba);color:#fff;padding:10px 13px;font-weight:750}
+.quote-address{display:flex;align-items:center;flex-wrap:wrap;gap:10px;background:var(--bg-card-subtle,#ebf3fc);padding:12px;border-radius:9px;overflow-wrap:anywhere}
+#quote-status{margin:2px 0;color:var(--primary,#0879ba)}#quote-form small{color:var(--text-muted,#536a81)}
+@media(max-width:550px){.quote-actions button{flex:1 1 100%}}
 </style>
 <link rel="stylesheet" href="/css/theme.css?v=3">
 <script defer src="/js/theme.js?v=3"></script>
@@ -2891,10 +2908,28 @@
         <p>Looking for telecom guidance, technical support, or project collaboration?</p>
     </div>
     <div class="consultation-actions">
-        <a class="consultation-btn" href="mailto:janahamino@gmail.com?subject=TelecomHub%20Consultation%20Request&body=Hello%20Amine%2C%0A%0AI%20would%20like%20to%20request%20a%20telecom%20consultation.%0A%0AMy%20name%3A%20%0ACompany%20(optional)%3A%20%0AConsultation%20topic%3A%20%0AProject%20details%3A%20%0APreferred%20contact%20time%3A%20%0A%0AThank%20you." aria-label="Request a telecom consultation by email">✉️ Request a Consultation</a>
-        <a class="consultation-link" href="mailto:janahamino@gmail.com?subject=TelecomHub%20Quotation%20Request&body=Hello%20Amine%2C%0A%0AI%20would%20like%20a%20quote%20for%20the%20following%20telecom%20service%3A%0A%0AScope%3A%20%0ALocation%3A%20%0ATimeline%3A%20%0A%0AThank%20you.">✉ Request a Quote</a>
+        <button type="button" class="consultation-btn" id="open-quote-dialog" aria-haspopup="dialog" aria-controls="quote-dialog">✉ Request a Quote</button>
     </div>
 </div>
+
+<dialog id="quote-dialog" aria-labelledby="quote-title">
+  <div class="quote-dialog-header"><h2 id="quote-title">Request a Quote</h2><button type="button" id="quote-close" aria-label="Close quote form">×</button></div>
+  <p class="quote-intro">Tell us about your telecom project. Choose Gmail, Outlook, or your email app to review and send your request.</p>
+  <form id="quote-form">
+    <label for="quote-name">Your name</label><input id="quote-name" type="text" autocomplete="name" required maxlength="100" placeholder="Full name">
+    <label for="quote-email">Your email</label><input id="quote-email" type="email" autocomplete="email" required maxlength="200" placeholder="name@example.com">
+    <label for="quote-topic">Project or service</label><input id="quote-topic" type="text" required maxlength="150" placeholder="e.g. 5G site inspection">
+    <label for="quote-details">Project details</label><textarea id="quote-details" required minlength="10" maxlength="4000" rows="4" placeholder="Describe your project, location and expected timeline"></textarea>
+    <div class="quote-actions">
+      <button type="button" id="quote-gmail">Open Gmail</button>
+      <button type="button" id="quote-outlook">Open Outlook</button>
+      <button type="button" id="quote-email-app">Use email app</button>
+    </div>
+    <div class="quote-address">Email: <strong>janahamino@gmail.com</strong> <button type="button" id="quote-copy">Copy address</button></div>
+    <p id="quote-status" role="status" aria-live="polite"></p>
+    <small>No email is sent automatically; you must press Send in your email app.</small>
+  </form>
+</dialog>
 
 <!-- ================= FOOTER ================= -->
 
@@ -3546,5 +3581,50 @@
 </script>
 
 <script type="module" src="js/articles-public.js"></script>
+
+<script>
+(function(){
+  const dialog=document.getElementById("quote-dialog");
+  const form=document.getElementById("quote-form");
+  if(!dialog||!form)return;
+  const address="janahamino@gmail.com";
+  const status=document.getElementById("quote-status");
+  const get=id=>document.getElementById(id).value.trim();
+  function message(){
+    if(!form.reportValidity())return null;
+    return {
+      subject:"TelecomHub Quotation Request — "+get("quote-topic"),
+      body:["Hello Amine,","","I would like to request a quotation.","",
+        "Name: "+get("quote-name"),"Reply email: "+get("quote-email"),
+        "Service: "+get("quote-topic"),"Project details:",get("quote-details"),"",
+        "Thank you."].join("\n")
+    };
+  }
+  function openProvider(which){
+    const data=message();if(!data)return;
+    let url="";
+    if(which==="gmail"){
+      url="https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(address)+"&su="+encodeURIComponent(data.subject)+"&body="+encodeURIComponent(data.body);
+    }else if(which==="outlook"){
+      url="https://outlook.live.com/mail/0/deeplink/compose?to="+encodeURIComponent(address)+"&subject="+encodeURIComponent(data.subject)+"&body="+encodeURIComponent(data.body);
+    }else{
+      url="mailto:"+address+"?subject="+encodeURIComponent(data.subject)+"&body="+encodeURIComponent(data.body);
+    }
+    if(which==="email"){window.location.href=url;status.textContent="If no email app opens, use Gmail or Outlook above, or copy the email address.";return;}
+    const opened=window.open(url,"_blank","noopener,noreferrer");
+    status.textContent=opened?"A new tab should open. Check pop-up settings if you don't see it.":"Your browser blocked the new tab. Allow pop-ups or copy the address below.";
+  }
+  document.getElementById("open-quote-dialog").addEventListener("click",()=>{if(typeof dialog.showModal==="function"){dialog.showModal();}else{dialog.setAttribute("open","");}document.getElementById("quote-name").focus();});
+  document.getElementById("quote-close").addEventListener("click",()=>dialog.close());
+  dialog.addEventListener("click",e=>{if(e.target===dialog)dialog.close();});
+  document.getElementById("quote-gmail").addEventListener("click",()=>openProvider("gmail"));
+  document.getElementById("quote-outlook").addEventListener("click",()=>openProvider("outlook"));
+  document.getElementById("quote-email-app").addEventListener("click",()=>openProvider("email"));
+  document.getElementById("quote-copy").addEventListener("click",async()=>{
+    try{await navigator.clipboard.writeText(address);status.textContent="Email address copied.";}
+    catch{status.textContent="Copy this address manually: "+address;}
+  });
+})();
+</script>
 </body>
 </html>
