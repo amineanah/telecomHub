@@ -20,7 +20,7 @@
     root.style.colorScheme=next;
     const toggle=document.getElementById("themeToggle")||document.getElementById("telecom-global-theme");
     if(toggle){
-      toggle.textContent=next==="dark"?"☀️ Light mode":"🌙 Dark mode";
+      toggle.textContent=next==="dark"?"☀️":"🌙";
       toggle.setAttribute("aria-label",next==="dark"?"Switch to light mode":"Switch to dark mode");
       toggle.setAttribute("aria-pressed",String(next==="dark"));
       toggle.title=next==="dark"?"Switch to light mode":"Switch to dark mode";
