@@ -1,0 +1,22 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /article-media/{uid}/{fileName} {
+      // Uploaded article assets are public. Do not upload private material.
+      allow read: if true;
+      allow write: if request.auth != null
+        && request.auth.uid == "wq68WfHSlzW1SNCeyIC2uoNwYvd2"
+        && uid == request.auth.uid
+        && request.resource != null
+        && request.resource.size > 0
+        && request.resource.size <= 25 * 1024 * 1024
+        && request.resource.contentType in [
+          'image/jpeg', 'image/png', 'image/webp',
+          'application/pdf', 'video/mp4', 'video/webm'
+        ];
+      allow delete: if request.auth != null
+        && request.auth.uid == "wq68WfHSlzW1SNCeyIC2uoNwYvd2"
+        && uid == request.auth.uid;
+    }
+  }
+}
