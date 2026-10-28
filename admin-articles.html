@@ -21,8 +21,20 @@ label{display:block;font-weight:650;margin:13px 0 5px}input,textarea,select{widt
 </select>
 <label for="article-summary">Short description</label><textarea id="article-summary" name="summary" rows="3" required minlength="25" maxlength="500" placeholder="A short introduction for the article card (25–500 characters)."></textarea>
 <label for="article-cover">Cover image URL (optional)</label><input id="article-cover" name="coverUrl" type="url" maxlength="1500" placeholder="https://example.com/your-photo.jpg"><p class="help">Use an image you own or have permission to publish. You can leave this empty for a built-in placeholder.</p>
-<label for="article-body">Article text</label><textarea id="article-body" name="body" required minlength="100" maxlength="30000" rows="16" placeholder="Write the complete article here. Separate paragraphs using a blank line. No coding needed."></textarea>
+<label for="article-body">Article text</label><textarea id="article-body" name="body" required minlength="100" maxlength="30000" rows="16" placeholder="Write the complete article here. Separate paragraphs using a blank line. Attach videos, images and PDFs below. No coding needed."></textarea>
 <div class="counter"><span id="body-count">0</span> / 30,000 characters</div>
+<h3 style="margin-top:22px">Media &amp; attachments</h3>
+<p class="help">Add multiple images, YouTube videos, PDFs, or downloadable documents to this article.</p>
+<label for="media-type">Media type</label>
+<select id="media-type"><option value="image">Image</option><option value="youtube">YouTube video</option><option value="video">Uploaded/hosted video</option><option value="pdf">PDF document</option><option value="link">Download or external resource</option></select>
+<label for="media-title">Caption / label</label><input id="media-title" maxlength="120" placeholder="e.g. Site inspection checklist">
+<label for="media-url">Public HTTPS URL</label><input id="media-url" type="url" maxlength="1500" placeholder="https://…">
+<div class="actions"><button type="button" id="add-media" class="secondary">Add URL to article</button></div>
+<label for="media-file">Or upload image, PDF, or video directly</label>
+<input id="media-file" type="file" accept="image/jpeg,image/png,image/webp,application/pdf,video/mp4,video/webm">
+<p class="help">Max 25 MB per file. Uploads require Firebase Storage and the provided Storage security rules. Files are readable by the public once uploaded; do not upload confidential drafts.</p>
+<div class="actions"><button type="button" id="upload-media" class="secondary">Upload &amp; attach file</button></div>
+<div id="media-items" aria-live="polite"></div>
 <div class="actions"><button type="button" id="save-draft" class="secondary">Save draft</button><button type="button" id="publish" class="success">Publish article</button><button type="button" id="reset-form" class="secondary">New article / Clear</button></div>
 </form><div class="tip">Only you can create or modify articles. Drafts stay private. Published articles become readable by everyone; verify facts, image rights and privacy before publishing.</div></section>
 <section class="panel"><h2>Manage articles</h2><p class="muted">Choose Edit to load an article into the form. Unpublish removes it from public view; Delete permanently removes it from Firestore.</p><button type="button" id="refresh" class="secondary">Refresh list</button><div id="items" aria-live="polite"></div></section>
