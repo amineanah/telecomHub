@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>TelecomHub Feedback Moderation</title>
+<style>body{font:16px system-ui;background:#f4f7fd;color:#123;margin:0;padding:30px}main{max-width:850px;margin:auto}article{background:#fff;border:1px solid #ddd;border-radius:12px;margin:15px 0;padding:20px}button{margin-right:10px;padding:10px;border:0;border-radius:6px;background:#0759aa;color:#fff;cursor:pointer}button.reject{background:#a23}</style>
+<main><a href="/">Back to homepage</a><h1>Feedback moderation</h1><p id="notice">Checking access…</p><div id="reviews"></div></main>
+<script type="module">
+import {auth} from "./js/firebase-config.js";
+import {onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+import {getFirestore,collection,query,where,getDocs,doc,updateDoc,serverTimestamp} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+const adminUid="wq68WfHSlzW1SNCeyIC2uoNwYvd2",db=getFirestore(auth.app),notice=document.getElementById("notice"),reviews=document.getElementById("reviews");
+onAuthStateChanged(auth,async user=>{
+if(!user||user.uid!==adminUid){notice.textContent="Administrator login required.";return;}
+try{
+const result=await getDocs(query(collection(db,"visitorFeedback"),where("status","==","pending")));
+notice.textContent=result.empty?"No pending feedback.":"Pending submissions: "+result.size;
+for(const snap of result.docs){
+const review=snap.data(),card=document.createElement("article"),heading=document.createElement("h2"),body=document.createElement("p");
+heading.textContent=review.name+" — "+review.rating+"/5";body.textContent=review.message;card.append(heading,body);
+for(const next of ["approved","rejected"]){
+const btn=document.createElement("button");btn.textContent=next==="approved"?"Approve":"Reject";if(next==="rejected")btn.className="reject";
+btn.onclick=async()=>{btn.disabled=true;try{await updateDoc(doc(db,"visitorFeedback",snap.id),{status:next,reviewedAt:serverTimestamp()});card.remove();}catch(error){notice.textContent="Update failed: "+error.code;btn.disabled=false;}};card.append(btn);
+}reviews.append(card);
+}
+}catch(error){notice.textContent="Could not load feedback: "+error.code;}
+});
+</script></html>
