@@ -3683,5 +3683,34 @@
      src="js/auth-state.js"></script>
 
   
+
+<!-- TelecomHub visitor feedback (published only after admin approval) -->
+<section id="visitor-feedback" class="telecom-feedback-section" aria-labelledby="telecom-feedback-title">
+  <div class="telecom-feedback-inner">
+    <div class="telecom-feedback-heading"><span class="telecom-feedback-kicker">OUR COMMUNITY</span><h2 id="telecom-feedback-title">Visitor Feedback</h2><p>Share your experience with TelecomHub. Feedback appears here after review and approval.</p></div>
+    <div id="telecom-feedback-list" class="telecom-feedback-grid" aria-live="polite"><p>Loading approved feedback…</p></div>
+    <form id="telecom-feedback-form" class="telecom-feedback-form">
+      <h3>Share your feedback</h3>
+      <label for="visitor-name">Your name</label><input id="visitor-name" name="visitorName" required maxlength="60" placeholder="Your name">
+      <label for="visitor-rating">Your rating</label><select id="visitor-rating" name="feedbackRating" required><option value="5">★★★★★ — Excellent</option><option value="4">★★★★☆ — Very good</option><option value="3">★★★☆☆ — Good</option><option value="2">★★☆☆☆ — Fair</option><option value="1">★☆☆☆☆ — Needs improvement</option></select>
+      <label for="visitor-message">Your feedback</label><textarea id="visitor-message" name="feedbackMessage" required minlength="10" maxlength="1000" rows="4" placeholder="What did you find helpful? What could we improve?"></textarea>
+      <button type="submit" disabled>Submit feedback for approval</button>
+      <p id="telecom-feedback-status" role="status">Please log in to share feedback.</p>
+    </form>
+  </div>
+</section>
+<style>
+.telecom-feedback-section{background:linear-gradient(145deg,#f3f8ff,#e7f1fc);padding:60px 20px;color:#122844}
+.telecom-feedback-inner{max-width:1120px;margin:auto}.telecom-feedback-heading{text-align:center;margin-bottom:25px}.telecom-feedback-heading h2{font-size:clamp(1.75rem,3vw,2.5rem);margin:8px 0;color:#0b457c}
+.telecom-feedback-kicker{color:#1373bb;font-size:12px;font-weight:800;letter-spacing:2px}.telecom-feedback-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:18px;margin:24px 0}
+.telecom-feedback-card,.telecom-feedback-form{background:#fff;border:1px solid #d5e3f2;border-radius:18px;padding:24px;box-shadow:0 5px 24px #0e46731a}
+.telecom-feedback-card{overflow-wrap:anywhere}.telecom-feedback-card strong{display:block;color:#0c467f}.telecom-feedback-card p{line-height:1.65;white-space:pre-wrap}.telecom-feedback-stars{display:block;color:#e1a300;letter-spacing:2px;margin:8px 0}
+.telecom-feedback-form{max-width:670px;margin:28px auto 0;display:grid;gap:10px}.telecom-feedback-form h3{margin:0 0 10px;color:#0b457c}.telecom-feedback-form label{font-weight:650}
+.telecom-feedback-form input,.telecom-feedback-form select,.telecom-feedback-form textarea{box-sizing:border-box;width:100%;border:1px solid #b8ccdd;border-radius:9px;padding:13px;background:#fff;color:#102740;font:inherit}
+.telecom-feedback-form button{padding:14px 18px;border:0;border-radius:10px;background:linear-gradient(100deg,#0965b4,#0a8ac3);color:white;font-weight:800;cursor:pointer}
+.telecom-feedback-form button:disabled{opacity:.55;cursor:not-allowed}#telecom-feedback-status{font-size:14px;color:#385875;margin:2px 0}
+</style>
+<script type="module" src="js/feedback.js"></script>
+
 </body>
 </html>
