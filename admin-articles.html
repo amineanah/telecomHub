@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Articles Manager | TelecomHub Admin</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#071426;color:#e9f4ff;font:15px/1.6 system-ui,-apple-system,Segoe UI,sans-serif}
+header{background:#0d2542;border-bottom:1px solid #24476b;padding:17px max(20px,calc((100vw - 1150px)/2));display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+header strong{font-size:19px}nav{display:flex;gap:15px;flex-wrap:wrap}a{color:#77cfff}main{max-width:1150px;margin:30px auto;padding:0 18px 65px}h1{font-size:clamp(26px,3.5vw,38px);margin:8px 0 5px}h2{font-size:21px;margin:0 0 15px}h3{font-size:17px;margin:0}.muted{color:#a9bdd3}.notice{padding:13px 16px;background:#133255;border:1px solid #2c6699;border-radius:11px;margin:18px 0}.notice.error{background:#45212e;border-color:#b73d58}.layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:22px}.panel{background:#0f2540;border:1px solid #284866;border-radius:16px;padding:24px;box-shadow:0 10px 26px #0002}
+label{display:block;font-weight:650;margin:13px 0 5px}input,textarea,select{width:100%;color:#fff;background:#0a1b30;border:1px solid #46617e;border-radius:9px;padding:12px;font:inherit}textarea{resize:vertical}input:focus,textarea:focus,select:focus{outline:2px solid #278ee1;outline-offset:1px}.help{font-size:12px;color:#a9bdd3;margin:5px 0}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}button{font:inherit;font-weight:700;color:#fff;background:#176bb5;border:1px solid #3386c9;border-radius:9px;padding:10px 15px;cursor:pointer}button:hover{filter:brightness(1.15)}button:disabled{opacity:.6;cursor:not-allowed}.secondary{background:#18344f;border-color:#537494}.danger{background:#8b2940;border-color:#be4263}.success{background:#0f795b;border-color:#1fae82}.article-item{border:1px solid #2c4b6b;background:#0a1d33;border-radius:11px;padding:15px;margin:12px 0}.article-item h3{line-height:1.4;margin:5px 0}.article-item p{font-size:13px;color:#b0c7dc;margin:0 0 11px}.article-item .actions{margin-top:10px}.article-item button{padding:6px 11px;font-size:12px}.pill{display:inline-block;border-radius:999px;padding:3px 9px;font-size:11px;background:#52422c;color:#ffe0a2}.pill.published{background:#155a47;color:#b9ffe2}#editor[hidden],#manager[hidden]{display:none}.counter{color:#9fdcfc;font-size:13px}#items{max-height:990px;overflow:auto}.tip{background:#0a203b;border-left:3px solid #3496ef;padding:12px;margin-top:15px;color:#bacfe0;font-size:13px}
+@media(max-width:830px){.layout{grid-template-columns:1fr}.panel{padding:17px}}
+</style></head>
+<body><header><strong>TelecomHub · Admin</strong><nav><a href="/">Homepage</a><a href="admin-feedback.html">Feedback Moderation</a><a href="privacy-policy.html">Privacy Policy</a></nav></header>
+<main><h1>Articles Manager</h1><p class="muted">Write once, publish from here. New published articles appear in the Knowledge Hub without editing HTML or GitHub.</p>
+<p id="notice" class="notice" role="status">Checking administrator access…</p>
+<div id="manager" class="layout" hidden>
+<section class="panel"><h2 id="editor-title">Write a new article</h2>
+<form id="article-form">
+<label for="article-title">Article title</label><input id="article-title" name="title" required maxlength="160" placeholder="e.g. Practical 5G Site Acceptance Checklist">
+<label for="article-category">Category</label><select id="article-category" name="category" required>
+<option value="5g">5G Networks</option><option value="ran">RAN &amp; Radio</option><option value="fiber">Fiber Optics</option><option value="ehs">EHS &amp; Quality</option><option value="site">Site Engineering</option><option value="ai">AI &amp; Automation</option><option value="tools">Tools &amp; Practical</option><option value="core">Core &amp; Transport</option><option value="power">Power &amp; IoT</option>
+</select>
+<label for="article-summary">Short description</label><textarea id="article-summary" name="summary" rows="3" required minlength="25" maxlength="500" placeholder="A short introduction for the article card (25–500 characters)."></textarea>
+<label for="article-cover">Cover image URL (optional)</label><input id="article-cover" name="coverUrl" type="url" maxlength="1500" placeholder="https://example.com/your-photo.jpg"><p class="help">Use an image you own or have permission to publish. You can leave this empty for a built-in placeholder.</p>
+<label for="article-body">Article text</label><textarea id="article-body" name="body" required minlength="100" maxlength="30000" rows="16" placeholder="Write the complete article here. Separate paragraphs using a blank line. No coding needed."></textarea>
+<div class="counter"><span id="body-count">0</span> / 30,000 characters</div>
+<div class="actions"><button type="button" id="save-draft" class="secondary">Save draft</button><button type="button" id="publish" class="success">Publish article</button><button type="button" id="reset-form" class="secondary">New article / Clear</button></div>
+</form><div class="tip">Only you can create or modify articles. Drafts stay private. Published articles become readable by everyone; verify facts, image rights and privacy before publishing.</div></section>
+<section class="panel"><h2>Manage articles</h2><p class="muted">Choose Edit to load an article into the form. Unpublish removes it from public view; Delete permanently removes it from Firestore.</p><button type="button" id="refresh" class="secondary">Refresh list</button><div id="items" aria-live="polite"></div></section>
+</div></main>
+<script type="module" src="js/admin-articles.js"></script></body></html>
