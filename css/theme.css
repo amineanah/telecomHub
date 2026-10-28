@@ -1,0 +1,67 @@
+/* TelecomHub: unified color modes (the last stylesheet on each page).
+   Toggle mode is shared across pages via js/theme.js. */
+html[data-telecom-theme="light"] {color-scheme:light;--th-bg:#f3f7fd;--th-surface:#ffffff;--th-surface-alt:#eaf2fb;--th-text:#172c46;--th-muted:#496581;--th-border:#cfdfed;--th-accent:#075eb1}
+html[data-telecom-theme="dark"] {color-scheme:dark;--th-bg:#071321;--th-surface:#0e243a;--th-surface-alt:#17324c;--th-text:#ebf5ff;--th-muted:#b4cbe1;--th-border:#35526b;--th-accent:#69c6ff}
+html[data-telecom-theme] body{transition:background-color .18s,color .18s}
+html[data-telecom-theme="light"] body{color:var(--th-text)}
+html[data-telecom-theme="dark"] body{background-color:var(--th-bg);color:var(--th-text)}
+/* Floating switch when a page has no pre-existing theme switch. */
+#telecom-global-theme{position:fixed;right:19px;bottom:19px;z-index:2147483000;display:inline-flex;gap:9px;align-items:center;justify-content:center;border:1px solid var(--th-border);border-radius:999px;padding:11px 16px;background:var(--th-surface);color:var(--th-text);box-shadow:0 8px 28px rgba(0,0,0,.22);font:700 13px system-ui,Arial;cursor:pointer}
+#telecom-global-theme:hover{outline:2px solid var(--th-accent);outline-offset:2px}
+#telecom-global-theme:focus-visible,.theme-toggle:focus-visible,#themeToggle:focus-visible{outline:3px solid var(--th-accent)!important;outline-offset:3px}
+html[data-telecom-theme="light"] .telecom-hub{background:linear-gradient(135deg,#f3f8ff,#e8f2ff 75%,#f0f7ff)!important;color:#162e49!important;border-color:#c5d9ed!important}
+html[data-telecom-theme="light"] .telecom-hub .hub-heading h2,html[data-telecom-theme="light"] .telecom-hub .hub-bottom h3{color:#15395e!important}
+html[data-telecom-theme="light"] .telecom-hub .hub-heading p,html[data-telecom-theme="light"] .telecom-hub .hub-results{color:#4b6582!important}
+html[data-telecom-theme="light"] .telecom-hub .hub-eyebrow{background:#dcefff!important;color:#075f9f!important;border-color:#93c3e5!important}
+html[data-telecom-theme="light"] .telecom-hub .hub-features>span,html[data-telecom-theme="light"] .telecom-hub .hub-card,html[data-telecom-theme="light"] .telecom-hub .hub-bottom{background:#fff!important;border-color:#c9dbef!important}
+html[data-telecom-theme="light"] .telecom-hub .hub-features strong,html[data-telecom-theme="light"] .telecom-hub .hub-card h3{color:#153b62!important}
+html[data-telecom-theme="light"] .telecom-hub .hub-features small,html[data-telecom-theme="light"] .telecom-hub .hub-card p,html[data-telecom-theme="light"] .telecom-hub .hub-bottom p{color:#4b6885!important}
+html[data-telecom-theme="light"] .telecom-hub .hub-filter,html[data-telecom-theme="light"] .telecom-hub .hub-search-label{background:#fff!important;color:#1f4267!important;border-color:#b8d0e5!important}
+html[data-telecom-theme="light"] .telecom-hub .hub-filter.is-active{background:#096fc4!important;color:white!important;border-color:#096fc4!important}
+html[data-telecom-theme="light"] .telecom-hub .hub-search-label input{color:#1c3d60!important}
+html[data-telecom-theme="light"] .telecom-hub .hub-search-label input::placeholder{color:#657e98!important}
+html[data-telecom-theme="light"] .telecom-hub .hub-card-type,html[data-telecom-theme="light"] .telecom-hub .hub-card-action{color:#0866aa!important}
+html[data-telecom-theme="light"] .telecom-hub .hub-empty{background:#eaf4ff!important;color:#25496b!important}
+/* The visitor-feedback widget is light-first and needs a proper dark palette. */
+html[data-telecom-theme="dark"] .telecom-feedback-section{background:linear-gradient(140deg,#071728,#102a43)!important;color:#eaf5ff!important;border-color:#35546e!important}
+html[data-telecom-theme="dark"] .telecom-feedback-heading h2,html[data-telecom-theme="dark"] .telecom-feedback-form h3{color:#eaf5ff!important}
+html[data-telecom-theme="dark"] .telecom-feedback-section p,html[data-telecom-theme="dark"] .telecom-feedback-section label{color:#c6d9eb}
+html[data-telecom-theme="dark"] .telecom-feedback-card,html[data-telecom-theme="dark"] .telecom-feedback-form{background:#10283f!important;color:#eaf5ff!important;border-color:#365a77!important}
+html[data-telecom-theme="dark"] .telecom-feedback-card strong{color:#8bd6ff!important}
+html[data-telecom-theme="dark"] .telecom-feedback-form input,html[data-telecom-theme="dark"] .telecom-feedback-form select,html[data-telecom-theme="dark"] .telecom-feedback-form textarea{background:#071a2c!important;color:#f2f8ff!important;border-color:#46647e!important}
+html[data-telecom-theme="dark"] #telecom-feedback-status{color:#b8d6ed!important}
+/* Existing pages that were written with permanent dark backgrounds. */
+html.theme-dark-original[data-telecom-theme="light"]{color-scheme:light;--bg:#f3f8fe;--card:#fff;--cyan:#0869b0;--text:#172e49;--muted:#536c83;--border:#cbdce9;--bg-dark:#f3f8fe;--bg-card:#fff;--bg-card-hover:#e9f2fb;--border-color:#c9d9e8;--text-main:#172f4a;--text-muted:#526d86;--text-dim:#607e98;--accent-cyan:#087ca8}
+html.theme-dark-original[data-telecom-theme="light"] body{background:#f3f8fe!important;background-image:none!important;color:#172f4a!important}
+html.theme-dark-original[data-telecom-theme="light"] :is(.auth-card,.panel,.article-item,.article-page,.asset,.container,.wrapper,.content-card,.info-section,.glass-card,.card,.stat-card,.sidebar,.feature-card,.tool-card,.workspace,.modal-content){color:#173554;background-color:#fff;border-color:#d1e0ee}
+html.theme-dark-original[data-telecom-theme="light"] :is(.auth-card,.panel,.article-item,.article-page,.asset,.content-card,.info-section,.glass-card,.card,.tool-card,.stat-card,.workspace) :is(h1,h2,h3,h4,p,li,label,strong,small){color:inherit}
+html.theme-dark-original[data-telecom-theme="light"] :is(.panel,.article-item,.article-page,.asset,.auth-card){background:#fff!important;border-color:#d1e0ee!important;color:#1a3859!important}
+html.theme-dark-original[data-telecom-theme="light"] :is(.muted,.help,.article-item p,.tip,.subtitle){color:#546f87!important}
+html.theme-dark-original[data-telecom-theme="light"] :is(input,textarea,select){background:#fff!important;color:#152f4a!important;border-color:#aac4da!important}
+html.theme-dark-original[data-telecom-theme="light"] :is(input,textarea)::placeholder{color:#59738b!important}
+html.theme-dark-original[data-telecom-theme="light"] :is(.notice,.tip,.msg){background:#e8f3ff!important;color:#234766!important;border-color:#acd0ee!important}
+html.theme-dark-original[data-telecom-theme="light"] .article-item{background:#f8fbff!important}
+html.theme-dark-original[data-telecom-theme="light"] :is(.secondary,.button-secondary){background:#e1edf8!important;color:#123e65!important;border-color:#acc7df!important}
+html.theme-dark-original[data-telecom-theme="light"] :is(.auth-card,.icon-box){box-shadow:0 10px 35px rgba(15,45,80,.10)}
+html.theme-dark-original[data-telecom-theme="light"] .icon-box{background:#e3f3fe!important;border-color:#b7dced!important}
+html.theme-dark-original[data-telecom-theme="light"] :is(.nav-links a,.brand,.brand span){color:#145183!important;-webkit-text-fill-color:initial}
+html.theme-dark-original[data-telecom-theme="light"] :is(header,.site-header){border-color:#cbdce9}
+/* Bright backgrounds on older article pages must darken while keeping legible text. */
+html:not(.theme-dark-original)[data-telecom-theme="dark"] body{background-color:var(--th-bg);color:var(--th-text)}
+html:not(.theme-dark-original)[data-telecom-theme="dark"] :is(.content-card,.info-section,.hero-section,.comparison-table,.specs-card,.article-page,.asset,.container-panel,.card,.resource-card,.faq-item){background:#10273f!important;background-image:none!important;color:#eaf5ff!important;border-color:#355773!important}
+html:not(.theme-dark-original)[data-telecom-theme="dark"] :is(.content-card,.info-section,.hero-section,.comparison-table,.specs-card,.article-page,.asset,.resource-card,.faq-item) :is(p,li,td,th,small){color:#c6d9eb!important}
+html:not(.theme-dark-original)[data-telecom-theme="dark"] :is(.article-page,.asset,.content-card,.info-section) :is(h1,h2,h3,h4){color:#a2dcff!important}
+html:not(.theme-dark-original)[data-telecom-theme="dark"] :is(input,textarea,select){background-color:#0d253b;color:#f0f8ff;border-color:#496985}
+/* Public article reader and informational / admin pages. */
+html[data-page="article.html"][data-telecom-theme="dark"] :is(.article-page,.asset){background:#10283f!important;color:#eaf6ff!important;border-color:#365572!important}
+html[data-page="article.html"][data-telecom-theme="dark"] :is(h1,h2,.asset h3){color:#9dd8ff!important}
+html[data-page="article.html"][data-telecom-theme="dark"] :is(.summary,.body,.asset a){color:#c3ddf2!important}
+html[data-page="article.html"][data-telecom-theme="dark"] .msg{background:#153651;color:#d3eaff}
+html[data-page="admin-feedback.html"][data-telecom-theme="dark"] article,html[data-page="privacy-policy.html"][data-telecom-theme="dark"] main,html[data-page="contact.html"][data-telecom-theme="dark"] .container{background:#10283f!important;color:#edf7ff!important;border-color:#355773!important}
+html[data-page="admin-feedback.html"][data-telecom-theme="dark"] body,html[data-page="privacy-policy.html"][data-telecom-theme="dark"] body,html[data-page="contact.html"][data-telecom-theme="dark"] body{background:#071321!important;color:#eaf6ff!important}
+html[data-page="privacy-policy.html"][data-telecom-theme="dark"] :is(h1,h2),html[data-page="contact.html"][data-telecom-theme="dark"] :is(h1,h2){color:#96d5ff!important}
+html[data-page="privacy-policy.html"][data-telecom-theme="dark"] main a,html[data-page="contact.html"][data-telecom-theme="dark"] main a{color:#85cdff}
+html[data-page="privacy-policy.html"][data-telecom-theme="dark"] small{color:#b7cedf}
+/* Keep original footer/header dark in both modes, with sufficient white/nav contrast. */
+html[data-telecom-theme] :is(header,footer)[data-telecom-policy-links]{color:#e6f2ff}
+@media(prefers-reduced-motion:reduce){html[data-telecom-theme] body{transition:none}}
