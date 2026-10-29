@@ -516,7 +516,7 @@ form.addEventListener("submit", async (event) => {
       await sendPasswordResetEmail(auth, email);
 
       showMessage(
-        "If an account exists, a reset email will be sent.",
+        "If an account exists for this email, a password reset link will arrive shortly. Check your inbox and spam folder, then return here to sign in.",
         "success"
       );
     }
@@ -533,6 +533,11 @@ form.addEventListener("submit", async (event) => {
         "Please choose a stronger password.",
       "auth/too-many-requests":
         "Too many attempts. Please try later.",
+      "auth/too-many-requests": "Too many attempts. Wait a few minutes before trying again.",
+      "auth/invalid-email": "Enter a valid email address.",
+      "auth/network-request-failed": "Network error. Check your connection and try again.",
+      "auth/unauthorized-continue-uri": "Password reset redirect is not authorized. Add this site domain to Firebase Authentication authorized domains.",
+      "auth/invalid-continue-uri": "Password reset redirect configuration is invalid.",
       "auth/operation-not-allowed":
         "Enable Email/Password in Firebase Console."
     };
