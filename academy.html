@@ -37,7 +37,7 @@
 .cert-reference{font-size:10px;color:#6a7180;overflow-wrap:anywhere}
 @media(max-width:700px){.cert-layout{grid-template-columns:1fr}.cert-art{height:125px;border-right:0;border-bottom:4px solid #c5a25a}.cert-tower{font-size:70px;top:48%;left:27%}.cert-5g{top:25%;left:40%;font-size:45px}.cert-art-label{display:none}.cert-body{padding:30px 26px}.cert-metrics{gap:5px}.cert-metric strong{font-size:15px}.certificate{min-height:0}}
 @media print{@page{size:A4 landscape;margin:0}.certificate{width:297mm;height:210mm;min-height:0;max-width:none;margin:0;box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}.cert-layout{grid-template-columns:25% 75%;min-height:210mm}.cert-art{height:auto;border-right:5px solid #c5a25a;border-bottom:0}.cert-tower{font-size:120px;top:37%;left:50%}.cert-5g{top:58%;left:0;font-size:64px}.cert-art-label{display:block}.cert-body{padding:38px 48px}.cert-metric strong{font-size:21px}.cert-heading{font-size:58px}.cert-recipient{font-size:45px}}
-</style></head><body><header><strong>📡 Telecom Digital Hub <span style="color:#52b9ff">Academy</span></strong><a href="index.html">← Back to website</a></header><main><section id="authGate" class="card"><h1>🔒 Sign in to access the Academy</h1><p>Only registered Telecom Digital Hub members can take certification exams. Please log in or create an account.</p><a href="/login.html" style="display:inline-block;background:#177ad1;color:white;padding:13px 20px;border-radius:10px;text-decoration:none;font-weight:700">Log in / Sign up</a></section><div id="academyProtected" hidden>
+</style></head><body><header><strong>📡 Telecom Digital Hub <span style="color:#52b9ff">Academy</span></strong><a href="index.html">← Back to website</a></header><main><div id="academyProtected">
 <section id="catalog"><span class="eyebrow">Certification Academy</span><h1>Validate your telecom knowledge.</h1><p>Choose a 30-question assessment. You have 30 minutes to finish. A score of 80% or higher earns a printable Telecom Digital Hub achievement certificate.</p><div class="notice">These are independent educational achievement certificates, not industry accreditation or vendor certifications. This version runs entirely in your browser; results are not independently verifiable.</div><div id="examCards" class="grid"></div></section>
 <section id="register" class="hidden"><div class="card"><span class="eyebrow">Before you begin</span><h1 id="registerTitle"></h1><p>Enter the name that should appear on your certificate. Your exam data stays in this browser.</p><form id="registerForm"><label for="candidate">Full name</label><input id="candidate" maxlength="90" minlength="2" autocomplete="name" required placeholder="Your full name"><div class="actions"><button type="submit">Start timed exam</button><button type="button" class="outline" id="cancelRegister">Cancel</button></div></form></div></section>
 <section id="exam" class="hidden"><div class="toolbar"><div><span class="eyebrow" id="examTitle"></span><h2 id="counter"></h2></div><strong id="timer" role="timer" aria-live="off"></strong></div><div class="progress"><div id="bar"></div></div><div class="card"><h2 id="question"></h2><div class="options" id="options" role="group" aria-label="Answer choices"></div><div class="toolbar"><button class="outline" id="previous">Previous</button><span class="muted" id="answered"></span><button id="next">Next</button></div></div><div class="actions"><button class="outline" id="submitExam">Submit exam</button></div></section>
@@ -60,7 +60,7 @@ const $=id=>document.getElementById(id);const sections=["catalog","register","ex
 const show=id=>{sections.forEach(s=>$(s).classList.toggle("hidden",s!==id));window.scrollTo(0,0)};
 let state=null,ticker=null;
 const shuffle=a=>{const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b};
-function setup(){const cards=$("examCards");Object.keys(BANKS).forEach((name,i)=>{const card=document.createElement("article");card.className="card";const h=document.createElement("h2");h.textContent=name;const p=document.createElement("p");p.textContent="30 questions · 30 minutes · Pass at 80%";const tag=document.createElement("span");tag.className="tag";tag.textContent=["Beginner","Intermediate","Advanced","Intermediate"][i];const btn=document.createElement("button");btn.textContent="Start assessment";btn.style.marginTop="20px";btn.addEventListener("click",()=>{if(!window.academyAuthenticated)return;$("registerTitle").textContent=name;state={name};show("register")});card.append(tag,h,p,btn);cards.append(card)})}
+function setup(){const cards=$("examCards");Object.keys(BANKS).forEach((name,i)=>{const card=document.createElement("article");card.className="card";const h=document.createElement("h2");h.textContent=name;const p=document.createElement("p");p.textContent="30 questions · 30 minutes · Pass at 80%";const tag=document.createElement("span");tag.className="tag";tag.textContent=["Beginner","Intermediate","Advanced","Intermediate"][i];const btn=document.createElement("button");btn.textContent="Start assessment";btn.style.marginTop="20px";btn.addEventListener("click",()=>{if(!window.academyAuthenticated){window.location.assign("/login.html?next=%2Facademy.html");return;}$("registerTitle").textContent=name;state={name};show("register")});card.append(tag,h,p,btn);cards.append(card)})}
 function start(){if(!window.academyAuthenticated)return;const name=$("candidate").value.trim().replace(/\s+/g," ");if(name.length<2)return;const entries=BANKS[state.name];const questions=shuffle(entries.map(([term,definition],idx)=>{const distractors=shuffle(entries.filter((_,i)=>i!==idx).map(e=>e[1])).slice(0,3);return {term,options:shuffle([definition,...distractors]),correct:definition}}));state={name:state.name,candidate:name,questions,answers:Array(30).fill(null),index:0,deadline:Date.now()+30*60*1000,submitted:false};show("exam");render();clearInterval(ticker);ticker=setInterval(tick,500);tick()}
 function render(){if(!state||state.submitted)return;const i=state.index,q=state.questions[i];$("examTitle").textContent=state.name;$("counter").textContent="Question "+(i+1)+" of 30";$("question").textContent="Which description best matches “"+q.term+"”?";$("bar").style.width=((i+1)/30*100)+"%";$("options").replaceChildren();q.options.forEach(option=>{const btn=document.createElement("button");btn.className="option";btn.type="button";btn.textContent=option;btn.setAttribute("aria-pressed",String(state.answers[i]===option));btn.onclick=()=>{state.answers[i]=option;render()};$("options").append(btn)});$("answered").textContent=state.answers.filter(x=>x!==null).length+" / 30 answered";$("previous").disabled=i===0;$("next").textContent=i===29?"Review / Submit":"Next"}
 function tick(){if(!state||state.submitted)return;const left=Math.max(0,Math.ceil((state.deadline-Date.now())/1000));$("timer").textContent=String(Math.floor(left/60)).padStart(2,"0")+":"+String(left%60).padStart(2,"0");if(left===0)finish(true)}
@@ -71,14 +71,14 @@ $("registerForm").onsubmit=e=>{e.preventDefault();start()};$("cancelRegister").o
 <script type="module">
 import { auth } from "./js/firebase-config.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-const gate=document.getElementById("authGate");
+
 const protectedArea=document.getElementById("academyProtected");
 window.academyAuthenticated=false;
+protectedArea.hidden=false;
 onAuthStateChanged(auth,user=>{
   const loggedIn=Boolean(user);
   window.academyAuthenticated=loggedIn;
-  gate.hidden=loggedIn;
-  protectedArea.hidden=!loggedIn;
+  protectedArea.hidden=false;
   if(!loggedIn){
     // Reset the page immediately on sign-out; do not leave exam or certificate visible.
     for(const id of ["register","exam","results","certificateSection"])document.getElementById(id).classList.add("hidden");
@@ -87,7 +87,6 @@ onAuthStateChanged(auth,user=>{
 },error=>{
   console.error("Firebase authentication check failed",error);
   window.academyAuthenticated=false;
-  gate.hidden=false;
-  protectedArea.hidden=true;
+  protectedArea.hidden=false;
 });
 </script></body></html>
