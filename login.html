@@ -506,7 +506,9 @@ form.addEventListener("submit", async (event) => {
         auth, email, password
       );
 
-      window.location.replace("/");
+      const next = new URLSearchParams(window.location.search).get("next");
+      // Restrict return destinations to the Academy; never redirect to arbitrary URLs.
+      window.location.replace(next === "/academy.html" ? next : "/");
       return;
     }
 
