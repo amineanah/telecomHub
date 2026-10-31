@@ -75,16 +75,3 @@ service cloud.firestore {
       allow delete: if admin();
     }
   }
-    // Private user-owned CV text. No public access or cross-account reads.
-    match /users/{userId}/career/cv {
-      allow get, create, update, delete: if request.auth != null && request.auth.uid == userId
-        && (request.method == 'get' || request.method == 'delete' || (
-          request.resource.data.keys().hasOnly(['text','updatedAt'])
-          && request.resource.data.keys().hasAll(['text','updatedAt'])
-          && request.resource.data.text is string
-          && request.resource.data.text.size() >= 80
-          && request.resource.data.text.size() <= 20000
-          && request.resource.data.updatedAt == request.time));
-    }
-
-}
