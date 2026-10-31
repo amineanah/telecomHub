@@ -1,5 +1,6 @@
 
 import { auth } from "./firebase-config.js";
+import {getFirestore,doc,getDoc} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
 import {
   onAuthStateChanged,
@@ -21,7 +22,8 @@ if (!loginBtn || !logoutBtn || !userName) {
   );
 } else {
 
-  onAuthStateChanged(auth, (user) => {
+  let photoRequest=0;
+  onAuthStateChanged(auth, async (user) => {
 
     if (user) {
 
@@ -51,6 +53,7 @@ if (!loginBtn || !logoutBtn || !userName) {
 
       // USER IS LOGGED OUT
 
+      ++photoRequest;
       loginBtn.hidden = false;
       logoutBtn.hidden = true;
       userName.hidden = true;
