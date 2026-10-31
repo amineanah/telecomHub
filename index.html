@@ -2228,6 +2228,7 @@
 #quote-status{margin:2px 0;color:var(--primary,#0879ba)}#quote-form small{color:var(--text-muted,#536a81)}
 @media(max-width:550px){.quote-actions button{flex:1 1 100%}}
 
+ .hub-more-link{text-align:center;margin:24px auto 10px}.hub-more-link a{display:inline-flex;align-items:center;justify-content:center;padding:15px 26px;background:linear-gradient(135deg,#0b63e5,#0284c7);border-radius:12px;color:#fff;text-decoration:none;font-weight:800;box-shadow:0 5px 18px #0003}.hub-more-link a:hover{filter:brightness(1.12)}
 /* Mobile usability improvements */
 @media(max-width:640px){html,body{max-width:100%;overflow-x:clip}nav{display:flex;flex-wrap:wrap;gap:8px;max-width:100%}nav a{white-space:normal;overflow-wrap:anywhere}img,video,iframe,svg{max-width:100%}main,section{min-width:0}}
 </style>
@@ -2759,22 +2760,7 @@
     <span>⚙ <strong>Interactive tools</strong><small>Explore concepts hands-on</small></span>
     <span>↗ <strong>Career development</strong><small>Build useful engineering skills</small></span>
   </div>
-  <div class="hub-controls">
-    <div class="hub-filters" role="group" aria-label="Filter articles by topic">
-      <button class="hub-filter is-active" type="button" data-hub-filter="all" aria-pressed="true">All resources</button>
-      <button class="hub-filter" type="button" data-hub-filter="5g" aria-pressed="false">5G Networks</button>
-      <button class="hub-filter" type="button" data-hub-filter="ran" aria-pressed="false">RAN &amp; Radio</button>
-      <button class="hub-filter" type="button" data-hub-filter="fiber" aria-pressed="false">Fiber Optics</button>
-      <button class="hub-filter" type="button" data-hub-filter="ehs" aria-pressed="false">EHS &amp; Quality</button>
-      <button class="hub-filter" type="button" data-hub-filter="site" aria-pressed="false">Site Engineering</button>
-      <button class="hub-filter" type="button" data-hub-filter="ai" aria-pressed="false">AI &amp; Automation</button>
-      <button class="hub-filter" type="button" data-hub-filter="tools" aria-pressed="false">Tools</button>
-      <button class="hub-filter" type="button" data-hub-filter="core" aria-pressed="false">Core &amp; Transport</button>
-      <button class="hub-filter" type="button" data-hub-filter="power" aria-pressed="false">Power &amp; IoT</button>
-    </div>
-    <label class="hub-search-label" for="hub-search"><span aria-hidden="true">⌕</span><span class="hub-sr-only">Search telecom articles</span><input id="hub-search" type="search" placeholder="Search articles…" autocomplete="off"></label>
-  </div>
-  <p id="hub-results" class="hub-results" role="status" aria-live="polite">Showing all 18 resources</p>
+  <p id="hub-results" class="hub-results" role="status" aria-live="polite">Showing 6 featured resources</p>
   <p id="hub-dynamic-status" class="hub-results" role="status" aria-live="polite"></p>
   <div id="hub-card-grid" class="hub-card-grid">
     <article class="hub-card" data-hub-category="5g" data-hub-search="5g &amp; 4g network fundamentals 5g networks explore cellular network architecture, core concepts and practical mobile-network technologies.">
@@ -2886,7 +2872,7 @@
   </a>
 </article>
   </div>
-  <p id="hub-empty" class="hub-empty" hidden>No matching resources found. Try another topic or search term.</p>
+  <div class="hub-more-link"><a href="articles.html" aria-label="Read more articles">📚 Read More Articles →</a></div><p id="hub-empty" class="hub-empty" hidden>No matching resources found. Try another topic or search term.</p>
   <div class="hub-bottom"><div><h3>Looking for hands-on telecom guidance?</h3><p>Explore the virtual inspector, interview practice, or contact us about telecom engineering services.</p></div><div class="hub-bottom-links"><a href="virtual-telecom-site.html.html">Virtual Site Inspector →</a><a href="#telecomInterview">Interview Practice →</a><a href="contact.html">Contact TelecomHub →</a></div></div>
 </section>
 <!-- ================= END KNOWLEDGE HUB ================= -->
@@ -3549,43 +3535,11 @@
 </footer>
 
 <script>
-/* Telecom Knowledge Hub search and category filters. Runs locally, no personal data sent. */
-(function(){
-  const section=document.getElementById("telecom-knowledge-hub");
-  if(!section)return;
-  let cards=Array.from(section.querySelectorAll(".hub-card"));
-  const buttons=Array.from(section.querySelectorAll(".hub-filter"));
-  const search=section.querySelector("#hub-search");
-  const count=section.querySelector("#hub-results");
-  const empty=section.querySelector("#hub-empty");
-  let active="all";
-  function update(){
-    const term=(search.value||"").trim().toLocaleLowerCase();
-    let shown=0;
-    cards.forEach(card=>{
-      const categoryOk=active==="all"||card.dataset.hubCategory===active;
-      const textOk=!term||(card.dataset.hubSearch||"").includes(term);
-      card.hidden=!(categoryOk&&textOk);
-      if(!card.hidden)shown++;
-    });
-    count.textContent="Showing "+shown+" of "+cards.length+" resources";
-    empty.hidden=shown!==0;
-  }
-  buttons.forEach(button=>button.addEventListener("click",()=>{
-    active=button.dataset.hubFilter;
-    buttons.forEach(item=>{const selected=item===button;item.classList.toggle("is-active",selected);item.setAttribute("aria-pressed",String(selected));});
-    update();
-  }));
-  search.addEventListener("input",update);
-  document.addEventListener("telecom:articles-loaded",()=>{
-    cards=Array.from(section.querySelectorAll(".hub-card"));
-    update();
-  });
-  update();
-})();
+/* Homepage preview: show six resources; browse all on articles.html. */
+(function(){const section=document.getElementById("telecom-knowledge-hub");if(!section)return;const count=section.querySelector("#hub-results");function update(){const cards=[...section.querySelectorAll(".hub-card")];cards.forEach((card,i)=>{card.hidden=i>=6});count.textContent="Showing "+Math.min(6,cards.length)+" featured resources";}document.addEventListener("telecom:articles-loaded",update);update()})();
 </script>
 
-<script type="module" src="js/articles-public.js"></script>
+<script type="module" src="js/articles-public.js?v=featured-six"></script>
 
 <script>
 (function(){
