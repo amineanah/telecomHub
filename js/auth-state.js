@@ -31,8 +31,8 @@ if (!loginBtn || !logoutBtn || !userName) {
       logoutBtn.hidden = false;
       userName.hidden = false;
 
-      userName.style.cursor = "default";
-      userName.removeAttribute("title");
+      userName.style.cursor = "pointer";
+      userName.setAttribute("title","Open My Profile");
       userName.removeAttribute("role");
       userName.removeAttribute("tabindex");
       userName.onclick=null;
