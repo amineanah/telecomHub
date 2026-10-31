@@ -24,6 +24,19 @@ service cloud.firestore {
         && request.resource.data.source == 'browser-scored';
       allow update, delete: if false;
     }
+    // Private editable career profile; only the signed-in owner can access it.
+    match /users/{userId}/profile/{profileId} {
+      allow get: if request.auth != null && request.auth.uid == userId && profileId == 'details';
+      allow list, delete: if false;
+      allow create, update: if request.auth != null && request.auth.uid == userId && profileId == 'details'
+        && request.resource.data.keys().hasOnly(['fullName','specialization','experience','updatedAt'])
+        && request.resource.data.keys().hasAll(['fullName','specialization','experience','updatedAt'])
+        && request.resource.data.fullName is string
+        && request.resource.data.fullName.size() >= 2 && request.resource.data.fullName.size() <= 90
+        && request.resource.data.specialization in ['', '5G / RAN','RF Optimization','Fiber / FTTH','IP / Core Networks','Transmission','Telecom Site Engineering','Power & Energy','Other']
+        && request.resource.data.experience in ['', 'Student','Junior (0–2 years)','Mid-level (3–5 years)','Senior (6+ years)']
+        && request.resource.data.updatedAt == request.time;
+    }
     match /visitorFeedback/{feedbackId} {
       allow create: if request.auth != null
         && request.resource.data.keys().hasOnly(['name', 'message', 'rating', 'status', 'authorUid', 'createdAt'])
