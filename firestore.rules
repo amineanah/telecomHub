@@ -37,6 +37,18 @@ service cloud.firestore {
         && request.resource.data.experience in ['', 'Student','Junior (0–2 years)','Mid-level (3–5 years)','Senior (6+ years)']
         && request.resource.data.updatedAt == request.time;
     }
+    // Small compressed profile photos, private to the signed-in owner.
+    match /users/{userId}/profile/avatar {
+      allow get: if request.auth != null && request.auth.uid == userId;
+      allow list, delete: if false;
+      allow create, update: if request.auth != null && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly(['imageData','updatedAt'])
+        && request.resource.data.keys().hasAll(['imageData','updatedAt'])
+        && request.resource.data.imageData is string
+        && request.resource.data.imageData.size() <= 70000
+        && (request.resource.data.imageData == '' || request.resource.data.imageData.matches('data:image/jpeg;base64,[A-Za-z0-9+/=]+'))
+        && request.resource.data.updatedAt == request.time;
+    }
     match /visitorFeedback/{feedbackId} {
       allow create: if request.auth != null
         && request.resource.data.keys().hasOnly(['name', 'message', 'rating', 'status', 'authorUid', 'createdAt'])
