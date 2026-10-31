@@ -2231,6 +2231,38 @@
  .hub-more-link{text-align:center;margin:24px auto 10px}.hub-more-link a{display:inline-flex;align-items:center;justify-content:center;padding:15px 26px;background:linear-gradient(135deg,#0b63e5,#0284c7);border-radius:12px;color:#fff;text-decoration:none;font-weight:800;box-shadow:0 5px 18px #0003}.hub-more-link a:hover{filter:brightness(1.12)}
 /* Mobile usability improvements */
 @media(max-width:640px){html,body{max-width:100%;overflow-x:clip}nav{display:flex;flex-wrap:wrap;gap:8px;max-width:100%}nav a{white-space:normal;overflow-wrap:anywhere}img,video,iframe,svg{max-width:100%}main,section{min-width:0}}
+
+/* Professional resume layout — theme-aware for existing light/dark switch */
+.professional-profile.professional-resume{display:flex;flex-direction:column;gap:22px;padding:clamp(20px,3vw,38px);background:var(--bg-card);color:var(--text-main);border:1px solid var(--border);border-radius:18px}
+.professional-resume .resume-topline{display:flex;justify-content:space-between;align-items:center;color:var(--primary);font-size:11px;font-weight:800;letter-spacing:.12em;border-bottom:1px solid var(--border);padding-bottom:15px}
+.professional-resume .resume-identity{display:flex;align-items:center;gap:24px}
+.professional-resume .profile-image{flex:0 0 auto;width:145px;height:165px;object-fit:cover;border-radius:14px;border:2px solid var(--primary);margin:0}
+.professional-resume .resume-identity-copy{min-width:0}
+.professional-resume .resume-identity h2{font-size:clamp(26px,3vw,38px);margin:0 0 8px}
+.professional-resume .profile-title{margin:0 0 13px}
+.professional-resume .resume-meta{margin:6px 0;color:var(--text-muted);font-size:14px}
+.professional-resume .resume-about{padding:20px 22px;background:var(--bg-card-subtle);border:1px solid var(--border);border-radius:12px}
+.professional-resume h3{font-size:19px;margin:0 0 12px;color:var(--text-main)}
+.professional-resume .resume-about p,.professional-resume .resume-step p{color:var(--text-muted);line-height:1.7;margin:0;font-size:14px}
+.professional-resume .resume-timeline{border-left:2px solid var(--primary-border);margin-left:16px;padding-left:24px;display:grid;gap:22px}
+.professional-resume .resume-step{position:relative}
+.professional-resume .resume-step-icon{position:absolute;left:-42px;top:0;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--primary);color:#fff;font-weight:800}
+.professional-resume .resume-step h4{margin:0 0 5px;color:var(--text-main);font-size:15px}
+.professional-resume .resume-skills{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.professional-resume .resume-skills>*{display:flex;align-items:center;justify-content:center;text-align:center;padding:12px 9px;border-radius:9px;background:var(--bg-card-subtle);border:1px solid var(--border);color:var(--text-main);font-size:12px;font-weight:700;text-decoration:none}
+.professional-resume .resume-skills a:hover{border-color:var(--primary);color:var(--primary)}
+.professional-resume .resume-actions{display:flex;gap:12px;flex-wrap:wrap}
+.professional-resume .resume-actions a{display:inline-flex;justify-content:center;align-items:center;min-width:160px;padding:13px 20px;border-radius:9px;font-weight:750;text-decoration:none}
+.professional-resume .resume-primary{background:var(--primary);color:#fff}
+.professional-resume .resume-secondary{border:1px solid var(--primary);color:var(--primary)}
+body.dark-mode .professional-profile.professional-resume{background:#0f172a;color:#fff;border-color:#334155}
+body.dark-mode .professional-resume .resume-about,body.dark-mode .professional-resume .resume-skills>*{background:#1e293b;border-color:#334155}
+body.dark-mode .professional-resume h3,body.dark-mode .professional-resume .resume-step h4,body.dark-mode .professional-resume .resume-skills>*{color:#f8fafc}
+body.dark-mode .professional-resume .resume-meta,body.dark-mode .professional-resume .resume-about p,body.dark-mode .professional-resume .resume-step p{color:#cbd5e1}
+body.dark-mode .professional-resume .resume-secondary{color:#9dccff;border-color:#75adff}
+body.dark-mode .professional-resume .resume-primary{color:#fff}
+@media(max-width:700px){.professional-resume .resume-skills{grid-template-columns:repeat(2,minmax(0,1fr))}.professional-resume .resume-identity{align-items:flex-start;gap:14px}.professional-resume .profile-image{width:105px;height:130px}}
+@media(max-width:430px){.professional-resume .resume-identity{flex-direction:column}.professional-resume .profile-image{width:125px;height:145px}.professional-resume .resume-actions a{width:100%}}
 </style>
 <link rel="stylesheet" href="/css/theme.css?v=3">
 <script defer src="/js/theme.js?v=3"></script>
@@ -2709,43 +2741,31 @@
 
     <!-- ================= PROFESSIONAL PROFILE ================= -->
 
-    <section class="professional-profile">
-        <div class="profile-intro">
-            <div class="profile-badge">PROFESSIONAL PROFILE</div>
-            <h2>Amine Janah</h2>
-            <img src="images/Amine pr1.jpeg" alt="Amine Janah" class="profile-image">
-            <p class="profile-title">Telecom Engineer | Quality Assurance | 5G & RAN</p>
-            <p>
-                Telecom professional with more than 3 years of experience in Huawei,
-                specializing in telecom hardware installation assurance, site quality
-                control, 5G deployment, RAN technologies and field operations.
-            </p>
-            <p>
-                • Lead and coordinate quality control activities for telecom network deployment.<br>
-                • Conduct field inspections to ensure compliance with installation and EHS standards.<br>
-                • Monitor installation quality for 4G and 5G RAN equipment (AAU, RRU, BBU).<br>
-                • Use ISDP and U2020 tools for project tracking and operational acceptance.
-            </p>
-        </div>
-
-        <div class="profile-details">
-            <div class="profile-card"><span>EXPERIENCE</span><strong>3+ Years</strong><small>Telecom Engineering</small></div>
-            <div class="profile-card"><span>CORE AREA</span><strong>5G / RAN</strong><small>Massive MIMO & RF</small></div>
-            <div class="profile-card"><span>QUALITY</span><strong>QA / QC</strong><small>Installation Assurance</small></div>
-            <div class="profile-card"><span>EDUCATION</span><strong>Master</strong><small>Telecommunication Systems</small></div>
-        </div>
-
-        <div class="profile-skills">
-            <a href="networks.html" class="skill-tag">5G NSA</a>
-            <span>Massive MIMO 64T64R</span>
-            <a href="ran.html" class="skill-tag">RAN</a>
-            <span>RF Optimization</span>
-            <span>Hardware Installation</span>
-            <span>Site Quality Control</span>
-            <span>ISDP</span>
-            <span>U2020</span>
-        </div>
-    </section>
+    <section class="professional-profile professional-resume" aria-labelledby="professional-profile-title">
+  <div class="resume-topline"><span>MEET THE ENGINEER BEHIND TELECOMHUB</span><span aria-hidden="true">◈</span></div>
+  <div class="resume-identity">
+    <img src="images/Amine pr1.jpeg" alt="Portrait of Amine Janah" class="profile-image" loading="lazy">
+    <div class="resume-identity-copy">
+      <div class="profile-badge">PROFESSIONAL PROFILE</div>
+      <h2 id="professional-profile-title">Amine Janah</h2>
+      <p class="profile-title">Telecom Engineer · 5G &amp; RAN · Quality Assurance</p>
+      <p class="resume-meta">3+ years of telecom engineering experience</p>
+      <p class="resume-meta">Master's in Telecommunication Systems</p>
+    </div>
+  </div>
+  <div class="resume-about"><h3>About Me</h3><p>Telecommunications professional with experience in 4G/5G infrastructure deployment, site installation assurance, quality inspections and field operations. Focused on reliable network delivery, engineering standards, and safe, high-quality installations.</p></div>
+  <div class="resume-focus"><h3>Professional Focus</h3>
+    <div class="resume-timeline">
+      <div class="resume-step"><span class="resume-step-icon" aria-hidden="true">⌁</span><div><h4>5G &amp; RAN Infrastructure</h4><p>Network deployment, radio equipment, Massive MIMO and AAU/RRU/BBU installation quality.</p></div></div>
+      <div class="resume-step"><span class="resume-step-icon" aria-hidden="true">✓</span><div><h4>Quality Assurance &amp; Site Inspections</h4><p>Installation compliance, field inspections, site readiness, quality control and EHS requirements.</p></div></div>
+      <div class="resume-step"><span class="resume-step-icon" aria-hidden="true">⚙</span><div><h4>Engineering Operations &amp; Training</h4><p>Project tracking and operational acceptance using ISDP and U2020, with hands-on 5G training and quality-focused field coordination.</p></div></div>
+    </div>
+  </div>
+  <div class="resume-competencies"><h3>Technical Competencies</h3><div class="resume-skills">
+    <a href="networks.html">4G / 5G Networks</a><a href="ran.html">RAN Engineering</a><span>Massive MIMO 64T64R</span><span>QA / QC</span><span>Site Engineering</span><span>EHS Compliance</span><span>ISDP &amp; U2020</span><span>RF Optimization</span>
+  </div></div>
+  <div class="resume-actions"><a class="resume-primary" href="contact.html">✉ Get in Touch</a><a class="resume-secondary" href="https://www.linkedin.com/in/amine-janah-58070a236/" target="_blank" rel="noopener noreferrer">LinkedIn Profile ↗</a></div>
+</section>
 
     <!-- ================= TELECOM KNOWLEDGE HUB ================= -->
 <section id="telecom-knowledge-hub" class="telecom-hub" aria-labelledby="hub-heading">
