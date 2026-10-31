@@ -39,10 +39,26 @@ if (!loginBtn || !logoutBtn || !userName) {
       userName.removeAttribute("tabindex");
       userName.onclick=null;
       userName.onkeydown=null;
-      userName.textContent =
-        user.displayName ||
-        user.email ||
-        "TelecomHub Member";
+      const label = document.createElement("span");
+      label.textContent = user.displayName || user.email || "TelecomHub Member";
+      const fallback = document.createElement("span");
+      fallback.className = "home-profile-fallback";
+      fallback.textContent = (user.displayName || user.email || "U")
+        .trim().split(/\s+/).slice(0, 2).map(part => part[0] || "").join("").toUpperCase();
+      userName.replaceChildren(fallback, label);
+      const request = ++photoRequest;
+      try {
+        const snap = await getDoc(doc(getFirestore(), "users", user.uid, "profile", "avatar"));
+        if (request === photoRequest && snap.exists() && snap.data().imageData) {
+          const img = document.createElement("img");
+          img.className = "home-profile-photo";
+          img.src = snap.data().imageData;
+          img.alt = "";
+          fallback.replaceWith(img);
+        }
+      } catch (error) {
+        console.warn("Profile picture unavailable; showing initials.", error);
+      }
 
       console.log(
         "TelecomHub: User logged in",
