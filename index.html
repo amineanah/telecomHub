@@ -2177,7 +2177,7 @@
         .login-button:hover { background: #0b63e5; transform: translateY(-1px); }
         #logout-btn { background: #dc3545; color: #fff; border: 1px solid #f87171; }
         #logout-btn:hover { background: #b91c1c; transform: translateY(-1px); }
-        #user-name { pointer-events: none; cursor: default !important; color: #f8fafc; font-size: 13px; font-weight: 700; overflow-wrap: anywhere; }
+        #user-name { pointer-events: auto; cursor: pointer !important; text-decoration: underline; text-underline-offset: 3px; color: #f8fafc; font-size: 13px; font-weight: 700; overflow-wrap: anywhere; }
         [hidden] { display: none !important; }
 
     
@@ -2243,7 +2243,7 @@
     <div class="topbar-left">
         <div class="auth-navigation" aria-label="Account controls">
             <a id="login-link" href="/login.html" class="login-button">👤 Login / Sign Up</a>
-            <span id="user-name" hidden></span>
+            <a id="user-name" href="/profile.html" title="Open My Profile" aria-label="Open My Profile" hidden></a>
             <button id="logout-btn" type="button" hidden>Logout</button>
         </div>
         <span class="topbar-description">Amine Janah — Telecom Engineer &amp; Quality Assurance</span>
