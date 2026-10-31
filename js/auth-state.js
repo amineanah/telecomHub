@@ -31,12 +31,12 @@ if (!loginBtn || !logoutBtn || !userName) {
       logoutBtn.hidden = false;
       userName.hidden = false;
 
-      userName.style.cursor = "pointer";
-      userName.title = "Open My Profile and Certificates";
-      userName.setAttribute("role","link");
-      userName.tabIndex=0;
-      userName.onclick=()=>window.location.href="/profile.html";
-      userName.onkeydown=e=>{if(e.key==="Enter")window.location.href="/profile.html"};
+      userName.style.cursor = "default";
+      userName.removeAttribute("title");
+      userName.removeAttribute("role");
+      userName.removeAttribute("tabindex");
+      userName.onclick=null;
+      userName.onkeydown=null;
       userName.textContent =
         user.displayName ||
         user.email ||
