@@ -16,7 +16,8 @@ service cloud.firestore {
         && request.resource.data.score is int && request.resource.data.score >= 80 && request.resource.data.score <= 100
         && request.resource.data.correct is int && request.resource.data.correct >= 24 && request.resource.data.correct <= 30
         && request.resource.data.total == 30
-        && request.resource.data.score == (request.resource.data.correct * 100 / 30)
+        && request.resource.data.score >= request.resource.data.correct * 100 / 30 - 1
+        && request.resource.data.score <= request.resource.data.correct * 100 / 30 + 1
         && request.resource.data.certificateId is string && request.resource.data.certificateId.size() <= 80
         && request.resource.data.issuedAt == request.time
         && request.resource.data.verificationStatus == 'unverified'
