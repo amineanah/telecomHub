@@ -510,7 +510,9 @@ form.addEventListener("submit", async (event) => {
         auth, email, password
       );
 
-      window.location.replace("/");
+      const nextPage = new URLSearchParams(window.location.search).get("next");
+      const allowedPages = new Set(["project-manager-simulator.html"]);
+      window.location.replace(allowedPages.has(nextPage) ? "/" + nextPage : "/");
       return;
     }
 
