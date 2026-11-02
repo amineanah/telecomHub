@@ -4,6 +4,31 @@ service cloud.firestore {
     function admin() {
       return request.auth != null && request.auth.uid == "wq68WfHSlzW1SNCeyIC2uoNwYvd2";
     }
+    // Explicit opt-in course enrollments. Learners edit only their own progress;
+    // the designated administrator can list all enrollments.
+    match /courseEnrollments/{enrollmentId} {
+      function signedOwner() { return request.auth != null && request.resource.data.uid == request.auth.uid && enrollmentId == request.auth.uid + '_' + request.resource.data.courseId; }
+      function validEnrollment() {
+        return request.resource.data.keys().hasOnly(['uid','courseId','learnerName','learnerEmail','completed','createdAt','updatedAt'])
+          && request.resource.data.keys().hasAll(['uid','courseId','learnerName','learnerEmail','completed','createdAt','updatedAt'])
+          && request.resource.data.uid is string
+          && request.resource.data.courseId in ['5g','fiber','rf','ehs','quality']
+          && request.resource.data.learnerName is string && request.resource.data.learnerName.size() <= 100
+          && request.resource.data.learnerEmail is string && request.resource.data.learnerEmail.size() <= 254
+          && request.resource.data.completed is list && request.resource.data.completed.size() <= 12
+          && request.resource.data.completed.hasOnly([0,1,2,3,4,5,6,7,8,9,10,11])
+          && request.resource.data.updatedAt == request.time;
+      }
+      allow get: if request.auth != null && (admin() || resource.data.uid == request.auth.uid);
+      allow list: if admin();
+      allow create: if signedOwner() && validEnrollment() && request.resource.data.createdAt == request.time;
+      allow update: if signedOwner() && validEnrollment()
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data.courseId == resource.data.courseId
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.completed.hasAll(resource.data.completed);
+      allow delete: if false;
+    }
     // Browser-scored educational certificates: self-reported, NOT verified credentials.
     match /users/{userId}/certificates/{certificateId} {
       allow get, list: if request.auth != null && request.auth.uid == userId;
