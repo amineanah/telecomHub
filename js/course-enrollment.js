@@ -1,0 +1,13 @@
+import {auth} from './firebase-config.js';
+import {onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js';
+import {getFirestore,doc,getDoc,setDoc,updateDoc,serverTimestamp} from 'https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js';
+const db=getFirestore(),adminUid='wq68WfHSlzW1SNCeyIC2uoNwYvd2';
+export function initCourseEnrollment(course,options){
+ const {status,button,completed,refresh}=options;let user=null,enrolled=false,remote=[],busy=false;
+ const id=u=>u.uid+'_'+course.id,ref=u=>doc(db,'courseEnrollments',id(u));
+ const message=t=>{status.textContent=t};
+ async function load(u){try{const snap=await getDoc(ref(u));enrolled=snap.exists();remote=enrolled?(snap.data().completed||[]):[];if(enrolled){completed.splice(0,completed.length,...new Set([...completed,...remote]));refresh()}button.hidden=enrolled;message(enrolled?'Enrolled — progress syncs to your account.':'Sign in and select Enroll to share course progress with the site administrator.')}catch(e){console.error(e);message('Unable to load enrollment. Check Firestore rules.');button.hidden=false}}
+ onAuthStateChanged(auth,async u=>{user=u;enrolled=false;button.hidden=false;if(!u){message('Sign in to enroll and let the site administrator see your progress. Progress otherwise stays on this device.');button.textContent='Sign in to enroll';return}button.textContent='Enroll in this course';await load(u)});
+ button.addEventListener('click',async()=>{if(!user){location.href='login.html';return}if(enrolled||busy)return;busy=true;button.disabled=true;try{await setDoc(ref(user),{uid:user.uid,courseId:course.id,learnerName:(user.displayName||'Learner').slice(0,100),learnerEmail:(user.email||'').slice(0,254),completed:[...new Set(completed)],createdAt:serverTimestamp(),updatedAt:serverTimestamp()});enrolled=true;button.hidden=true;message('Enrollment saved. The administrator can now see your course progress.')}catch(e){console.error(e);message('Enrollment failed. Make sure the updated Firestore rules are published.')}finally{busy=false;button.disabled=false}});
+ return {async save(){if(!enrolled||!user)return;try{const latest=await getDoc(ref(user));if(!latest.exists())return;const merged=[...new Set([...(latest.data().completed||[]),...completed])].sort((a,b)=>a-b);await updateDoc(ref(user),{completed:merged,updatedAt:serverTimestamp()});message('Progress synced to your account.')}catch(e){console.error(e);message('Saved on this device, but account sync failed. Retry after checking your connection and Firestore rules.')}}};
+}
