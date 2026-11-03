@@ -29,9 +29,9 @@ service cloud.firestore {
         && request.resource.data.completed.hasAll(resource.data.completed);
       allow delete: if false;
     }
-    // Browser-scored educational certificates: self-reported, NOT verified credentials.
+    // Admin collection-group queries across all learner certificate subcollections.\n    match /{path=**}/certificates/{certificateId} {\n      allow list: if admin();\n    }\n    // Browser-scored educational certificates: self-reported, NOT verified credentials.
     match /users/{userId}/certificates/{certificateId} {
-      allow get, list: if request.auth != null && request.auth.uid == userId;
+      allow get, list: if admin() || (request.auth != null && request.auth.uid == userId);
       allow create: if request.auth != null && request.auth.uid == userId
         && request.resource.data.keys().hasOnly(['candidate','exam','score','correct','total','certificateId','issuedAt','verificationStatus','source'])
         && request.resource.data.keys().hasAll(['candidate','exam','score','correct','total','certificateId','issuedAt','verificationStatus','source'])
@@ -47,7 +47,7 @@ service cloud.firestore {
         && request.resource.data.issuedAt == request.time
         && request.resource.data.verificationStatus == 'unverified'
         && request.resource.data.source == 'browser-scored';
-      allow update, delete: if false;
+      // Administrator may review/revoke and correct candidate name, preserving exam and score.\n      allow update: if admin()\n        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['candidate','verificationStatus','reviewNote','reviewedAt'])\n        && request.resource.data.candidate is string\n        && request.resource.data.candidate.size() >= 2 && request.resource.data.candidate.size() <= 90\n        && request.resource.data.verificationStatus in ['unverified','verified','revoked']\n        && request.resource.data.reviewNote is string && request.resource.data.reviewNote.size() <= 500\n        && request.resource.data.reviewedAt == request.time;\n      allow delete: if false;
     }
     // Private editable career profile; only the signed-in owner can access it.
     match /users/{userId}/profile/{profileId} {
