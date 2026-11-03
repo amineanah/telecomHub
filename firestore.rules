@@ -37,10 +37,15 @@ service cloud.firestore {
     match /users/{userId}/certificates/{certificateId} {
       allow get, list: if admin() || (request.auth != null && request.auth.uid == userId);
       allow create: if (admin()
-        && request.resource.data.keys().hasOnly(['candidate','exam','certificateId','issuedAt','verificationStatus','source','reviewNote','issuedBy'])
+        && request.resource.data.keys().hasOnly(['candidate','exam','score','correct','total','certificateId','issuedAt','verificationStatus','source','reviewNote','issuedBy'])
         && request.resource.data.keys().hasAll(['candidate','exam','certificateId','issuedAt','verificationStatus','source','reviewNote','issuedBy'])
         && request.resource.data.candidate is string && request.resource.data.candidate.size() >= 2 && request.resource.data.candidate.size() <= 90
         && request.resource.data.exam in ['5G NR Fundamentals','LTE / 4G Engineering','RAN Optimization','RF Planning & Design','Telecom Site Quality Control & Acceptance','Telecom EHS & Working at Heights','Fiber Optics & FTTH Engineering']
+        && request.resource.data.score is int && request.resource.data.score >= 80 && request.resource.data.score <= 100
+        && request.resource.data.correct is int && request.resource.data.correct >= 24 && request.resource.data.correct <= 30
+        && request.resource.data.total == 30
+        && request.resource.data.score >= request.resource.data.correct * 100 / 30 - 1
+        && request.resource.data.score <= request.resource.data.correct * 100 / 30 + 1
         && request.resource.data.certificateId == certificateId && certificateId.size() <= 80
         && request.resource.data.issuedAt == request.time
         && request.resource.data.verificationStatus == 'unverified'
