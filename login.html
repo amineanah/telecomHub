@@ -347,7 +347,6 @@ import {
   updateProfile,
   signOut
 } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
 /* YOUR FIREBASE PROJECT */
 
@@ -364,18 +363,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
-async function syncAccount(user) {
-  if (!user) return;
-  const ref = doc(db, "accountDirectory", user.uid);
-  const base = { uid: user.uid, name: (user.displayName || "").slice(0, 100), email: (user.email || "").slice(0, 254), lastLogin: serverTimestamp() };
-  try {
-    await setDoc(ref, { ...base, createdAt: user.metadata.creationTime || "" }, { merge: true });
-  } catch (error) {
-    console.warn("Account directory sync failed:", error.code || error);
-  }
-}
-
 
 /* ELEMENTS */
 
@@ -498,7 +485,6 @@ form.addEventListener("submit", async (event) => {
           displayName: fullName
         });
 
-        await syncAccount(result.user);
         await sendEmailVerification(result.user);
 
         showMessage(
@@ -520,10 +506,9 @@ form.addEventListener("submit", async (event) => {
     }
 
     if (mode === "login") {
-      const signedIn = await signInWithEmailAndPassword(
+      await signInWithEmailAndPassword(
         auth, email, password
       );
-      await syncAccount(signedIn.user);
 
       const nextPage = new URLSearchParams(window.location.search).get("next");
       const allowedPages = new Set(["project-manager-simulator.html"]);
