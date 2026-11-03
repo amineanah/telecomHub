@@ -4,27 +4,6 @@ service cloud.firestore {
     function admin() {
       return request.auth != null && request.auth.uid == "wq68WfHSlzW1SNCeyIC2uoNwYvd2";
     }
-    // Account directory: each user may write only their own metadata.
-    // Admin alone can enumerate accounts; records cannot be deleted by clients.
-    match /accountDirectory/{userId} {
-      function owner() { return request.auth != null && request.auth.uid == userId; }
-      function valid() {
-        return request.resource.data.keys().hasOnly(['uid','name','email','createdAt','lastLogin'])
-          && request.resource.data.keys().hasAll(['uid','name','email','createdAt','lastLogin'])
-          && request.resource.data.uid == userId
-          && request.resource.data.name is string && request.resource.data.name.size() <= 100
-          && request.resource.data.email is string && request.resource.data.email.size() <= 254
-          && request.resource.data.createdAt is string && request.resource.data.createdAt.size() <= 60
-          && request.resource.data.lastLogin == request.time;
-      }
-      allow get: if admin() || owner();
-      allow list: if admin();
-      allow create: if owner() && valid();
-      allow update: if owner() && valid()
-        && request.resource.data.uid == resource.data.uid
-        && request.resource.data.createdAt == resource.data.createdAt;
-      allow delete: if false;
-    }
     // Explicit opt-in course enrollments. Learners edit only their own progress;
     // the designated administrator can list all enrollments.
     match /courseEnrollments/{enrollmentId} {
