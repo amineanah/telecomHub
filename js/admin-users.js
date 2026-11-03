@@ -1,5 +1,4 @@
-import { getApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-functions.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
 let cachedUsers = null;
 const $ = id => document.getElementById(id);
@@ -11,16 +10,8 @@ const formatDate = value => {
 const monthKey = date => `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}`;
 
 async function fetchUsers() {
-  const functions = getFunctions(getApp(), "us-central1");
-  const listUsers = httpsCallable(functions, "adminListUsers");
-  const users = [];
-  let pageToken = null;
-  do {
-    const response = await listUsers({ pageToken, pageSize: 1000 });
-    users.push(...(response.data.users || []));
-    pageToken = response.data.nextPageToken || null;
-  } while (pageToken);
-  return users;
+  const snapshot = await getDocs(collection(getFirestore(), "accountDirectory"));
+  return snapshot.docs.map(item => item.data());
 }
 
 function renderChart(users) {
@@ -110,7 +101,7 @@ function exportCsv() {
 }
 
 async function load() {
-  $("users-status").textContent = "Loading registered Firebase accounts…";
+  $("users-status").textContent = "Loading recorded accounts…";
   $("users-refresh").disabled = true;
   try {
     cachedUsers = await fetchUsers();
@@ -119,7 +110,7 @@ async function load() {
     renderTable();
   } catch (error) {
     console.error(error);
-    $("users-status").textContent = error?.message || "Unable to load accounts. Check the deployed Cloud Function and administrator access.";
+    $("users-status").textContent = error?.message || "Unable to load accounts. Check published Firestore rules and administrator access.";
   } finally {
     $("users-refresh").disabled = false;
   }
