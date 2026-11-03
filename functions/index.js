@@ -41,3 +41,25 @@ exports.restoreCertificateAdmin=onCall({region:'us-central1',maxInstances:5},asy
  });
  return {ok:true,...result};
 });
+
+exports.adminListUsers=onCall({region:'us-central1',maxInstances:5},async request=>{
+ authorized(request);
+ const pageToken=typeof request.data?.pageToken==='string'&&request.data.pageToken?request.data.pageToken:undefined;
+ const pageSize=Math.min(1000,Math.max(1,Number(request.data?.pageSize)||1000));
+ try{
+  const result=await getAuth().listUsers(pageSize,pageToken);
+  return {
+   users:result.users.map(user=>({
+    uid:user.uid,
+    name:user.displayName||'',
+    email:user.email||'',
+    createdAt:user.metadata.creationTime||null,
+    lastLogin:user.metadata.lastSignInTime||null
+   })),
+   nextPageToken:result.pageToken||null
+  };
+ }catch(error){
+  console.error('adminListUsers failed',error);
+  throw new HttpsError('internal','Unable to retrieve registered accounts.');
+ }
+});
