@@ -1,7 +1,7 @@
 // Cloudflare Worker: scheduled verified-certificate email delivery.
 // Configure SERVICE_ACCOUNT_JSON, RESEND_API_KEY, RESEND_FROM as Worker secrets.
 const PROJECT='telecomhu-1c41c';
-const enc=o=>btoa(String.fromCharCode(...new TextEncoder().encode(typeof o==='string'?o:JSON.stringify(o)))).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,'');
+const enc=o=>btoa(String.fromCharCode(...new TextEncoder().encode(typeof o==='string'?o:JSON.stringify(o)))).replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'');
 const escapeHtml=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 async function accessToken(env){
  const sa=JSON.parse(env.SERVICE_ACCOUNT_JSON),now=Math.floor(Date.now()/1000);
