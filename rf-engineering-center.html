@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Free public RF link budget calculator and 5G radio engineering reference tools.">
+<title>RF Engineering Center | TelecomHub</title>
+<link rel="stylesheet" href="/css/theme.css?v=3">
+<script defer src="/js/theme.js?v=3"></script>
+<style>
+:root{--rf-blue:#1264e8;--rf-bg:#f3f7fc;--rf-card:#fff;--rf-text:#17243a;--rf-muted:#607087;--rf-line:#dce5f0}
+body{margin:0;background:var(--rf-bg);color:var(--rf-text);font:15px/1.6 Inter,system-ui,Segoe UI,sans-serif}
+body.dark-mode{--rf-bg:#0b1220;--rf-card:#121e31;--rf-text:#edf4ff;--rf-muted:#a8b7cc;--rf-line:#293a53}
+a{color:var(--rf-blue)}.rf-wrap{max-width:1120px;margin:auto;padding:24px}
+.rf-top{background:#071a34;color:#fff;padding:14px 24px;display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap}
+.rf-top a{color:#fff;text-decoration:none}.rf-hero{padding:42px 0 28px}.rf-hero h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:0 0 12px}.rf-hero p{color:var(--rf-muted);max-width:760px}
+.rf-pill{display:inline-block;background:#e4efff;color:#124b9c;padding:4px 10px;border-radius:30px;font-size:12px;font-weight:700}
+.rf-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.rf-card{background:var(--rf-card);border:1px solid var(--rf-line);border-radius:14px;padding:22px;box-shadow:0 5px 18px #132b4a0b}.rf-card h2{font-size:20px;margin:0 0 6px}.rf-muted{color:var(--rf-muted);font-size:13px}
+.rf-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}label{display:block;font-size:13px;font-weight:650}input,select{width:100%;box-sizing:border-box;margin-top:5px;padding:10px 11px;border:1px solid var(--rf-line);border-radius:8px;background:var(--rf-bg);color:var(--rf-text);font:inherit}
+.rf-result{margin-top:16px;padding:16px;border-radius:10px;background:#eaf3ff;color:#12345d}.rf-result strong{font-size:25px;display:block}.rf-result small{display:block;color:#345779}
+.rf-btn{border:0;border-radius:8px;padding:11px 16px;background:var(--rf-blue);color:white;font-weight:700;cursor:pointer;margin-top:14px}.rf-btn:focus,input:focus{outline:3px solid #1264e855;outline-offset:2px}
+.rf-wide{grid-column:1/-1}.rf-list{padding-left:19px;color:var(--rf-muted)}.rf-sources a{display:inline-block;margin:5px 14px 5px 0}.rf-note{border-left:4px solid #e0a126;padding:10px 14px;background:#fff7e5;color:#60440c;border-radius:5px;font-size:13px}
+@media(max-width:720px){.rf-grid{grid-template-columns:1fr}.rf-fields{grid-template-columns:1fr}.rf-wide{grid-column:auto}.rf-wrap{padding:16px}}
+</style>
+</head>
+<body>
+<header class="rf-top"><a href="/index.html"><strong>TELECOMHUB</strong></a><nav><a href="/ran.html">RAN learning</a> &nbsp;·&nbsp; <a href="/index.html">Home</a></nav></header>
+<main class="rf-wrap">
+<section class="rf-hero"><span class="rf-pill">FREE · PUBLIC ENGINEERING TOOL</span><h1>RF Engineering Center</h1><p>Practical first-pass radio calculations for planning, learning and troubleshooting. Enter your own assumptions, inspect the formulas and use the linked standards references for detailed engineering work.</p></section>
+<div class="rf-grid">
+<section class="rf-card">
+<h2>RF link budget</h2><p class="rf-muted">Downlink received power estimate using a simple free-space path-loss model.</p>
+<div class="rf-fields">
+<label>Transmit power (dBm)<input id="tx" type="number" value="悖" step="0.1"></label>
+<label>Tx antenna gain (dBi)<input id="txg" type="number" value="18" step="0.1"></label>
+<label>Tx feeder / system loss (dB)<input id="txl" type="number" value="2" step="0.1"></label>
+<label>Rx antenna gain (dBi)<input id="rxg" type="number" value="0" step="0.1"></label>
+<label>Rx feeder / system loss (dB)<input id="rxl" type="number" value="0" step="0.1"></label>
+<label>Frequency (MHz)<input id="freq" type="number" value="3500" min="1" step="1"></label>
+<label>Distance (km)<input id="dist" type="number" value="1" min="0.001" step="0.1"></label>
+<label>Additional penetration / clutter loss (dB)<input id="extra" type="number" value="0" min="0" step="0.1"></label>
+</div><button class="rf-btn" id="calcLink">Calculate link budget</button>
+<div class="rf-result" aria-live="polite"><small>Estimated received power (dBm)</small><strong id="rxpower">—</strong><span id="ploss">Path loss: —</span></div>
+<p class="rf-muted">Model: FSPL = 32.44 + 20 log₁₀(fMHz) + 20 log₁₀(dkm). Received power = Tx power + Tx gain − Tx losses − path loss + Rx gain − Rx losses − additional loss.</p>
+</section>
+<section class="rf-card">
+<h2>RSRP / SINR learning guide</h2><p class="rf-muted">Interpretation guide only. Thresholds vary by band, device, deployment and operator; do not treat these as universal acceptance criteria.</p>
+<div class="rf-fields">
+<label>Measured RSRP (dBm)<input id="rsrp" type="number" value="-95" step="1"></label>
+<label>Measured SINR (dB)<input id="sinr" type="number" value="12" step="1"></label>
+<label>Measured RSRQ (dB)<input id="rsrq" type="number" value="-10" step="1"></label>
+</div><button class="rf-btn" id="interpret">Interpret measurements</button>
+<div class="rf-result" aria-live="polite"><strong id="radioGrade">—</strong><span id="radioText">Enter measurements and select interpret.</span></div>
+</section>
+<section class="rf-card">
+<h2>Quick antenna geometry</h2><p class="rf-muted">Approximate vertical beam footprint from height and downtilt, using flat-ground geometry.</p>
+<div class="rf-fields">
+<label>Antenna height above ground (m)<input id="height" type="number" value="30" min="0.1" step="0.5"></label>
+<label>Electrical + mechanical downtilt (degrees)<input id="tilt" type="number" value="4" min="0.1" max="89" step="0.1"></label>
+</div><button class="rf-btn" id="calcTilt">Estimate beam centre</button>
+<div class="rf-result" aria-live="polite"><small>Approximate horizontal distance</small><strong id="beamDistance">—</strong><span>Distance = height / tan(total downtilt). Assumes level terrain and ignores antenna pattern and clutter.</span></div>
+</section>
+<section class="rf-card">
+<h2>RAN KPI quick calculator</h2><p class="rf-muted">Calculate simple success ratios from counters. Use matching counter definitions and time windows.</p>
+<div class="rf-fields">
+<label>Successful attempts<input id="success" type="number" value="985" min="0"></label>
+<label>Total attempts<input id="attempts" type="number" value="1000" min="0.0001"></label>
+</div><button class="rf-btn" id="calcKpi">Calculate success rate</button>
+<div class="rf-result" aria-live="polite"><small>Success rate</small><strong id="kpiValue">—</strong><span id="kpiNote">Successful attempts ÷ total attempts × 100.</span></div>
+</section>
+<section class="rf-card rf-wide">
+<h2>Engineering references & further reading</h2><p class="rf-muted">Use the official publications as the authority for specifications. This page provides learning summaries and calculators, not vendor-specific configuration instructions.</p>
+<div class="rf-sources">
+<a href="https://www.3gpp.org/dynareport/38300.htm" target="_blank" rel="noopener noreferrer">3GPP TS 38.300 — NR and NG-RAN overall description</a>
+<a href="https://www.3gpp.org/dynareport/38104.htm" target="_blank" rel="noopener noreferrer">3GPP TS 38.104 — NR base station radio transmission and reception</a>
+<a href="https://www.3gpp.org/dynareport/38211.htm" target="_blank" rel="noopener noreferrer">3GPP TS 38.211 — NR physical channels and modulation</a>
+<a href="https://www.etsi.org/standards" target="_blank" rel="noopener noreferrer">ETSI standards catalogue</a>
+<a href="https://www.o-ran.org/specifications" target="_blank" rel="noopener noreferrer">O-RAN Alliance specifications</a>
+<a href="https://www.itu.int/rec/R-REC-P.525/en" target="_blank" rel="noopener noreferrer">ITU-R P.525 — Free-space attenuation</a>
+</div>
+<ul class="rf-list"><li>For real propagation planning, use an appropriate terrain/clutter model (for example, a validated operator model); FSPL is a simplified baseline.</li><li>RSRP, RSRQ and SINR interpretation depends on measurement method, radio configuration, load and vendor counters.</li><li>Validate every design against current licensed spectrum, equipment limits, local regulation and the applicable 3GPP release.</li></ul>
+<div class="rf-note">Educational use: results are estimates, not a substitute for a calibrated RF planning system, drive-test evidence, vendor documentation or a competent engineering review.</div>
+</section>
+</div>
+</main>
+<script>
+(function(){
+ const $=id=>document.getElementById(id), num=id=>Number($(id).value);
+ function fspl(f,d){return 32.44+20*Math.log10(f)+20*Math.log10(d)}
+ $('tx').value='43';
+ $('calcLink').addEventListener('click',()=>{
+  const ids=['tx','txg','txl','rxg','rxl','freq','dist','extra'];
+  if(ids.some(id=>!Number.isFinite(num(id)))||num('freq')<=0||num('dist')<=0){$('rxpower').textContent='Check inputs';return}
+  const loss=fspl(num('freq'),num('dist'));
+  const rx=num('tx')+num('txg')-num('txl')-loss+num('rxg')-num('rxl')-num('extra');
+  $('rxpower').textContent=rx.toFixed(2)+' dBm';$('ploss').textContent='Free-space path loss: '+loss.toFixed(2)+' dB';
+ });
+ $('interpret').addEventListener('click',()=>{
+  const r=num('rsrp'),s=num('sinr'),q=num('rsrq');
+  if(![r,s,q].every(Number.isFinite)){$('radioGrade').textContent='Check inputs';return}
+  const grade=r>=-80&&s>=20?'Strong radio conditions':r>=-100&&s>=5?'Moderate radio conditions':'Potentially weak / interference-limited conditions';
+  $('radioGrade').textContent=grade;$('radioText').textContent='RSRP '+r+' dBm · SINR '+s+' dB · RSRQ '+q+' dB. Review trends, serving/neighbor cells, load and measurement context before diagnosing.';
+ });
+ $('calcTilt').addEventListener('click',()=>{
+  const h=num('height'),t=num('tilt');if(!(h>0&&t>0&&t<90)){$('beamDistance').textContent='Check height / tilt';return}
+  $('beamDistance').textContent=(h/Math.tan(t*Math.PI/180)).toFixed(1)+' m';
+ });
+ $('calcKpi').addEventListener('click',()=>{
+  const s=num('success'),a=num('attempts');if(!(a>0&&s>=0&&s<=a)){$('kpiValue').textContent='Check counters';$('kpiNote').textContent='Require 0 ≤ successful attempts ≤ total attempts and total attempts > 0.';return}
+  $('kpiValue').textContent=(100*s/a).toFixed(3)+'%';$('kpiNote').textContent=s+' successful / '+a+' total attempts.';
+ });
+ $('calcLink').click();$('interpret').click();$('calcTilt').click();$('calcKpi').click();
+})();
+</script>
+</body></html>
